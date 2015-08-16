@@ -1,4 +1,5 @@
 <?php namespace App\Http\Controllers;
+use Auth;
 
 class HomeController extends Controller {
 
@@ -30,7 +31,16 @@ class HomeController extends Controller {
 	 */
 	public function index()
 	{
-		return view('home');
+		if(Auth::user()->role_id == 1){
+			return view('user.HomeUser'); 
+
+		} else if (Auth::user()->role_id == 2){
+			return redirect('assistant');
+
+		} else if (Auth::user()->role_id == 3){
+			return redirect('user');
+		}
 	}
+
 
 }
