@@ -31,4 +31,13 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 */
 	protected $hidden = ['password', 'remember_token'];
 
+	public function submission()
+	{
+		return $this->belongsTo('App\Models\SubmissionModel');
+	}
+
+	public function group()
+	{
+		return $this->belongsTo('App\Models\GroupModel');
+	}
 }
