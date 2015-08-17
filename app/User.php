@@ -33,11 +33,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
 	public function submission()
 	{
-		return $this->belongsTo('App\Models\SubmissionModel');
+		return $this->belongsTo('App\Submission');
 	}
 
-	public function group()
+	public function role()
 	{
-		return $this->belongsTo('App\Models\GroupModel');
+		return $this->belongsTo('App\Role');
 	}
 }

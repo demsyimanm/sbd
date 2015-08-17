@@ -27,11 +27,11 @@ class SubmissionModel extends Model
 
 	public function question()
 	{
-		return $this->belongsTo('App\Models\QuestionModel');
+		return $this->belongsTo('App\Question');
 	}
 
 	public function user()
 	{
-		return $this->hasMany('App\Models\UserModel');
+		return $this->hasMany('App\User');
 	}	
 }

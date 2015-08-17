@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-	@include('header
+	@include('header')
 	@include('user.NavUser')
 
 <body>

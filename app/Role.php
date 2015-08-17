@@ -4,10 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class GroupModel extends Model
+class Role extends Model
 {
-    use SoftDeletes;
-
 	protected $table = 'role';
 	protected $primaryKey = 'id';
 	public $timestamps = true;
@@ -22,6 +20,6 @@ class GroupModel extends Model
 
 	public function user()
 	{
-		return $this->hasMany('App\Models\UserModel');
+		return $this->hasMany('App\User');
 	}
 }

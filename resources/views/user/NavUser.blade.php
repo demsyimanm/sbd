@@ -26,8 +26,8 @@
 
 				<ul class="nav navbar-nav navbar-right">
 					@if (Auth::guest())
-						<li><a href="/auth/login" style="color:white">Login</a></li>
-						<li><a href="/auth/register" style="color:white">Register</a></li>
+						<li><a href="{{URL::to('/auth/login') }}" style="color:white">Login</a></li>
+						<li><a href=" {{URL::to('/auth/register') }}" style="color:white">Register</a></li>
 					@else
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" style="color:white" data-toggle="dropdown" role="button" aria-expanded="false">{{ Auth::user()->role_id }} <span class="caret"></span></a>
