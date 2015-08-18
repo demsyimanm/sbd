@@ -1,67 +1,48 @@
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>SBDOJ</title>
+<DOCTYPE html>
+<html lang="en">
+@include('header')
+<body style="background-color:#CCCCFF;" class="hold-transition skin-blue fixed sidebar-mini">
+	<div class="login-box">
+      <div class="login-logo">
+        <a href="../../index2.html"><b>SBD</b> Online Judge</a>
+      </div><!-- /.login-logo -->
+      <div class="login-box-body">
+        <p class="login-box-msg">Sign in to start your session</p>
+        <form action"" method="post">
+        	<input type="hidden" name="_token" value="{{ csrf_token() }}">
+          	<div class="form-group has-feedback">
+            	<input type="text" name="username" class="form-control" placeholder="Nomor Registrasi Pokok">
+            	<span class="glyphicon glyphicon-user form-control-feedback"></span>
+          	</div>
+          	<div class="form-group has-feedback">
+            	<input type="password" name="password" class="form-control" placeholder="Password">
+            	<span class="glyphicon glyphicon-lock form-control-feedback"></span>
+          	</div>
+          	<div class="row">
+            	<div class="col-xs-4">
+              		<button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+            	</div><!-- /.col -->
+          	</div>
+        </form>
+      </div><!-- /.login-box-body -->
+    </div><!-- /.login-box -->
 
-	<link href="/css/app.css" rel="stylesheet">
-	<link href="{{URL::to('assets/css/bootstrap.min.css')}}" rel="stylesheet">
-	<link href="{{URL::to('assets/css/site.min.css')}}" rel="stylesheet">
-	<!-- Fonts -->
-	<link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
-</head>
+    <!-- jQuery 2.1.4 -->
+    <script src="../../plugins/jQuery/jQuery-2.1.4.min.js"></script>
+    <!-- Bootstrap 3.3.5 -->
+    <script src="../../bootstrap/js/bootstrap.min.js"></script>
+    <!-- iCheck -->
+    <script src="../../plugins/iCheck/icheck.min.js"></script>
+    <script>
+      $(function () {
+        $('input').iCheck({
+          checkboxClass: 'icheckbox_square-blue',
+          radioClass: 'iradio_square-blue',
+          increaseArea: '20%' // optional
+        });
+      });
+    </script>
 
-<style>
-body  {
-    background-color: #4FC1E9;
-}
-</style>
-
-<body>
-<div class="container-fluid">
-	<div class="row">
-		<div class="col-md-4 col-md-offset-4" style="margin-top:10%;">
-			<div class="panel panel-primary">
-				<div class="panel-heading">Login</div>
-				<div class="panel-body">
-					@if (count($errors) > 0)
-						<div class="alert alert-danger">
-							<strong>Whoops!</strong> There were some problems with your input.<br><br>
-							<ul>
-								@foreach ($errors->all() as $error)
-									<li>{{ $error }}</li>
-								@endforeach
-							</ul>
-						</div>
-					@endif
-
-					<form class="form-horizontal" role="form" method="POST" action="">
-						<input type="hidden" name="_token" value="{{ csrf_token() }}">
-
-						<div class="form-group" style="margin-top:5%;">
-							<label class="col-md-4 control-label">Username</label>
-							<div class="col-md-6">
-								<input type="text" class="form-control" name="username" >
-							</div>
-						</div>
-
-						<div class="form-group" style="margin-top:5%;">
-							<label class="col-md-4 control-label">Password</label>
-							<div class="col-md-6">
-								<input type="password" class="form-control" name="password">
-							</div>
-						</div>
-						<div class="form-group" style="margin-top:5%;">
-							<div class="col-md-6 col-md-offset-4">
-								<button type="submit" class="btn btn-primary" style="margin-right: 15px;">
-									Login
-								</button>
-							</div>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
+@include('footer')	
 </body>
+</html>
