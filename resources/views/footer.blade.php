@@ -1,3 +1,9 @@
+<footer class="main-footer">
+<div class="pull-right hidden-xs">
+  <b>Version</b> 2.3.0
+</div>
+<strong>Copyright &copy; 2014-2015 <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights reserved.
+</footer>
 <!-- jQuery 2.1.4 -->
     <script src="{{ URL::to('assets/AdminLTE/plugins/jQuery/jQuery-2.1.4.min.js') }}"></script>
     <!-- jQuery UI 1.11.4 -->
@@ -35,3 +41,11 @@
     <script src="{{ URL::to('assets/AdminLTE/dist/js/pages/dashboard.js') }}"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="{{ URL::to('assets/AdminLTE/dist/js/demo.js') }}"></script>
+    <!-- DataTables -->
+    <script src="{{ URL::to('assets/AdminLTE/plugins/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ URL::to('assets/AdminLTE/plugins/datatables/dataTables.bootstrap.min.js') }}"></script>
+    <script> 
+      $(function () {
+        $("#data_table").DataTable();
+      });
+    </script>

@@ -23,7 +23,7 @@
                 <ul class="dropdown-menu">
                   <!-- User image -->
                   <li class="user-header">
-                    <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                    <img src="{{ URL::to('assets/AdminLTE/dist/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image">
                     <p>
                       {{ Auth::user()->username }}
                     </p>
@@ -50,6 +50,11 @@
             <li class="active treeview">
               <a href="{{ URL::to('admin')}}">
                 <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+              </a>
+            </li>
+            <li class="active treeview">
+              <a href="{{ URL::to('admin/user')}}">
+                <i class="fa fa-user"></i> <span>Akun</span>
               </a>
             </li>
           </ul>
