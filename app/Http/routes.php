@@ -27,11 +27,18 @@ Route::get('assistant', 'AssistantController@index');
 Route::get('admin', 'AdminController@index');
 Route::get('admin/user', 'AccountController@index');
 Route::get('admin/user/create', 'AccountController@create');
-/*<<<<<<< HEAD*/
+
 
 /*<!--Event-->*/
 Route::get('admin/event', 'EventController@index');
 Route::get('admin/event/create', 'EventController@create');
+Route::post('admin/event/create', array('before' => 'csrf', 'uses' => 'EventController@create'));
+Route::get('admin/event/update/{id}', 'EventController@update');
+Route::post('admin/event/update/{id}', array('before' => 'csrf', 'uses' => 'EventController@update'));
+Route::get('admin/event/delete/{id}', 'EventController@destroy');
+Route::post('admin/event/delete/{id}', array('before' => 'csrf', 'uses' => 'EventController@destroy'));
+
+
 Route::post('admin/user/create', array('before' => 'csrf', 'uses' => 'AccountController@create'));
 Route::get('admin/user/update/{id}', 'AccountController@update');
 Route::post('admin/user/update/{id}', array('before' => 'csrf', 'uses' => 'AccountController@update'));

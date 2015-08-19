@@ -30,9 +30,8 @@
 	<link rel="stylesheet" href="{{ URL::to('assets/AdminLTE/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')}}">
 
 
-	<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.21/themes/redmond/jquery-ui.css" />
-	<link rel="stylesheet" type="text/css" href="{{URL::to('plugin/timepicker/pt/src/jquery.ptTimeSelect.css')}}" />
-	<script type="text/javascript" src="{{URL::to('plugin/timepicker/pt/src/jquery.ptTimeSelect.js')}}"></script>
+	<link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" media="screen" href="{{ URL::to('plugin/datetime/css/bootstrap-datetimepicker.min.css')}}">
 
 	<!-- DataTables -->
     <link rel="stylesheet" href="{{ URL::to('assets/AdminLTE/plugins/datatables/dataTables.bootstrap.css')}}">

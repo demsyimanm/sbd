@@ -6,7 +6,7 @@ use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class EventModel extends Model
+class Event extends Model
 {
 	use SoftDeletes;
 
@@ -20,7 +20,7 @@ class EventModel extends Model
 		'konten',
 		'waktu_mulai',
 		'waktu_akhir',
-		'kelas',
+		'kelas'
 	);
 
 	protected $SoftDelete = true;

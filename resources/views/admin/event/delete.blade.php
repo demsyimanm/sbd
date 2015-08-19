@@ -2,7 +2,7 @@
 @section('content')
     <section class="content-header">
         <h1>
-        	Delete User
+        	Delete Event
         </h1>
     </section>
 
@@ -10,7 +10,7 @@
     <section class="content">
 	<form action="" method="POST" class="form-horizontal">
 		<input type="hidden" name="_token" value="{{ csrf_token() }}">
-		<input type="hidden" name="id" value="{{ $user->id }}">
+		<input type="hidden" name="id" value="{{ $eve->id }}">
 		<div class="example-modal" style="margin-left:30%">
             <div class="example-modal">
             <div class="modal modal-danger">
@@ -22,44 +22,38 @@
                   </div>
                   <div class="modal-body">
                     <div class="form-group">
-						<label class="col-md-2 control-label">Name</label>
+						<label class="col-md-2 control-label">Judul Event</label>
 						<div class="col-md-6">
-							<input disabled="" type="text" class="form-control" name="nama" value="{{ $user->nama }}">
+							<input type="text" class="form-control" name="judul" value="{{ $eve->judul }}" readonly="">
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-2 control-label">Username</label>
+						<label class="col-md-2 control-label">Konten</label>
 						<div class="col-md-6">
-							<input disabled="" type="text" class="form-control" name="username" value="{{ $user->username }}" >
+							<textarea type="text" class="form-control" name="konten" style="resize:vertical;"  readonly="">{{ $eve->konten }}</textarea>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="col-md-2 control-label">Waktu Mulai</label>
+						<div class="col-md-6">
+							<input type="text" class="form-control" name="waktu_mulai" value="{{ $eve->waktu_mulai }}" readonly="">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="col-md-2 control-label">Waktu Akhir</label>
+						<div class="col-md-6">
+							<input type="text" class="form-control" name="waktu_akhir" value="{{ $eve->waktu_akhir }}" readonly="">
 						</div>
 					</div>
 
 					<div class="form-group">
 						<label class="col-md-2 control-label">Kelas</label>
 						<div class="col-md-6">
-							<select disabled="" class="form-control" name="kelas">
-			                        <option> -- </option>
-			                        <option <?php if ($user->kelas == 'A') echo "selected";?> value="A">A</option>
-			                        <option <?php if ($user->kelas == 'B') echo "selected";?>value="B">B</option>
-			                        <option <?php if ($user->kelas == 'C') echo "selected";?>value="C">C</option>
-			                        <option <?php if ($user->kelas == 'D') echo "selected";?>value="D">D</option>
-			                        <option <?php if ($user->kelas == 'E') echo "selected";?>value="E">E</option>
-							</select>
+							<input type="text" class="form-control" name="kelas" value="{{ $eve->kelas }}" readonly="">
 						</div>
 					</div>
-
-					<div class="form-group">
-						<label class="col-md-2 control-label">Role</label>
-						<div class="col-md-6">
-							<select disabled="" class="form-control" name="role_id">
-			                        <option selected='selected'> -- </option>
-			                    @foreach ($role as $item)
-			                        <option <?php if ($user->role_id == $item->id) echo "selected";?> value="{{ $item->id }}">{{ $item->nama}}</option>
-			                    @endforeach
-							</select>
-						</div>
-					</div>
-                  </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-danger" style="margin-right:7%;">Delete</button>

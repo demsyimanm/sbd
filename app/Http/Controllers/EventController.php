@@ -1,9 +1,19 @@
-<?php namespace App\Http\Controllers;
+<?php 
+namespace App\Http\Controllers;
 
-use App\Http\Requests;
+/*use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
+*/
+use Input;
+use View;
+use Auth;
+use Request;
+use App\Role;
+use App\User;
+use App\Event;
+use App\Http\Controllers\EventController;
 
 class EventController extends Controller {
 
@@ -14,7 +24,8 @@ class EventController extends Controller {
 	 */
 	public function index()
 	{
-		return view('admin.event.manage');
+		$this->data['event'] = Event::get();
+		return view('admin.event.manage',$this->data);
 	}
 
 	/**
@@ -24,8 +35,27 @@ class EventController extends Controller {
 	 */
 	public function create()
 	{
-		//$data['event'] = Post::with('user', 'comments')->orderby('id','DESC')->get();
-		return view('admin.event.create');
+		if(Auth::user()->role->id == 1 || Auth::user()->role->id == 2){
+			if (Request::isMethod('get')) {
+				return View::make('admin.event.create');
+			} 
+
+			else if (Request::isMethod('post')) {
+				$data = Input::all();
+				
+				Event::insertGetId(array(
+					'judul' => $data['judul'], 
+					'konten' => $data['konten'], 
+					'waktu_mulai' => $data['waktu_mulai'], 
+					'waktu_akhir' => $data['waktu_akhir'],
+					'kelas' => $data['kelas']
+				));
+				return redirect('admin/event');
+			}
+		} 
+		else {
+			return redirect('/');
+		}
 	}
 
 	/**
@@ -68,7 +98,27 @@ class EventController extends Controller {
 	 */
 	public function update($id)
 	{
-		//
+		if(Auth::user()->role->id == 1 || Auth::user()->role->id == 2){
+			if (Request::isMethod('get')) {
+				$this->data = array();
+				$this->data['eve'] = Event::find($id);
+				return View::make('admin.event.update', $this->data);
+			} 
+			else if (Request::isMethod('post')) {
+				$data = Input::all();
+				
+				Event::where('id', $id)->update(array(
+					'judul' => $data['judul'], 
+					'konten' => $data['konten'], 
+					'waktu_mulai' => $data['waktu_mulai'], 
+					'waktu_akhir' => $data['waktu_akhir'],
+					'kelas' => $data['kelas']
+				));
+				return redirect('admin/event');
+			}
+		} else {
+			return redirect('/');
+		}
 	}
 
 	/**
@@ -79,7 +129,20 @@ class EventController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		//
+		if(Auth::user()->role->id == 1){
+			if (Request::isMethod('get')) {
+				$this->data = array();
+				$this->data['eve'] = Event::find($id);
+				return View::make('admin.event.delete', $this->data);
+			} 
+			else if (Request::isMethod('post')) {
+				$data = Input::all();
+				Event::where('id', $id)->delete();
+				return redirect('admin/event');
+			}
+		} else {
+			return redirect('/');
+		}
 	}
 
 }

@@ -53,7 +53,7 @@
               </a>
             </li>
              
-            <li class="active treeview">
+            <li class="treeview">
               <a href="{{ URL::to('admin/user')}}">
                 <i class="fa fa-user"></i> <span>Akun</span>
               </a>
