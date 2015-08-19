@@ -2,7 +2,7 @@
 @section('content')
     <section class="content-header">
         <h1>
-        	Create User
+        	Update User
         </h1>
     </section>
 
@@ -20,24 +20,18 @@
 	@endif
 	<form action="" method="POST" class="form-horizontal">
 		<input type="hidden" name="_token" value="{{ csrf_token() }}">
+		<input type="hidden" name="id" value="{{ $user->id }}">
 		<div class="box-body">
 			<div class="form-group">
 				<label class="col-md-2 control-label">Name</label>
 				<div class="col-md-6">
-					<input type="text" class="form-control" name="nama" value="{{ old('nama') }}">
+					<input type="text" class="form-control" name="nama" value="{{ $user->nama }}">
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-md-2 control-label">Username</label>
 				<div class="col-md-6">
-					<input type="text" class="form-control" name="username" >
-				</div>
-			</div>
-
-			<div class="form-group">
-				<label class="col-md-2 control-label">Password</label>
-				<div class="col-md-6">
-					<input type="password" class="form-control" name="password">
+					<input type="text" class="form-control" name="username" value="{{ $user->username }}" >
 				</div>
 			</div>
 
@@ -45,12 +39,12 @@
 				<label class="col-md-2 control-label">Kelas</label>
 				<div class="col-md-6">
 					<select class="form-control" name="kelas">
-	                        <option selected='selected'> -- </option>
-	                        <option value="A">A</option>
-	                        <option value="B">B</option>
-	                        <option value="C">C</option>
-	                        <option value="D">D</option>
-	                        <option value="E">E</option>
+	                        <option> -- </option>
+	                        <option <?php if ($user->kelas == 'A') echo "selected";?> value="A">A</option>
+	                        <option <?php if ($user->kelas == 'B') echo "selected";?>value="B">B</option>
+	                        <option <?php if ($user->kelas == 'C') echo "selected";?>value="C">C</option>
+	                        <option <?php if ($user->kelas == 'D') echo "selected";?>value="D">D</option>
+	                        <option <?php if ($user->kelas == 'E') echo "selected";?>value="E">E</option>
 					</select>
 				</div>
 			</div>
@@ -61,7 +55,7 @@
 					<select class="form-control" name="role_id">
 	                        <option selected='selected'> -- </option>
 	                    @foreach ($role as $item)
-	                        <option value="{{ $item->id }}">{{ $item->nama}}</option>
+	                        <option <?php if ($user->role_id == $item->id) echo "selected";?> value="{{ $item->id }}">{{ $item->nama}}</option>
 	                    @endforeach
 					</select>
 				</div>
@@ -69,7 +63,7 @@
 		</div><!-- /.box-body -->
         <div class=" col-md-6 col-md-offset-2 box-footer">
             <button type="submit" class="btn btn-default">Cancel</button>
-            <button type="submit" class="btn btn-info pull-right">Create</button>
+            <button type="submit" class="btn btn-info pull-right">Save</button>
         </div><!-- /.box-footer -->
 	</form>
     </section><!-- /.content -->
