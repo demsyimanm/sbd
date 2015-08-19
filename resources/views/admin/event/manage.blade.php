@@ -25,7 +25,7 @@
 	    <thead>
 		    <tr>
 		        <th width="5%" class="text-center">No</th>
-		        <th width="25%">Judul</th>
+		        <th width="25%">Judul<span style="font-size:11px;"> &nbsp;(click the title to edit questions)</span></th>
 		        <th width="25%">Konten</th>
 	        	<th width="12.5%">Waktu Mulai</th>
 	        	<th width="12.5%">Waktu Akhir</th>
@@ -37,8 +37,8 @@
 	    	@foreach($event as $eve)
 	      	<tr>
 	      		<td class="text-center"><?php echo $i++ ?></td>
-	      		<td><a href="" >{{ $eve->judul }}</td>
-	      		<td>{{ $eve->konten }}</td>
+	      		<td><a href="{{ URL::to('admin/question/'. $eve->id) }}" >{{ $eve->judul }}</td>
+	      		<td><?php echo nl2br(substr($eve->konten,0,10))." ..."?></td>
 	      		<td>{{ $eve->waktu_mulai }}</td>
 	      		<td>{{ $eve->waktu_akhir }}</td>
 	      		<td class="text-center">{{ $eve->kelas }}</td>

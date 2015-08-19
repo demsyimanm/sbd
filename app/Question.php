@@ -6,7 +6,7 @@ use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class QuestionModel extends Model
+class Question extends Model
 {
 	use SoftDeletes;
 
@@ -20,7 +20,6 @@ class QuestionModel extends Model
 		'judul',
 		'konten',
 		'jawaban'
-		'waktu',
 	);
 
 	protected $SoftDelete = true;

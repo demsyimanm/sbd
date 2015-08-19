@@ -38,6 +38,16 @@ Route::post('admin/event/update/{id}', array('before' => 'csrf', 'uses' => 'Even
 Route::get('admin/event/delete/{id}', 'EventController@destroy');
 Route::post('admin/event/delete/{id}', array('before' => 'csrf', 'uses' => 'EventController@destroy'));
 
+/*Question*/
+Route::get('admin/question/{id}', 'QuestionController@index');
+Route::post('admin/question/{id}', array('before' => 'csrf', 'uses' => 'QuestionController@index'));
+Route::get('admin/question/{id}/create', 'QuestionController@create');
+Route::post('admin/question/{id}/create', array('before' => 'csrf', 'uses' => 'QuestionController@create'));
+Route::get('admin/question/{id1}/update/{id2}', 'QuestionController@update');
+Route::post('admin/question/{id1}/update/{id2}', array('before' => 'csrf', 'uses' => 'QuestionController@update'));
+Route::get('admin/question/{id1}/delete/{id2}', 'QuestionController@destroy');
+Route::post('admin/question/{id1}/delete/{id2}', array('before' => 'csrf', 'uses' => 'QuestionController@destroy'));
+
 
 Route::post('admin/user/create', array('before' => 'csrf', 'uses' => 'AccountController@create'));
 Route::get('admin/user/update/{id}', 'AccountController@update');
