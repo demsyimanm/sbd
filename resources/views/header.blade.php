@@ -6,7 +6,6 @@
 	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 	<!-- Bootstrap 3.3.5 -->
 	<link rel="stylesheet" href="{{ URL::to('assets/AdminLTE/bootstrap/css/bootstrap.min.css')}}">
-	<script src="{{ URL::to('assets/AdminLTE/plugins/jQuery/jQuery-2.1.4.min.js') }}"></script>
 	<!-- Font Awesome -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 	<!-- Ionicons -->
@@ -28,11 +27,6 @@
 	<link rel="stylesheet" href="{{ URL::to('assets/AdminLTE/plugins/daterangepicker/daterangepicker-bs3.css')}}">
 	<!-- bootstrap wysihtml5 - text editor -->
 	<link rel="stylesheet" href="{{ URL::to('assets/AdminLTE/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')}}">
-
-
-	<link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" media="screen" href="{{ URL::to('plugin/datetime/css/bootstrap-datetimepicker.min.css')}}">
-
 	<!-- DataTables -->
     <link rel="stylesheet" href="{{ URL::to('assets/AdminLTE/plugins/datatables/dataTables.bootstrap.css')}}">
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->

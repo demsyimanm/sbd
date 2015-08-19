@@ -11,7 +11,7 @@
 	<form action="" method="POST" class="form-horizontal">
 		<input type="hidden" name="_token" value="{{ csrf_token() }}">
 		<input type="hidden" name="id" value="{{ $eve->id }}">
-		<div class="example-modal" style="margin-left:30%">
+		<div class="example-modal">
             <div class="example-modal">
             <div class="modal modal-danger">
               <div class="modal-dialog">
@@ -56,7 +56,7 @@
 					</div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-danger" style="margin-right:7%;">Delete</button>
+                    <button type="submit" class="btn btn-danger">Delete</button>
                   </div>
                 </div><!-- /.modal-content -->
               </div><!-- /.modal-dialog -->
