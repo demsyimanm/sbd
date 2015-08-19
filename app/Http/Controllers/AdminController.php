@@ -16,7 +16,6 @@ class AdminController extends Controller {
 	{
 		return view('admin.HomeAdmin');
 	}
-
 	/**
 	 * Show the form for creating a new resource.
 	 *

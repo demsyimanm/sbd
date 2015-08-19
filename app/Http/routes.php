@@ -23,7 +23,11 @@ Route::controllers([
 Route::get('user', 'UserController@index');
 Route::get('assistant', 'AssistantController@index');
 
-
+/*User*/
 Route::get('admin', 'AdminController@index');
 Route::get('admin/user', 'AccountController@index');
 Route::get('admin/user/create', 'AccountController@create');
+
+/*<!--Event-->*/
+Route::get('admin/event', 'EventController@index');
+Route::get('admin/event/create', 'EventController@create');

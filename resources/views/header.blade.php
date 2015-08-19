@@ -6,6 +6,7 @@
 	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 	<!-- Bootstrap 3.3.5 -->
 	<link rel="stylesheet" href="{{ URL::to('assets/AdminLTE/bootstrap/css/bootstrap.min.css')}}">
+	<script src="{{ URL::to('assets/AdminLTE/plugins/jQuery/jQuery-2.1.4.min.js') }}"></script>
 	<!-- Font Awesome -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 	<!-- Ionicons -->
@@ -28,6 +29,10 @@
 	<!-- bootstrap wysihtml5 - text editor -->
 	<link rel="stylesheet" href="{{ URL::to('assets/AdminLTE/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')}}">
 
+	<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.21/themes/redmond/jquery-ui.css" />
+	<link rel="stylesheet" type="text/css" href="{{URL::to('plugin/timepicker/pt/src/jquery.ptTimeSelect.css')}}" />
+	<script type="text/javascript" src="{{URL::to('plugin/timepicker/pt/src/jquery.ptTimeSelect.js')}}"></script>
+	
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 	<!--[if lt IE 9]>

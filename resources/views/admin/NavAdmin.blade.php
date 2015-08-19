@@ -46,10 +46,22 @@
         <section class="sidebar">
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
-            <li class="header">MAIN NAVIGATION</li>
-            <li class="active treeview">
+            <li class="header">ADMIN NAVIGATION</li>
+            <li class="treeview">
               <a href="{{ URL::to('admin')}}">
                 <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+              </a>
+            </li>
+
+            <li class="treeview">
+              <a href="{{ URL::to('admin/user')}}">
+                <i class="fa fa-user"></i> <span>User</span>
+              </a>
+            </li>
+
+            <li class="treeview">
+              <a href="{{ URL::to('admin/event')}}">
+                <i class="fa fa-calendar"></i> <span>Event</span>
               </a>
             </li>
           </ul>
