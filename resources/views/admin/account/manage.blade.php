@@ -35,7 +35,7 @@
 	    	@foreach($users as $user)
 	      	<tr>
 	      		<td class="text-center"><?php echo $i++ ?></td>
-	      		<td><a href="{{ URL::to('admin/user/show/'. $user->id) }}" >{{ $user->username }}</td>
+	      		<td><a href="{{ URL::to('admin/user/update/'. $user->id) }}" >{{ $user->username }}</td>
 	      		<td>{{ $user->nama }}</td>
 	      		<td>{{ $user->role->nama }}</td>
 	      		<td class="text-center">{{ $user->kelas }}</td>

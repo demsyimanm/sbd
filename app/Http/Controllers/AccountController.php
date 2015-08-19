@@ -43,6 +43,7 @@ class AccountController extends Controller {
 					'kelas' => $data['kelas'], 
 					'role_id' => $data['role_id']
 				));
+				return redirect('admin/user');
 			}
 		} else {
 			return redirect('/');
@@ -93,18 +94,18 @@ class AccountController extends Controller {
 			if (Request::isMethod('get')) {
 				$this->data = array();
 				$this->data['user'] = User::find($id);
-				dd($this->data);
+				$this->data['role'] = Role::get();
 				return View::make('admin.account.update', $this->data);
 			} else if (Request::isMethod('post')) {
 				$data = Input::all();
 				
-				User::insertGetId(array(
+				User::where('id', $id)->update(array(
 					'nama' => $data['nama'], 
 					'username' => $data['username'], 
-					'password' => bcrypt($data['password']), 
 					'kelas' => $data['kelas'], 
 					'role_id' => $data['role_id']
 				));
+				return redirect('admin/user');
 			}
 		} else {
 			return redirect('/');
@@ -119,7 +120,20 @@ class AccountController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		//
+		if(Auth::user()->role->id == 1){
+			if (Request::isMethod('get')) {
+				$this->data = array();
+				$this->data['user'] = User::find($id);
+				$this->data['role'] = Role::get();
+				return View::make('admin.account.delete', $this->data);
+			} else if (Request::isMethod('post')) {
+				$data = Input::all();
+				User::where('id', $id)->delete();
+				return redirect('admin/user');
+			}
+		} else {
+			return redirect('/');
+		}
 	}
 
 }
