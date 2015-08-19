@@ -24,14 +24,11 @@
 	<link rel="stylesheet" href="{{ URL::to('assets/AdminLTE/plugins/jvectormap/jquery-jvectormap-1.2.2.css')}}">
 	<!-- Date Picker -->
 	<link rel="stylesheet" href="{{ URL::to('assets/AdminLTE/plugins/datepicker/datepicker3.css')}}">
+	<link rel="stylesheet" href="{{ URL::to('assets/AdminLTE/plugins/timepicker/bootstrap-timepicker.min.css')}}">
 	<!-- Daterange picker -->
 	<link rel="stylesheet" href="{{ URL::to('assets/AdminLTE/plugins/daterangepicker/daterangepicker-bs3.css')}}">
 	<!-- bootstrap wysihtml5 - text editor -->
 	<link rel="stylesheet" href="{{ URL::to('assets/AdminLTE/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')}}">
-
-
-	<link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" media="screen" href="{{ URL::to('plugin/datetime/css/bootstrap-datetimepicker.min.css')}}">
 
 	<!-- DataTables -->
     <link rel="stylesheet" href="{{ URL::to('assets/AdminLTE/plugins/datatables/dataTables.bootstrap.css')}}">
@@ -42,10 +39,13 @@
 		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 	<![endif]-->
 	<!-- DataTables CSS -->
-<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.8/css/jquery.dataTables.css">
+	<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.8/css/jquery.dataTables.css">
   
 <!-- jQuery -->
-<script type="text/javascript" charset="utf8" src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+	<script type="text/javascript" charset="utf8" src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+	<script src="{{ URL::to('assets/AdminLTE/bootstrap/js/bootstrap.min.js') }}"></script>
+	<script src="{{ URL::to('assets/AdminLTE/plugins/datepicker/bootstrap-datepicker.js') }}"></script>
+    <script src="{{ URL::to('assets/AdminLTE/plugins/timepicker/bootstrap-timepicker.min.js') }}"></script>
   
 <!-- DataTables -->
 <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.8/js/jquery.dataTables.js"></script>

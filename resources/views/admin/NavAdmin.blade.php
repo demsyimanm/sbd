@@ -53,11 +53,13 @@
               </a>
             </li>
              
+             @if(Auth::user()->role->id == 1)
             <li class="treeview">
               <a href="{{ URL::to('admin/user')}}">
                 <i class="fa fa-user"></i> <span>Akun</span>
               </a>
             </li>
+            @endif
 
             <li class="treeview">
               <a href="{{ URL::to('admin/event')}}">

@@ -21,7 +21,7 @@ Route::controllers([
 ]);
 
 Route::get('user', 'UserController@index');
-Route::get('assistant', 'AssistantController@index');
+Route::get('assistant', 'AdminController@index');
 
 /*User*/
 Route::get('admin', 'AdminController@index');

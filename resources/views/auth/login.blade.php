@@ -11,7 +11,7 @@
         <form action"" method="post">
         	<input type="hidden" name="_token" value="{{ csrf_token() }}">
           	<div class="form-group has-feedback">
-            	<input type="text" name="username" class="form-control" placeholder="Nomor Registrasi Pokok">
+            	<input type="text" name="username" class="form-control input-sm" placeholder="Nomor Registrasi Pokok">
             	<span class="glyphicon glyphicon-user form-control-feedback"></span>
           	</div>
           	<div class="form-group has-feedback">

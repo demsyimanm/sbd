@@ -24,7 +24,7 @@
 	    <thead>
 		    <tr>
 		        <th width="5%" class="text-center">No</th>
-		        <th width="25%">Judul<span style="font-size:11px;"> &nbsp;(click the title to edit questions)</span></th>
+		        <th width="25%">Judul</th>
 		        <th width="25%">Pertanyaan</th>
 	        	<th width="12.5%">Jawaban</th>
 	        	<th width="10%">Action</th>
@@ -34,7 +34,7 @@
 	    	@foreach($question as $quest)
 	      	<tr>
 	      		<td class="text-center"><?php echo $i++ ?></td>
-	      		<td><a href="{{ URL::to('admin/question/'. $quest->id) }}" >{{ $quest->judul }}</td>
+	      		<td><a href="{{ URL::to('admin/question/'. $eve->id.'/update/'.$quest->id) }}" >{{ $quest->judul }}</td>
 	      		<td><?php echo nl2br(substr($quest->konten,0,30))." ..."?></td>
 	      		<td><?php echo nl2br(substr($quest->jawaban,0,30))." ..."?></td>
 	      		<td>

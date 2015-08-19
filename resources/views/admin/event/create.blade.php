@@ -34,28 +34,39 @@
 				</div>
 			</div>
 
-			<div class="form-group input-append date" id="datetimepicker">
-				<label class="col-md-2 control-label">Waktu Mulai</label>
+			<div class="form-group">
+				<label class="col-md-2 control-label">Tanggal Mulai</label>
 				<div class="col-md-6">
-					<input type="text" class="form-control" name="waktu_mulai">
-					<span class="add-on">
-			        	<i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
-			      	</span>
+					<input type="text" name="tgl_mulai" class="form-control datepicker" id="">
 				</div>
 			</div>
-			<br><br>
-			<div class="form-group input-append date" id="datetimepicker2">
-				<label class="col-md-2 control-label">Waktu Akhir</label>
-				<div class="col-md-6">
-					<input type="text" class="form-control" name="waktu_akhir">
-					<span class="add-on">
-			        	<i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
-			      	</span>
+
+			<div class="input-group bootstrap-timepicker timepicker" style="margin-left: 4.5%">
+				<label class="col-md-5 control-label">Waktu Mulai</label>
+				<div class="col-md-7">
+					<input class="form-control" name="wkt_mulai" id="timepicker1" data-provide="timepicker" 
+						data-minute-step="1" >
 				</div>
-			</div><br><br>
+			</div><br>
+			
+			<div class="input-group bootstrap-timepicker timepicker" style="margin-left: 4.5%">
+				<label class="col-md-5 control-label">Waktu Akhir</label>
+				<div class="col-md-7">
+					<input type="text" class="form-control" name="wkt_akhir" id="timepicker2" data-minute-step="1" showMeridian="false" snapToStep="false">
+				</div>
+			</div><br>
+
+			<div class="form-group">
+				<label class="col-md-2 control-label">Tanggal Akhir</label>
+				<div class="col-md-6">
+					<input type="text" class="form-control datepicker" name="tgl_akhir">
+				</div>
+			</div>
+			
 			<div class="form-group">
 				<label class="col-md-2 control-label">Kelas</label>
 				<div class="col-md-6">
+				@if($user == 1)
 					<select class="form-control" name="kelas">
 	                        <option selected='selected'> -- </option>
 	                        <option value="A">A</option>
@@ -64,6 +75,10 @@
 	                        <option value="D">D</option>
 	                        <option value="E">E</option>
 					</select>
+
+				@else
+					<input type="text" class="form-control" name="kelas" value="{{$kelas}}" disabled="">
+				@endif
 				</div>
 			</div>
 			    
@@ -73,18 +88,27 @@
             <button type="submit" class="btn btn-info pull-right">Create</button>
         </div><!-- /.box-footer -->
 	</form>
-
-	<script type="text/javascript" src="{{ URL::to('plugin/datetime/js//bootstrap-datetimepicker.min.js') }}"></script>
 	<script type="text/javascript">
-      $('#datetimepicker').datetimepicker({
-        format: 'yyyy-MM-dd hh:mm:ss',
-        language: 'pt-EN'
-      });
-
-      $('#datetimepicker2').datetimepicker({
-        format: 'yyyy-MM-dd hh:mm:ss',
-        language: 'pt-EN'
-      });
+            $('#timepicker1').timepicker({
+                minuteStep: 1,
+                showSeconds: true,
+                showMeridian: false
+            });
+    </script>
+    <script type="text/javascript">
+            $('#timepicker2').timepicker({
+                minuteStep: 1,
+                showSeconds: true,
+                showMeridian: false
+            });
+    </script>
+    <script type="text/javascript">
+	    	$('.datepicker').datepicker({
+			    format: 'yyyy/mm/dd',
+			    startDate: '-3d',
+			    clearBtn: true,
+			     autoclose: true
+			});
     </script>
     </section><!-- /.content -->
 @endsection

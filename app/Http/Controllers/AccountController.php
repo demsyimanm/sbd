@@ -17,8 +17,11 @@ class AccountController extends Controller {
 	 */
 	public function index()
 	{
-		$this->data['users'] = User::get();
-		return view('admin.account.manage', $this->data);
+		if(Auth::user()->role->id == 1){
+			$this->data['users'] = User::get();
+			return view('admin.account.manage', $this->data);
+		}
+		return redirect('/');
 	}
 
 	/**

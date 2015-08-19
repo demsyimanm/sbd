@@ -24,8 +24,16 @@ class EventController extends Controller {
 	 */
 	public function index()
 	{
-		$this->data['event'] = Event::get();
-		return view('admin.event.manage',$this->data);
+		if(Auth::user()->role->id == 1){
+			$this->data['event'] = Event::get();
+			return view('admin.event.manage',$this->data);
+		}
+
+		else if (Auth::user()->role->id == 2)
+		{
+			$this->data['event'] = Event::where('kelas','=',Auth::user()->kelas)->get();
+			return view('admin.event.manage',$this->data);
+		}
 	}
 
 	/**
@@ -35,14 +43,17 @@ class EventController extends Controller {
 	 */
 	public function create()
 	{
-		if(Auth::user()->role->id == 1 || Auth::user()->role->id == 2){
+		if(Auth::user()->role->id == 1){
+			$this->data['user'] = Auth::user()->role->id;
+			$this->data['kelas'] = "";
 			if (Request::isMethod('get')) {
-				return View::make('admin.event.create');
+				return View::make('admin.event.create',$this->data);
 			} 
 
 			else if (Request::isMethod('post')) {
 				$data = Input::all();
-				
+				$data['waktu_mulai'] = $data['tgl_mulai']." ".$data['wkt_mulai'];
+				$data['waktu_akhir'] = $data['tgl_akhir']." ".$data['wkt_akhir'];
 				Event::insertGetId(array(
 					'judul' => $data['judul'], 
 					'konten' => $data['konten'], 
@@ -53,6 +64,30 @@ class EventController extends Controller {
 				return redirect('admin/event');
 			}
 		} 
+
+		else if (Auth::user()->role->id == 2)
+		{
+			$this->data['kelas'] = Auth::user()->kelas;
+			$this->data['user'] = Auth::user()->role->id;
+			if (Request::isMethod('get')) {
+				return View::make('admin.event.create',$this->data);
+			} 
+
+			else if (Request::isMethod('post')) {
+				$data = Input::all();
+				$data['waktu_mulai'] = $data['tgl_mulai']." ".$data['wkt_mulai'];
+				$data['waktu_akhir'] = $data['tgl_akhir']." ".$data['wkt_akhir'];
+				Event::insertGetId(array(
+					'judul' => $data['judul'], 
+					'konten' => $data['konten'], 
+					'waktu_mulai' => $data['waktu_mulai'], 
+					'waktu_akhir' => $data['waktu_akhir'],
+					'kelas' => $this->data['kelas']
+				));
+				return redirect('admin/event');
+			}
+
+		}
 		else {
 			return redirect('/');
 		}
@@ -98,15 +133,18 @@ class EventController extends Controller {
 	 */
 	public function update($id)
 	{
-		if(Auth::user()->role->id == 1 || Auth::user()->role->id == 2){
+		if(Auth::user()->role->id == 1 ){
+			$this->data = array();
+			$this->data['user'] = Auth::user()->role->id;
+			$this->data['kelas'] = "";
+			$this->data['eve'] = Event::find($id);
 			if (Request::isMethod('get')) {
-				$this->data = array();
-				$this->data['eve'] = Event::find($id);
 				return View::make('admin.event.update', $this->data);
 			} 
 			else if (Request::isMethod('post')) {
 				$data = Input::all();
-				
+				$data['waktu_mulai'] = $data['tgl_mulai']." ".$data['wkt_mulai'];
+				$data['waktu_akhir'] = $data['tgl_akhir']." ".$data['wkt_akhir'];
 				Event::where('id', $id)->update(array(
 					'judul' => $data['judul'], 
 					'konten' => $data['konten'], 
@@ -116,7 +154,31 @@ class EventController extends Controller {
 				));
 				return redirect('admin/event');
 			}
-		} else {
+		} 
+	
+		else if(Auth::user()->role->id == 2){
+			$this->data = array();
+			$this->data['kelas'] = Auth::user()->kelas;
+			$this->data['user'] = Auth::user()->role->id;
+			$this->data['eve'] = Event::find($id);
+			if (Request::isMethod('get')) {
+				return View::make('admin.event.update', $this->data);
+			} 
+			else if (Request::isMethod('post')) {
+				$data = Input::all();
+				$data['waktu_mulai'] = $data['tgl_mulai']." ".$data['wkt_mulai'];
+				$data['waktu_akhir'] = $data['tgl_akhir']." ".$data['wkt_akhir'];
+				Event::where('id', $id)->update(array(
+					'judul' => $data['judul'], 
+					'konten' => $data['konten'], 
+					'waktu_mulai' => $data['waktu_mulai'], 
+					'waktu_akhir' => $data['waktu_akhir'],
+					'kelas' => $this->data['kelas']
+				));
+				return redirect('admin/event');
+			}
+		} 
+		else {
 			return redirect('/');
 		}
 	}
@@ -129,7 +191,7 @@ class EventController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		if(Auth::user()->role->id == 1){
+		if(Auth::user()->role->id == 1 || Auth::user()->role->id == 2){
 			if (Request::isMethod('get')) {
 				$this->data = array();
 				$this->data['eve'] = Event::find($id);
