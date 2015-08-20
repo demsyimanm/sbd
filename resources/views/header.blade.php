@@ -28,10 +28,10 @@
 	<link rel="stylesheet" href="{{ URL::to('assets/AdminLTE/plugins/daterangepicker/daterangepicker-bs3.css')}}">
 	<!-- bootstrap wysihtml5 - text editor -->
 	<link rel="stylesheet" href="{{ URL::to('assets/AdminLTE/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')}}">
-<<<<<<< HEAD
+<!-- <<<<<<< HEAD
 
 =======
->>>>>>> 654698b0aee68ae7c5e93009cb52e4c38a92ba83
+>>>>>>> 654698b0aee68ae7c5e93009cb52e4c38a92ba83 -->
 	<!-- DataTables -->
     <link rel="stylesheet" href="{{ URL::to('assets/AdminLTE/plugins/datatables/dataTables.bootstrap.css')}}">
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
