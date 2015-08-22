@@ -10,8 +10,12 @@
 		<form action"" method="post">
         	<input type="hidden" name="_token" value="{{ csrf_token() }}">
         	<br><br>
+        	<div class = "col-md-8 col-md-offset-1">
+        		<h6>Soal :</h6>
+        		<h4>{{$quest->konten}}</h4><br>
+        	</div>
           	<div class="form-group has-feedback col-md-8 col-md-offset-1">
-          		<h4>Salin query Anda ke textarea di bawah :</h4>
+          		<h5>Salin query Anda ke textarea di bawah :</h5>
             	<textarea type="text" name="jawaban" class="form-control input-sm" style="resize:vertical;height:250px;"></textarea>
           	</div>
           	<div class="row">

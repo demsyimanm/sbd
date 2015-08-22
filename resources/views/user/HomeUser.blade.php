@@ -42,7 +42,7 @@
                         date: '{{$nearest}}',
                         offset: +7
                     }, function () {
-                        alert('WOOT WOOT, done!');
+                        alert('Praktikum dimulai!');
                     });
                 </script> 
                 

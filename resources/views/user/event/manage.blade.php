@@ -1,5 +1,11 @@
 @extends('user.AppUser')
 @section('content')
+<style type="text/css">
+	.not-active {
+	   pointer-events: none;
+	   cursor: default;
+	}
+</style>
 <section class="content-header">
 	<h1>
 	    Event
@@ -19,7 +25,7 @@
 	    <thead>
 		    <tr>
 		        <th width="5%" class="text-center">No</th>
-		        <th width="25%">Judul<span style="font-size:11px;"> &nbsp;(click the title to edit questions)</span></th>
+		        <th width="25%">Judul<span style="font-size:11px;"></span></th>
 		        <th width="30%">Konten</th>
 	        	<th width="12.5%">Waktu Mulai</th>
 	        	<th width="12.5%">Waktu Akhir</th>
@@ -28,16 +34,29 @@
 	      	</tr>
 	    </thead>
 	    <tbody>
+	    	<?php
+      			date_default_timezone_set('Asia/Jakarta'); // CDT
+				$current_date = date('Y-m-d H:i:s');
+      		?>
 	    	@foreach($event as $eve)
 	      	<tr>
 	      		<td class="text-center"><?php echo $i++ ?></td>
-	      		<td><a href="{{ URL::to('user/question/'. $eve->id) }}" >{{ $eve->judul }}</td>
+	      		@if($eve->waktu_mulai < $current_date && $eve->waktu_akhir < $current_date || $current_date < $eve->waktu_mulai)
+	      			<td><a href="{{ URL::to('user/question/'. $eve->id) }}" class="not-active">{{ $eve->judul }}</td>
+	      		@else
+	      			<td><a href="{{ URL::to('user/question/'. $eve->id) }}" >{{ $eve->judul }}</td>
+	      		@endif
 	      		<td><?php echo nl2br(substr($eve->konten,0,10))." ..."?></td>
 	      		<td>{{ $eve->waktu_mulai }}</td>
 	      		<td>{{ $eve->waktu_akhir }}</td>
 	      		<td class="text-center">{{ $eve->kelas }}</td>
 	      		<td>
-	      				<a href="{{ URL::to('user/question/'. $eve->id) }}" class="btn btn-twitter"><i class="fa fa-rocket"></i> Pilih
+	      		
+	      		@if($eve->waktu_mulai < $current_date && $eve->waktu_akhir < $current_date || $current_date < $eve->waktu_mulai )
+	      			<a href="{{ URL::to('user/question/'. $eve->id) }}" class="btn btn-twitter disabled"><i class="fa fa-rocket"></i> Pilih
+	      		@else
+	      			<a href="{{ URL::to('user/question/'. $eve->id) }}" class="btn btn-twitter"><i class="fa fa-rocket"></i> Pilih
+	      		@endif
 	      		</td>
 	      	</tr>
 	      	@endforeach
