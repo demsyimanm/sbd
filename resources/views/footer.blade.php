@@ -1,6 +1,6 @@
 <footer class="main-footer">
 <div class="pull-right hidden-xs">
-   &copy; <b>Bilfash </b>&<b> Demsy</b> 2014-2015
+   &copy;2015 <b>Bilfash </b>&<b> Demsy</b>
 </div>
 <strong>Supported by <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong><b> Version</b> 2.3.0. All rights reserved.
 </footer>
@@ -25,8 +25,7 @@
     <!-- jQuery Knob Chart -->
     <script src="{{ URL::to('assets/AdminLTE/plugins/knob/jquery.knob.js') }}"></script>
     <!-- daterangepicker -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
-    <script src="{{ URL::to('assets/AdminLTE/plugins/daterangepicker/daterangepicker.js') }}"></script>
+   
     <!-- datepicker -->
     
     <!-- Bootstrap WYSIHTML5 -->
@@ -53,4 +52,4 @@
        /* $('#timepicker1').timepicker();
         $('#timepicker2').timepicker();*/
     </script>
-   
+    

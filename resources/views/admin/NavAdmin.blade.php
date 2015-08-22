@@ -67,6 +67,12 @@
               </a>
             </li>
 
+            <li class="treeview">
+              <a href="{{ URL::to('admin/calendar')}}">
+                <i class="fa fa-calendar-check-o"></i> <span>Calendar</span>
+              </a>
+            </li>
+
           </ul>
         </section>
         <!-- /.sidebar -->

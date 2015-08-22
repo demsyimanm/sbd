@@ -30,8 +30,11 @@
 	<link rel="stylesheet" href="{{ URL::to('assets/AdminLTE/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')}}">
 <!-- <<<<<<< HEAD
 
+
 =======
 >>>>>>> 654698b0aee68ae7c5e93009cb52e4c38a92ba83 -->
+	<link rel="stylesheet" href="{{ URL::to('assets/AdminLTE/plugins/fullcalendar/fullcalendar.css')}}">
+	<link rel="stylesheet" href="{{ URL::to('assets/AdminLTE/plugins/fullcalendar/fullcalendar.print.css')}}">
 	<!-- DataTables -->
     <link rel="stylesheet" href="{{ URL::to('assets/AdminLTE/plugins/datatables/dataTables.bootstrap.css')}}">
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -44,13 +47,18 @@
 	<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.8/css/jquery.dataTables.css">
   
 <!-- jQuery -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
 	<script type="text/javascript" charset="utf8" src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+
 	<script src="{{ URL::to('assets/AdminLTE/bootstrap/js/bootstrap.min.js') }}"></script>
 	<script src="{{ URL::to('assets/AdminLTE/plugins/datepicker/bootstrap-datepicker.js') }}"></script>
     <script src="{{ URL::to('assets/AdminLTE/plugins/timepicker/bootstrap-timepicker.min.js') }}"></script>
   
 <!-- DataTables -->
-<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.8/js/jquery.dataTables.js"></script>
+	<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.8/js/jquery.dataTables.js"></script>
+ 	
+    <script src="{{ URL::to('assets/AdminLTE/plugins/daterangepicker/daterangepicker.js') }}"></script>
+    <script src="{{ URL::to('assets/AdminLTE/plugins/fullcalendar/fullcalendar.js') }}"></script>
   <style>
       .example-modal .modal {
         position: relative;
@@ -65,4 +73,36 @@
         background: transparent !important;
       }
     </style>
+    <style type="text/css">
+		body {
+			background: #363f48;
+			color: #33333f;
+			font: normal 12px;
+			margin-top: 20px;
+		}
+		ul.countdown {
+			list-style: none;
+			margin: 75px 0;
+			padding: 0;
+			display: block;
+			text-align: center;
+		}
+		ul.countdown li {
+			display: inline-block;
+		}
+		ul.countdown li span {
+			font-size: 80px;
+			font-weight: 300;
+			line-height: 80px;
+		}
+		ul.countdown li.seperator {
+			font-size: 80px;
+			line-height: 70px;
+			vertical-align: top;
+		}
+		ul.countdown li p {
+			color: black;
+			font-size: 14px;
+		}
+</style>
   </head>

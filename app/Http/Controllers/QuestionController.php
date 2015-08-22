@@ -8,6 +8,7 @@ use App\Role;
 use App\User;
 use App\Event;
 use App\Question;
+use App\Submission;
 use App\Http\Controllers\EventController;
 class QuestionController extends Controller {
 
@@ -21,7 +22,12 @@ class QuestionController extends Controller {
 		$this->data = array();
 		$this->data['eve'] = Event::find($id);
 		$this->data['question'] = Question::where('event_id','=',$id)->get();
-		return view('admin.event.question.manage',$this->data);
+		if(Auth::user()->role->id == 1 || Auth::user()->role->id == 2){
+			return view('admin.event.question.manage',$this->data);
+		}
+		else if(Auth::user()->role->id == 3){
+			return view('user.event.question.manage',$this->data);
+		}
 
 	}
 
@@ -61,6 +67,32 @@ class QuestionController extends Controller {
 	 *
 	 * @return Response
 	 */
+
+	public function submit($id1,$id2)
+	{
+		if (Request::isMethod('get')) {
+			$this->data = array();
+			$this->data['eve'] = Event::find($id1);
+			$this->data['quest'] = Question::find($id2);
+			return View::make('user.event.question.submit', $this->data);
+		} 
+		else if (Request::isMethod('post')) {
+			$data = Input::all();
+			
+			Submission::insertGetId(array(
+					'question_id' => $id2,
+					'users_id' => Auth::user()->id,
+					'nilai' => '0', 
+					'jawaban' => $data['jawaban'], 
+					'status' => "0"
+			));
+			return redirect('user/question/'.$id1);
+		}
+		else {
+			return redirect('/');
+		}
+	}
+
 	public function store()
 	{
 		//

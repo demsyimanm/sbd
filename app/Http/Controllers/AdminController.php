@@ -4,7 +4,8 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
-
+use Auth;
+use App\Event;
 class AdminController extends Controller {
 
 	/**
@@ -14,7 +15,22 @@ class AdminController extends Controller {
 	 */
 	public function index()
 	{
-		return view('admin.HomeAdmin');
+		date_default_timezone_set('Asia/Jakarta'); // CDT
+		$current_date = date('Y-m-d H:i:s');
+
+		if (Auth::user()->role->id == 1)
+		{
+			$this->data['nearest'] = Event::where('waktu_mulai','>=',$current_date)->min('waktu_mulai');
+		}
+
+		else if (Auth::user()->role->id == 2)
+		{
+			$kelas = Auth::user()->kelas;
+			$this->data['nearest'] = Event::where('kelas','=',$kelas)->where('waktu_mulai','>=',$current_date)->min('waktu_mulai');
+		}
+		$this->data['event'] = Event::where('waktu_mulai','=',$this->data['nearest'])->get();
+		$this->data['nearest'] = date('m/d/Y H:i:s', strtotime($this->data['nearest']));
+		return view('admin.HomeAdmin',$this->data);
 	}
 	/**
 	 * Show the form for creating a new resource.
@@ -25,6 +41,12 @@ class AdminController extends Controller {
 	{
 		//
 	}
+
+	public function calendar()
+	{
+		return view ('admin.CalendarAdmin');
+	}
+
 
 	/**
 	 * Store a newly created resource in storage.

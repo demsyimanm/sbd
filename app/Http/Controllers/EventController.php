@@ -29,11 +29,14 @@ class EventController extends Controller {
 			return view('admin.event.manage',$this->data);
 		}
 
-		else if (Auth::user()->role->id == 2)
+		else if (Auth::user()->role->id == 2 )
 		{
 			$this->data['event'] = Event::where('kelas','=',Auth::user()->kelas)->get();
 			return view('admin.event.manage',$this->data);
 		}
+		elseif (Auth::user()->role->id == 3) {
+			$this->data['event'] = Event::where('kelas','=',Auth::user()->kelas)->get();
+			return view('user.event.manage',$this->data);		}
 	}
 
 	/**

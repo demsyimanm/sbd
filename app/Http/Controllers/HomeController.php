@@ -37,7 +37,7 @@ class HomeController extends Controller {
 			return redirect('assistant');
 
 		} else if (Auth::user()->role_id == 3){
-			return view('user.HomeUser'); 
+			return redirect('user'); 
 		}
 	}
 

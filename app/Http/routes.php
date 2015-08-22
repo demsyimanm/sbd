@@ -20,10 +20,18 @@ Route::controllers([
 	'password' => 'Auth\PasswordController',
 ]);
 
-Route::get('user', 'UserController@index');
-Route::get('assistant', 'AdminController@index');
 
 /*User*/
+Route::get('user', 'UserController@index');
+Route::get('user/event', 'EventController@index');
+Route::get('user/question/{id}', 'QuestionController@index');
+Route::get('user/question/{id1}/submit/{id2}', 'QuestionController@submit');
+Route::post('user/question/{id1}/submit/{id2}', array('before' => 'csrf', 'uses' => 'QuestionController@submit'));
+
+/*Assistant*/
+Route::get('assistant', 'AdminController@index');
+
+/*Admin*/
 Route::get('admin', 'AdminController@index');
 Route::get('admin/user', 'AccountController@index');
 Route::get('admin/user/create', 'AccountController@create');
@@ -48,6 +56,8 @@ Route::post('admin/question/{id1}/update/{id2}', array('before' => 'csrf', 'uses
 Route::get('admin/question/{id1}/delete/{id2}', 'QuestionController@destroy');
 Route::post('admin/question/{id1}/delete/{id2}', array('before' => 'csrf', 'uses' => 'QuestionController@destroy'));
 
+/*Calendar*/
+Route::get('admin/calendar', 'AdminController@calendar');
 
 Route::post('admin/user/create', array('before' => 'csrf', 'uses' => 'AccountController@create'));
 Route::get('admin/user/update/{id}', 'AccountController@update');

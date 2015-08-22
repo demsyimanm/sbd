@@ -6,11 +6,11 @@ use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class SubmissionModel extends Model
+class Submission extends Model
 {
 	use SoftDeletes;
 
-	protected $table = 'submissions';
+	protected $table = 'submission';
 	protected $primaryKey = 'id';
 	public $timestamps = true;
 	public $incrementing = true;
