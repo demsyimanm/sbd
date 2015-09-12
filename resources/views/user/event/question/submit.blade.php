@@ -6,7 +6,7 @@
 	</h1>
 </section>
 <section class="content">
-	<div class="box">
+	<div class="box box-primary">
 		<form action"" method="post">
         	<input type="hidden" name="_token" value="{{ csrf_token() }}">
         	<br><br>

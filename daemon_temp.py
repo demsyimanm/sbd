@@ -1,10 +1,8 @@
 #!/usr/bin/python
 import  MySQLdb
-
 a=0
 while (1):
-  try:
-   db= MySQLdb.connect("10.151.12.202", "sbdoj", "pass", "sbdoj")
+   db= MySQLdb.connect("10.151.44.27", "root", "", "sbd")
    cursor = db.cursor()
    sql = """select id, question_id, users_id, jawaban,status from submission where status = 0 having id = min(id)"""
    cursor.execute(sql)
@@ -23,14 +21,9 @@ while (1):
        stat = unchecked[4]
        unchecked = cursor.fetchone()
 
-   if (sub_id!="") : tanda = 1
-
-   '''print sub_id
-   print ques_id
-   print user_id
-   print ans
-   print stat'''
+   if (sub_id!=""): tanda = 1
    if (tanda==1):
+    try:
        cursor.execute(ans)
        results = cursor.fetchall()
        num_fields = len(cursor.description)
@@ -89,14 +82,12 @@ while (1):
            cursor.execute(update2)
            db.commit()
            print "query success"
-  except:
-      db.rollback()
-      update1 = """update submission set nilai = 0, status = 1 where id = """+str(sub_id)
-      cursor.execute(update1)
-      db.commit()
-      print "query failed"
-
-db.close()
+    except:
+        update1 = """update submission set nilai = 0, status = 1 where id = """+str(sub_id)
+        cursor.execute(update1)
+        db.commit()
+        print "query failed"
+    db.close()
 # disconnect from server
   # Now print fetched result
       #print "nama=%s,username=%s,kelas=%s,role_id=%s" % \

@@ -101,9 +101,12 @@ class EventController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function parserStart($id)
 	{
-		//
+		Event::where('id', $id)->update(array(
+			'status' => '1'
+		));
+		return redirect('admin/event');
 	}
 
 	/**
@@ -112,9 +115,12 @@ class EventController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($id)
+	public function ParserStop($id)
 	{
-		//
+		Event::where('id', $id)->update(array(
+			'status' => '0'
+		));
+		return redirect('admin/event');
 	}
 
 	/**

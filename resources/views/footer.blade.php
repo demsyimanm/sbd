@@ -1,13 +1,13 @@
 <footer class="main-footer">
 <div class="pull-right hidden-xs">
-   &copy;2015 <b>Bilfash </b>&<b> Demsy</b>
+   &copy;<b>Bilfash </b>&<b> Demsy</b>
 </div>
 <strong>Supported by <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong><b> Version</b> 2.3.0. All rights reserved.
 </footer>
 <!-- jQuery 2.1.4 -->
     
     <!-- jQuery UI 1.11.4 -->
-    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+    <script src="{{ URL::to('assets/AdminLTE/plugins/jQueryUI/jquery-ui.min.js') }}"></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
       $.widget.bridge('uibutton', $.ui.button);
@@ -15,7 +15,6 @@
     <!-- Bootstrap 3.3.5 -->
    
     <!-- Morris.js charts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
     <script src="{{ URL::to('assets/AdminLTE/plugins/morris/morris.min.js') }}"></script>
     <!-- Sparkline -->
     <script src="{{ URL::to('assets/AdminLTE/plugins/sparkline/jquery.sparkline.min.js') }}"></script>

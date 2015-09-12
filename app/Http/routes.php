@@ -45,6 +45,8 @@ Route::get('admin/event/update/{id}', 'EventController@update');
 Route::post('admin/event/update/{id}', array('before' => 'csrf', 'uses' => 'EventController@update'));
 Route::get('admin/event/delete/{id}', 'EventController@destroy');
 Route::post('admin/event/delete/{id}', array('before' => 'csrf', 'uses' => 'EventController@destroy'));
+Route::get('admin/event/parser/start/{id}', 'EventController@parserStart');
+Route::get('admin/event/parser/stop/{id}', 'EventController@parserStop');
 
 /*Question*/
 Route::get('admin/question/{id}', 'QuestionController@index');
