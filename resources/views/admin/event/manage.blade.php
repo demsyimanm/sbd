@@ -25,13 +25,14 @@
 	    <thead>
 		    <tr>
 		        <th width="5%" class="text-center">No</th>
-		        <th width="23%">Judul<span style="font-size:11px;"> &nbsp;(click the title to edit questions)</span></th>
-		        <th width="20%">Konten</th>
-	        	<th width="13%">Waktu Mulai</th>
-	        	<th width="13%">Waktu Akhir</th>
-	        	<th width="3%">Kls</th>
-	        	<th width="13%" class="text-center">Parser</th>
-	        	<th width="9%">Action</th>
+		        <th width="25%" class="text-center">Judul<span style="font-size:11px;"> &nbsp;(click the title to edit questions)</span></th>
+	        	<th width="11%" class="text-center">Waktu Mulai</th>
+	        	<th width="11%" class="text-center">Waktu Akhir</th>
+	        	<th width="3%" class="text-center">Kls</th>
+	        	<th width="13%" class="text-center">IP</th>
+	        	<th width="10%" class="text-center">DB</th>
+	        	<th width="11%" class="text-center">Parser</th>
+	        	<th width="9%" class="text-center">Action</th>
 	      	</tr>
 	    </thead>
 	    <tbody>
@@ -39,17 +40,18 @@
 	      	<tr>
 	      		<td class="text-center"><?php echo $i++ ?></td>
 	      		<td><a href="{{ URL::to('admin/question/'. $eve->id) }}" >{{ $eve->judul }}</td>
-	      		<td><?php echo nl2br(substr($eve->konten,0,10))." ..."?></td>
 	      		<td>{{ $eve->waktu_mulai }}</td>
 	      		<td>{{ $eve->waktu_akhir }}</td>
 	      		<td class="text-center">{{ $eve->kelas }}</td>
+	      		<td>{{ $eve->ip }}</td>
+	      		<td>{{ $eve->db_name }}</td>
 	      		<td>
 	      			@if($eve->status == '0')
-	      				<a href="{{URL::to('admin/event/parser/start/'.$eve->id)}}" class="btn btn-success">Start</a>
-	      				<a href="#" class="btn btn-danger" disabled="">Stop</a>
+	      				<a href="{{URL::to('admin/event/parser/start/'.$eve->id)}}" class="btn btn-success btn-sm">Start</a>
+	      				<a href="#" class="btn btn-danger btn-sm" disabled="">Stop</a>
 	      			@else
-	      				<a href="#" class="btn btn-success" disabled="">Start</a>
-	      				<a href="{{URL::to('admin/event/parser/stop/'.$eve->id)}}" class="btn btn-danger" >Stop</a>
+	      				<a href="#" class="btn btn-success btn-sm" disabled="">Start</a>
+	      				<a href="{{URL::to('admin/event/parser/stop/'.$eve->id)}}" class="btn btn-danger btn-sm" >Stop</a>
 	      			@endif
 	      		</td>
 	      		<td>
@@ -63,10 +65,11 @@
 	      	<tr>
 	       		<th class="text-center">No</th>
 		        <th>Judul</th>
-		        <th>Konten</th>
 	        	<th>Waktu Mulai</th>
 	        	<th>Waktu Akhir</th>
 	        	<th>Kls</th>
+	        	<th class="text-center">IP</th>
+	        	<th class="text-center">DB</th>
 	        	<th class="text-center">Parser</th>
 	        	<th>Action</th>
 	      	</tr>

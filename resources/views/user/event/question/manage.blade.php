@@ -1,55 +1,74 @@
 @extends('user.AppUser')
 @section('content')
 <section class="content-header">
-	<h1>
-	    Question {{$eve->judul}} Kelas {{$eve->kelas}}
-	</h1>
+	
 </section>
+<?php $i=0; ?>
+@foreach ($judul as $jud)
+	<?php
+		$temp_jud[$i] = $jud->judul;
+		$i++;
+	?>
+@endforeach
+
 <section class="content">
-	<div class="box box-primary">
+    <div class="">
 		<div class="box-body">
-			{{$eve->konten}}
+			<div class="col-md-12">
+		      <div class="nav-tabs-custom">
+		        <ul class="nav nav-tabs">
+		          <li class="active"><a href="#information" data-toggle="tab">Information</a></li>
+		          <?php for ($z=0;$z<$i;$z++){?>
+		          		<li><a href="#{{$temp_jud[$z]}}" data-toggle="tab">{{$temp_jud[$z]}}</a></li>
+		          <?php } ?>
+		        </ul><br>
+		        <div class="tab-content">
+		          <div class="active tab-pane" id="information">
+		          	<div class="">
+		          		<div class="box-body ">
+		          			<div class="col-md-10 col-md-offset-1">
+		          			<h2>
+							   {{$eve->judul}}
+							</h2><br>
+		          				{{$eve->konten}}
+		          				<br><br>
+		          			</div>
+
+		          		</div>
+		          	</div>
+		          </div>
+		          <?php $x=0; ?>
+		          @foreach ($question as $quest)
+		          	<div class="tab-pane" id="{{$temp_jud[$x]}}">
+			          	<div class="">
+			          		<div class="box-body">
+				          		<div class="col-md-10 col-md-offset-1">
+				          			<h2>{{$quest->judul}}</h2><br>
+				          			<?php echo nl2br($quest->konten)?>
+				          			<form id="form1" action="{{ URL::to('user/question/'. $eve->id.'/submit/'.$quest->id) }}"  method="POST">
+							        	<input type="hidden" name="_token" value="{{ csrf_token() }}">
+							        	<br><br>
+						          		<h5>Salin query Anda ke textarea di bawah :</h5>
+						          		<div class="form-group">
+						            		<textarea type="text" name="jawaban" class="form-control input-sm" style="resize:vertical;height:250px;"></textarea>
+							          	</div>
+							          	<br>
+							          	<div class="form-group">
+							            	<div class="col-md-2 col-md-offset-10">
+							              		<button type="submit" class="btn btn-primary btn-block btn-flat">Submit</button>
+							            	</div><!-- /.col -->
+							          	</div>
+							        </form>
+				          		</div>
+				          	</div>
+			          	</div>
+		         	</div>
+		         	<?php $x++; ?>
+		          @endforeach
+		        </div>
+		      </div>
+		    </div>
 		</div>
 	</div>
-	<div class="box box-warning">
-		<div class="box-body">
-	      	<script> 
-			    $(function () {
-			    	$("#data_table").DataTable();
-			    });
-		    </script>
-		  	<table id="data_table" class="table table-bordered table-striped">
-		  	<?php $i = 1;?>
-		    <thead>
-			    <tr>
-			        <th width="5%" class="text-center">No</th>
-			        <th width="35%">Judul</th>
-			        <th width="50%">Pertanyaan</th>
-		        	<th width="10%">Action</th>
-		      	</tr>
-		    </thead>
-		    <tbody>
-		    	@foreach($question as $quest)
-		      	<tr>
-		      		<td class="text-center"><?php echo $i++ ?></td>
-		      		<td><a href="{{ URL::to('user/question/'. $eve->id.'/submit/'.$quest->id) }}" >{{ $quest->judul }}</td>
-		      		<td><?php echo nl2br(substr($quest->konten,0,30))." ..."?></td>
-		      		<td>
-		      			<a href="{{ URL::to('user/question/'. $eve->id.'/submit/'.$quest->id) }}" class="btn btn-twitter" ><i class="fa  fa-check-square-o"></i> Jawab</a>
-		      		</td>
-		      	</tr>
-		      	@endforeach
-		    </tbody>
-		    <tfoot>
-		      	<tr>
-		       		<th class="text-center">No</th>
-			        <th>Judul</th>
-			        <th>Pertanyaan</th>
-		        	<th>Action</th>
-		      	</tr>
-		    </tfoot>
-		  	</table>
-		  </div>
-	</div><!-- /.box-body -->
 </section>
 @endsection

@@ -74,5 +74,7 @@
 	    </tfoot>
 	  	</table>
 	</div><!-- /.box-body -->
+
+	
 </section>
 @endsection

@@ -92,12 +92,39 @@
 				@endif
 				</div>
 			</div>
-			
+			<div class="form-group">
+				<label class="col-md-2 control-label">Database IP</label>
+				<div class="col-md-6">
+					<input type="text" class="form-control" name="ip" value="{{$eve->ip}}">
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-md-2 control-label">Connection Username</label>
+				<div class="col-md-6">
+					<input type="text" class="form-control " name="conn_username" value="{{$eve->conn_username}}">
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-md-2 control-label">Connection Password</label>
+				<div class="col-md-6">
+					<input type="text" class="form-control " name="conn_password" value="{{$eve->conn_password}}">
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-md-2 control-label">Database Name</label>
+				<div class="col-md-6">
+					<input type="text" class="form-control " name="db_name" value="{{$eve->db_name}}">
+				</div>
+			</div>
+
+			 <div class=" col-md-6 col-md-offset-2 box-footer">
+            	<button type="submit" class="btn btn-primary pull-right">Save</button>
+        	</div><!-- /.box-footer -->
 		</div><!-- /.box-body -->
-        <div class=" col-md-6 col-md-offset-2 box-footer">
-            <button type="submit" class="btn btn-default">Cancel</button>
-            <button type="submit" class="btn btn-info pull-right">Save</button>
-        </div><!-- /.box-footer -->
+       
 	</form>
 	<script type="text/javascript">
             $('#timepicker1').timepicker({

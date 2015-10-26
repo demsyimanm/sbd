@@ -20,7 +20,11 @@ class Event extends Model
 		'konten',
 		'waktu_mulai',
 		'waktu_akhir',
-		'kelas'
+		'kelas',
+		'ip',
+		'conn_username',
+		'conn_password',
+		'db_name'
 	);
 
 	protected $SoftDelete = true;

@@ -81,12 +81,38 @@
 				@endif
 				</div>
 			</div>
-			    
+			<div class="form-group">
+				<label class="col-md-2 control-label">Database IP</label>
+				<div class="col-md-6">
+					<input type="text" class="form-control" name="ip">
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-md-2 control-label">Connection Username</label>
+				<div class="col-md-6">
+					<input type="text" class="form-control " name="conn_username">
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-md-2 control-label">Connection Password</label>
+				<div class="col-md-6">
+					<input type="text" class="form-control " name="conn_password">
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-md-2 control-label">Database Name</label>
+				<div class="col-md-6">
+					<input type="text" class="form-control " name="db_name">
+				</div>
+			</div>
+			 <div class=" col-md-6 col-md-offset-2 box-footer">
+            	<button type="submit" class="btn btn-info pull-right">Create</button>
+        	 </div><!-- /.box-footer -->
 		</div><!-- /.box-body -->
-        <div class=" col-md-6 col-md-offset-2 box-footer">
-            <button type="submit" class="btn btn-default">Cancel</button>
-            <button type="submit" class="btn btn-info pull-right">Create</button>
-        </div><!-- /.box-footer -->
+        
 	</form>
 	<script type="text/javascript">
             $('#timepicker1').timepicker({

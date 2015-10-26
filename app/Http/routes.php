@@ -25,7 +25,6 @@ Route::controllers([
 Route::get('user', 'UserController@index');
 Route::get('user/event', 'EventController@index');
 Route::get('user/question/{id}', 'QuestionController@index');
-Route::get('user/question/{id1}/submit/{id2}', 'QuestionController@submit');
 Route::post('user/question/{id1}/submit/{id2}', array('before' => 'csrf', 'uses' => 'QuestionController@submit'));
 
 /*Assistant*/
