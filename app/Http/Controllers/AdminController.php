@@ -1,11 +1,15 @@
 <?php namespace App\Http\Controllers;
 
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use Illuminate\Http\Request;
+use Request;
 use Auth;
+use Input;
 use App\Event;
+use App\User;
+use App\Question;
+use App\Submission;
+
 class AdminController extends Controller {
 
 	/**
@@ -37,9 +41,48 @@ class AdminController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function create()
+	public function scoreboards()
 	{
-		//
+		if (Request::isMethod('get')) {
+			# code...
+			$this->data['event'] = Event::get();
+			return view('admin.scoreboard.index',$this->data);
+		} else {
+			$id = Input::get('event');
+			return redirect('admin/scoreboard/'.$id);
+		}
+	}
+
+	public function scoreboard($id)
+	{
+		$event = Event::find($id);
+		$nilai = array();
+		$user = User::where('kelas',$event->kelas)->where('role_id', 3)->get();
+		$question = Question::where('event_id', $id)->get();
+		foreach ($question as $quest) {
+			$submission = Submission::where('question_id',$quest->id)->get();
+			foreach ($submission as $sub) {
+				foreach ($user as $use) {
+					$nilai[$use->username][$sub->question_id] = 0;
+				}
+			}
+		}
+		foreach ($question as $quest) {
+			foreach ($user as $use) {
+				$submission = Submission::where('question_id',$quest->id)->where('users_id',$use->id)->max('nilai');
+				if($submission) $nilai[$use->username][$quest->id] = $submission;
+			}
+		}
+		foreach ($nilai as $key => $value) {
+			$nilai[$key]['total'] = 0;
+			foreach ($value as $val) {
+				$nilai[$key]['total'] += $val;
+			}
+		}
+		$this->data['question'] = $question;
+		$this->data['nilai'] = $nilai;
+		$this->data['id'] = $id;
+		return view('admin.scoreboard.board',$this->data);
 	}
 
 	public function calendar()
@@ -53,9 +96,40 @@ class AdminController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function refresh($id)
 	{
-		//
+		if (Request::isMethod('get')) {
+            if (Request::ajax()) {
+                {
+                    $event = Event::find($id);
+					$nilai = array();
+					$user = User::where('kelas',$event->kelas)->where('role_id', 3)->get();
+					$question = Question::where('event_id', $id)->get();
+					foreach ($question as $quest) {
+						$submission = Submission::where('question_id',$quest->id)->get();
+						foreach ($submission as $sub) {
+							foreach ($user as $use) {
+								$nilai[$use->username][$sub->question_id] = 0;
+							}
+						}
+					}
+					foreach ($question as $quest) {
+						foreach ($user as $use) {
+							$submission = Submission::where('question_id',$quest->id)->where('users_id',$use->id)->max('nilai');
+							if($submission) $nilai[$use->username][$quest->id] = $submission;
+						}
+					}
+					foreach ($nilai as $key => $value) {
+						$nilai[$key]['total'] = 0;
+						foreach ($value as $val) {
+							$nilai[$key]['total'] += $val;
+						}
+					}
+
+                        return json_encode($nilai);
+                }
+            }
+        }
 	}
 
 	/**
@@ -64,10 +138,6 @@ class AdminController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($id)
-	{
-		//
-	}
 
 	/**
 	 * Show the form for editing the specified resource.

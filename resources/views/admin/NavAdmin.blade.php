@@ -134,6 +134,12 @@ setInterval( function() {
               </a>
             </li>
 
+            <li class="treeview">
+              <a href="{{ URL::to('admin/scoreboards')}}">
+                <i class="fa fa-trophy"></i> <span>Scoreboard</span>
+              </a>
+            </li>
+
           </ul>
         </section>
         <!-- /.sidebar -->
