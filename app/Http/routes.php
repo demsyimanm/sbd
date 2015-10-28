@@ -60,6 +60,12 @@ Route::post('admin/question/{id1}/delete/{id2}', array('before' => 'csrf', 'uses
 /*Calendar*/
 Route::get('admin/calendar', 'AdminController@calendar');
 
+/*Scoreboard*/
+Route::get('admin/scoreboards', 'AdminController@scoreboards');
+Route::post('admin/scoreboards', array('before' => 'csrf', 'uses' => 'AdminController@scoreboards'));
+Route::get('admin/scoreboard/{id}', 'AdminController@scoreboard');
+Route::get('admin/scoreboard/refresh/{id}', 'AdminController@refresh');
+
 Route::post('admin/user/create', array('before' => 'csrf', 'uses' => 'AccountController@create'));
 Route::get('admin/user/update/{id}', 'AccountController@update');
 Route::post('admin/user/update/{id}', array('before' => 'csrf', 'uses' => 'AccountController@update'));
