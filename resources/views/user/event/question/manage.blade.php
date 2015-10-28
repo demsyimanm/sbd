@@ -7,6 +7,7 @@
 @foreach ($judul as $jud)
 	<?php
 		$temp_jud[$i] = $jud->judul;
+		$temp_jud_id[$i] = $jud->id;
 		$i++;
 	?>
 @endforeach
@@ -19,7 +20,7 @@
 		        <ul class="nav nav-tabs">
 		          <li class="active"><a href="#information" data-toggle="tab">Information</a></li>
 		          <?php for ($z=0;$z<$i;$z++){?>
-		          		<li><a href="#{{$temp_jud[$z]}}" data-toggle="tab">{{$temp_jud[$z]}}</a></li>
+		          		<li><a href="#{{$temp_jud_id[$z]}}" data-toggle="tab">{{$temp_jud[$z]}}</a></li>
 		          <?php } ?>
 		        </ul><br>
 		        <div class="tab-content">
@@ -39,7 +40,7 @@
 		          </div>
 		          <?php $x=0; ?>
 		          @foreach ($question as $quest)
-		          	<div class="tab-pane" id="{{$temp_jud[$x]}}">
+		          	<div class="tab-pane" id="{{$temp_jud_id[$x]}}">
 			          	<div class="">
 			          		<div class="box-body">
 				          		<div class="col-md-10 col-md-offset-1">

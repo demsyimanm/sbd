@@ -3,17 +3,20 @@ import  MySQLdb
 
 a=0
 while (1):
-  db= MySQLdb.connect("xzczxczx", "czxzxcx", "zxczxc", "zxzxc")
+  db= MySQLdb.connect(host="localhost", # your host, usually localhost
+                     user="sbd", # your username
+                      passwd="", # your password
+                      db="sbd")
   cursor = db.cursor()
   try:
-   sql = '''select id, question_id, users_id, jawaban,status from submission where status = 0 having id = min(id)'''
+   sql = """select id, question_id, users_id, jawaban,status from submission where status = 0 having id = min(id)"""
    cursor.execute(sql)
    unchecked = cursor.fetchone()
-   sub_id = ''
-   ques_id = ''
-   user_id = ''
-   ans = ''
-   stat = ''
+   sub_id = ""
+   ques_id = ""
+   user_id = ""
+   ans = ""
+   stat = ""
    tanda = 0
    while unchecked is not None:
        sub_id = unchecked[0]
@@ -23,7 +26,13 @@ while (1):
        stat = unchecked[4]
        unchecked = cursor.fetchone()
 
-   if (sub_id!='') : tanda = 1
+   if (sub_id!="") : tanda = 1
+
+   '''print sub_id
+   print ques_id
+   print user_id
+   print ans
+   print stat'''
    if (tanda==1):
        cursor.execute(ans)
        results = cursor.fetchall()
@@ -35,7 +44,12 @@ while (1):
                hasil[rows][column] = res[column]
            rows+=1
 
-       kunci = '''select jawaban from question where id='''+ str(ques_id)
+       '''for row in range(rows):
+           for column in range(num_fields):
+             print hasil[row][column]'''
+
+
+       kunci = """select jawaban from question where id="""+ str(ques_id)
        cursor.execute(kunci)
        temp = cursor.fetchone()
        while temp is not None:
@@ -53,6 +67,10 @@ while (1):
                arr_kunci[row_kunci][column_kunci] = res_key[column_kunci]
            row_kunci+=1
        
+       '''for row in range(row_kunci):
+           for column in range(num_fields_1):
+             print arr_kunci[row_kunci][column_kunci]'''
+
        flag=0
        if (num_fields != num_fields_1): flag=1
        if (rows != row_kunci): flag=1
@@ -64,21 +82,25 @@ while (1):
                        flag=1
            
        if (flag==1): 
-           update1 = '''update submission set nilai = 0, status = 1 where id = '''+str(sub_id)
+           update1 = """update submission set nilai = 0, status = 1 where id = """+str(sub_id)
            cursor.execute(update1)
            db.commit()
-           print 'query failed'
+           print "query failed"
 
        elif (flag==0): 
-           update2 = '''update submission set nilai = 100, status = 1 where id = '''+str(sub_id)
+           update2 = """update submission set nilai = 100, status = 1 where id = """+str(sub_id)
            cursor.execute(update2)
            db.commit()
-           print 'query success'
+           print "query success"
   except:
       db.rollback()
-      update1 = '''update submission set nilai = 0, status = 1 where id = '''+str(sub_id)
+      update1 = """update submission set nilai = 0, status = 1 where id = """+str(sub_id)
       cursor.execute(update1)
       db.commit()
-      print 'query failed'
+      print "query failed"
 
 db.close()
+# disconnect from server
+  # Now print fetched result
+      #print "nama=%s,username=%s,kelas=%s,role_id=%s" % \
+            #(nama, username, kelas, role_id)

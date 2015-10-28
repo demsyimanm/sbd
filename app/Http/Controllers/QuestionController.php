@@ -21,7 +21,7 @@ class QuestionController extends Controller {
 	{
 		$this->data = array();
 		$this->data['eve'] = Event::find($id);
-		$this->data['judul'] = Question::select('judul')->where('event_id','=',$id)->get();
+		$this->data['judul'] = Question::select('id','judul')->where('event_id','=',$id)->get();
 		$this->data['question'] = Question::where('event_id','=',$id)->get();
 		if(Auth::user()->role->id == 1 || Auth::user()->role->id == 2){
 			return view('admin.event.question.manage',$this->data);

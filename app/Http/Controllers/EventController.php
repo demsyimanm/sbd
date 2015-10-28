@@ -65,12 +65,12 @@ class EventController extends Controller {
 					'waktu_mulai' => $data['waktu_mulai'], 
 					'waktu_akhir' => $data['waktu_akhir'],
 					'kelas' => $data['kelas'],
-					'ip' => $data['ip'],
+					/*'ip' => $data['ip'],
 					'conn_username' => $data['conn_username'],
 					'conn_password' => $data['conn_password'],
-					'db_name' => $data['db_name']
+					'db_name' => $data['db_name']*/
 				));
-				$file = fopen("parser_".$max_id.".py", "wb") or die("Unable to open file!");
+				/*$file = fopen("parser_".$max_id.".py", "wb") or die("Unable to open file!");
 				$content = "#!/usr/bin/python
 import  MySQLdb
 
@@ -156,7 +156,7 @@ while (1):
 
 db.close()";
 				fwrite($file, $content);
-				fclose($file);
+				fclose($file);*/
 				return redirect('admin/event');
 			}
 		} 
