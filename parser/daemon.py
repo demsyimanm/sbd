@@ -1,7 +1,7 @@
 #!/usr/bin/python
 import MySQLdb
 import time
-
+import sys
 try:
   db_kunci= MySQLdb.connect("localhost", "root", "", "bridge")
   cursor_kunci = db_kunci.cursor()
@@ -98,9 +98,13 @@ try:
     time.sleep(1)
     db.close()
   db_kunci.close()
+except KeyboardInterrupt:
+  sys.exit(0)
 except:
   print "berhenti"
   execfile('daemon.py')
+
+  
 # disconnect from server
   # Now print fetched result
       #print "nama=%s,username=%s,kelas=%s,role_id=%s" % \
