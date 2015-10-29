@@ -53,17 +53,32 @@ class AdminController extends Controller {
 		}
 	}
 
+	public function scoreboardsUser()
+	{
+		if (Request::isMethod('get')) {
+			# code...
+			$kelas = Auth::user()->kelas;
+			$this->data['event'] = Event::where('kelas','=',$kelas)->get();
+			return view('admin.scoreboard.index',$this->data);
+		} else {
+			$id = Input::get('event');
+			return redirect('user/scoreboard/'.$id);
+		}
+	}
+
 	public function scoreboard($id)
 	{
 		$event = Event::find($id);
 		$nilai = array();
 		$user = User::where('kelas',$event->kelas)->where('role_id', 3)->get();
 		$question = Question::where('event_id', $id)->get();
+		$flag_nilai = 0;
 		foreach ($question as $quest) {
 			$submission = Submission::where('question_id',$quest->id)->get();
 			foreach ($submission as $sub) {
 				foreach ($user as $use) {
 					$nilai[$use->username][$sub->question_id] = 0;
+					$flag_nilai = 1;
 				}
 			}
 		}
@@ -80,8 +95,15 @@ class AdminController extends Controller {
 			}
 		}
 		$this->data['question'] = $question;
-		$this->data['nilai'] = $nilai;
+		$this->data['nilai'] = 0;
+		$this->data['user'] = $user;
+		if ($flag_nilai == 1) {
+			$this->data['nilai'] = $nilai;
+		}
+		$this->data['flag_nilai'] = $flag_nilai;
 		$this->data['id'] = $id;
+		//var_dump($this->data);
+		//break;
 		return view('admin.scoreboard.board',$this->data);
 	}
 

@@ -129,12 +129,6 @@ setInterval( function() {
             </li>
 
             <li class="treeview">
-              <a href="{{ URL::to('admin/calendar')}}">
-                <i class="fa fa-calendar-check-o"></i> <span>Calendar</span>
-              </a>
-            </li>
-
-            <li class="treeview">
               <a href="{{ URL::to('admin/scoreboards')}}">
                 <i class="fa fa-trophy"></i> <span>Scoreboard</span>
               </a>

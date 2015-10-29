@@ -63,8 +63,12 @@ Route::get('admin/calendar', 'AdminController@calendar');
 /*Scoreboard*/
 Route::get('admin/scoreboards', 'AdminController@scoreboards');
 Route::post('admin/scoreboards', array('before' => 'csrf', 'uses' => 'AdminController@scoreboards'));
+Route::get('user/scoreboards', 'AdminController@scoreboardsUser');
+Route::post('user/scoreboards', array('before' => 'csrf', 'uses' => 'AdminController@scoreboardsUser'));
 Route::get('admin/scoreboard/{id}', 'AdminController@scoreboard');
 Route::get('admin/scoreboard/refresh/{id}', 'AdminController@refresh');
+Route::get('user/scoreboard/{id}', 'AdminController@scoreboard');
+Route::get('user/scoreboard/refresh/{id}', 'AdminController@refresh');
 
 Route::post('admin/user/create', array('before' => 'csrf', 'uses' => 'AccountController@create'));
 Route::get('admin/user/update/{id}', 'AccountController@update');
