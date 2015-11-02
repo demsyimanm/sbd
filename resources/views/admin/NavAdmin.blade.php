@@ -70,7 +70,7 @@ setInterval( function() {
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <img src="{{ URL::to('assets/AdminLTE/dist/img/user.png')}}" class="user-image" alt="User Image">
-                  <span class="hidden-xs">{{ Auth::user()->role->nama }}</span>
+                  <span class="hidden-xs">{{ Auth::user()->nama }}</span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- User image -->
@@ -114,7 +114,7 @@ setInterval( function() {
               </a>
             </li>
              
-             @if(Auth::user()->role->id == 1)
+             @if(Auth::user()->role->id == 1 || Auth::user()->role->id == 2)
             <li class="treeview">
               <a href="{{ URL::to('admin/user')}}">
                 <i class="fa fa-user"></i> <span>Akun</span>

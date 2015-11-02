@@ -43,13 +43,29 @@ class AdminController extends Controller {
 	 */
 	public function scoreboards()
 	{
-		if (Request::isMethod('get')) {
-			# code...
-			$this->data['event'] = Event::get();
-			return view('admin.scoreboard.index',$this->data);
-		} else {
-			$id = Input::get('event');
-			return redirect('admin/scoreboard/'.$id);
+		if (Auth::user()->role->id == 1)
+		{
+			if (Request::isMethod('get')) {
+				# code...
+				$this->data['event'] = Event::get();
+				return view('admin.scoreboard.index',$this->data);
+			} else {
+				$id = Input::get('event');
+				return redirect('admin/scoreboard/'.$id);
+			}
+		}
+
+		else
+		{
+			if (Request::isMethod('get')) {
+				# code...
+				$kelas = Auth::user()->kelas;
+				$this->data['event'] = Event::where('kelas','=',$kelas)->get();
+				return view('admin.scoreboard.index',$this->data);
+			} else {
+				$id = Input::get('event');
+				return redirect('admin/scoreboard/'.$id);
+			}
 		}
 	}
 
@@ -72,13 +88,11 @@ class AdminController extends Controller {
 		$nilai = array();
 		$user = User::where('kelas',$event->kelas)->where('role_id', 3)->get();
 		$question = Question::where('event_id', $id)->get();
-		$flag_nilai = 0;
 		foreach ($question as $quest) {
 			$submission = Submission::where('question_id',$quest->id)->get();
 			foreach ($submission as $sub) {
 				foreach ($user as $use) {
 					$nilai[$use->username][$sub->question_id] = 0;
-					$flag_nilai = 1;
 				}
 			}
 		}
@@ -86,6 +100,7 @@ class AdminController extends Controller {
 			foreach ($user as $use) {
 				$submission = Submission::where('question_id',$quest->id)->where('users_id',$use->id)->max('nilai');
 				if($submission) $nilai[$use->username][$quest->id] = $submission;
+				else $nilai[$use->username][$quest->id] = 0;
 			}
 		}
 		foreach ($nilai as $key => $value) {
@@ -95,13 +110,10 @@ class AdminController extends Controller {
 			}
 		}
 		$this->data['question'] = $question;
-		$this->data['nilai'] = 0;
 		$this->data['user'] = $user;
-		if ($flag_nilai == 1) {
-			$this->data['nilai'] = $nilai;
-		}
-		$this->data['flag_nilai'] = $flag_nilai;
+		$this->data['nilai'] = $nilai;
 		$this->data['id'] = $id;
+		$this->data['event'] = $event;
 		//var_dump($this->data);
 		//break;
 		return view('admin.scoreboard.board',$this->data);
@@ -139,6 +151,7 @@ class AdminController extends Controller {
 						foreach ($user as $use) {
 							$submission = Submission::where('question_id',$quest->id)->where('users_id',$use->id)->max('nilai');
 							if($submission) $nilai[$use->username][$quest->id] = $submission;
+							else $nilai[$use->username][$quest->id] = 0;
 						}
 					}
 					foreach ($nilai as $key => $value) {

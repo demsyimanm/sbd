@@ -40,10 +40,11 @@
 					<input type="password" class="form-control" name="password">
 				</div>
 			</div>
-
+			
 			<div class="form-group">
 				<label class="col-md-2 control-label">Kelas</label>
 				<div class="col-md-6">
+				@if($user == 1)
 					<select class="form-control" name="kelas">
 	                        <option selected='selected'> -- </option>
 	                        <option value="A">A</option>
@@ -52,9 +53,12 @@
 	                        <option value="D">D</option>
 	                        <option value="E">E</option>
 					</select>
+				@elseif ($user == 2 )
+					<input type="text" class="form-control" value="{{$kelas}}" disabled="">
+					<input type="hidden" class="form-control" name="kelas" value="{{$kelas}}">
+				@endif
 				</div>
 			</div>
-
 			<div class="form-group">
 				<label class="col-md-2 control-label">Role</label>
 				<div class="col-md-6">

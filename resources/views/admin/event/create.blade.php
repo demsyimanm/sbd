@@ -77,7 +77,8 @@
 					</select>
 
 				@else
-					<input type="text" class="form-control" name="kelas" value="{{$kelas}}" disabled="">
+					<input type="text" class="form-control" value="{{$kelas}}" disabled="">
+					<input type="hidden" class="form-control" name="kelas" value="{{$kelas}}">
 				@endif
 				</div>
 			</div>

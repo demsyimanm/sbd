@@ -13,7 +13,7 @@
 @endforeach
 
 <section class="content">
-    <div class="">
+    <div class="box box-primary">
 		<div class="box-body">
 			<div class="col-md-12">
 		      <div class="nav-tabs-custom">

@@ -13,7 +13,7 @@ use Request;
 use App\Role;
 use App\User;
 use App\Event;
-use App\Http\Controllers\EventController;
+
 
 class EventController extends Controller {
 
@@ -46,9 +46,9 @@ class EventController extends Controller {
 	 */
 	public function create()
 	{
-		if(Auth::user()->role->id == 1){
+		if(Auth::user()->role->id == 1 || Auth::user()->role->id == 2){
 			$this->data['user'] = Auth::user()->role->id;
-			$this->data['kelas'] = "";
+			$this->data['kelas'] = Auth::user()->kelas;
 			if (Request::isMethod('get')) {
 				return View::make('admin.event.create',$this->data);
 			} 
@@ -226,7 +226,7 @@ except:
 			'status' => '1'
 		));
 		//http_get("http://localhost:3000/start?id=".$id);
-		return redirect("http://localhost:3000/start?id=".$id);
+		return redirect("http://10.151.63.115:3000/start?id=".$id);
 	}
 
 	/**
@@ -240,7 +240,7 @@ except:
 		Event::where('id', $id)->update(array(
 			'status' => '0'
 		));
-		return redirect("http://localhost:3000/stop?id=".$id);
+		return redirect("http://10.151.63.115:3000/stop?id=".$id);
 	}
 
 	/**

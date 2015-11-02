@@ -9,19 +9,19 @@
 	<div class="box box-primary">
 	<div class="box-body">
 		<?php $jum = $question->count()?>
-		<script> 
-		    /*var table = $(function () {
+		<!--script> 
+		    var table = $(function () {
 		    	$("#data_table").DataTable({
 		    		"paging" : false,
 		    		"order" : [[ {{ $jum + 2 }},"desc" ]],
-				    		ajax: "{{url('admin/scoreboard/refresh/'.$id)}}"
+				    		ajax: "refresh/{{$id}}"
 		    	});
 		    });
 			
-			table.ajax.url( 'refresh/'+<?php echo $id?>) ).load();
+			table.ajax.url( 'refresh/{{$id}}' ).load();
 			setInterval( function () {
 			    table.ajax.reload(); // user paging is not reset on reload
-			}, 300 );*/
+			}, 3000 );
 		 //    repeatAjax();
 
 			// function repeatAjax(){
@@ -41,7 +41,7 @@
 			//              }
 			//         });
 			// }
-	    </script>
+	    </script-->
 	  	<table id="data_table" class="table table-bordered table-striped">
 	  	<?php $i = 1;?>
 	    <thead>
