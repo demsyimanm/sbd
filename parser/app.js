@@ -26,7 +26,7 @@ objChild.child=child;
 objChild.id=req.query.id;
 arrChild.push(objChild); 
 res.statusCode = 302; 
-res.setHeader("Location", "http://localhost/sbd/public/admin/event");
+res.setHeader("Location", "http://10.151.63.115/sbd/public/admin/event");
 res.end();
 
 });
@@ -43,7 +43,7 @@ app.get('/stop', function (req, res) {
   }
 
 res.statusCode = 302; 
-res.setHeader("Location", "http://localhost/sbd/public/admin/event");
+res.setHeader("Location", "http://10.151.63.115/sbd/public/admin/event");
 res.end();
 });
 var server = app.listen(3000, function () {
