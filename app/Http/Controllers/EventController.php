@@ -13,7 +13,8 @@ use Request;
 use App\Role;
 use App\User;
 use App\Event;
-use App\Http\Controllers\EventController;
+use App\Submission;
+use App\Question;
 
 class EventController extends Controller {
 
@@ -24,19 +25,30 @@ class EventController extends Controller {
 	 */
 	public function index()
 	{
+		/*sudah*/
 		if(Auth::user()->role->id == 1){
-			$this->data['event'] = Event::get();
-			return view('admin.event.manage',$this->data);
+			/*$this->data['event'] = Event::get();*/
+			$url = "http://localhost:5000/getEvent";
+    		$events = json_decode(file_get_contents($url));
+			return view('admin.event.manage',compact('events'));
 		}
 
+		/*sudah*/
 		else if (Auth::user()->role->id == 2 )
 		{
-			$this->data['event'] = Event::where('kelas','=',Auth::user()->kelas)->get();
-			return view('admin.event.manage',$this->data);
+			$url = "http://localhost:5000/getEventKelas/".Auth::user()->kelas;
+    		$events = json_decode(file_get_contents($url));
+			/*$this->data['event'] = Event::where('kelas','=',Auth::user()->kelas)->get();*/
+			return view('admin.event.manage',compact('events'));
 		}
+
+		/*sudah*/
 		elseif (Auth::user()->role->id == 3) {
-			$this->data['event'] = Event::where('kelas','=',Auth::user()->kelas)->get();
-			return view('user.event.manage',$this->data);		}
+			$url = "http://localhost:5000/getEventKelas/".Auth::user()->kelas;
+    		$events = json_decode(file_get_contents($url));
+			/*$this->data['event'] = Event::where('kelas','=',Auth::user()->kelas)->get();*/
+			return view('user.event.manage',compact('events'));		
+		}
 	}
 
 	/**
@@ -46,9 +58,9 @@ class EventController extends Controller {
 	 */
 	public function create()
 	{
-		if(Auth::user()->role->id == 1){
+		if(Auth::user()->role->id == 1 || Auth::user()->role->id == 2){
 			$this->data['user'] = Auth::user()->role->id;
-			$this->data['kelas'] = "";
+			$this->data['kelas'] = Auth::user()->kelas;
 			if (Request::isMethod('get')) {
 				return View::make('admin.event.create',$this->data);
 			} 
@@ -80,7 +92,7 @@ try:
   db_kunci= MySQLdb.connect(".'"'.$data['ip'].'"'.", ".'"'.$data['conn_username'].'"'.", ".'"'.$data['conn_password'].'"'.", ".'"'.$data['db_name'].'"'.")
   cursor_kunci = db_kunci.cursor()
   while True:
-    db= MySQLdb.connect('localhost', 'root', '', 'sbd')
+    db= MySQLdb.connect('localhost', 'root', 'komputer,.oyeoye', 'sbd')
     cursor = db.cursor()
     
     try:
@@ -182,34 +194,6 @@ except:
 				return redirect('admin/event');
 			}
 		} 
-
-		else if (Auth::user()->role->id == 2)
-		{
-			$this->data['kelas'] = Auth::user()->kelas;
-			$this->data['user'] = Auth::user()->role->id;
-			if (Request::isMethod('get')) {
-				return View::make('admin.event.create',$this->data);
-			} 
-
-			else if (Request::isMethod('post')) {
-				$data = Input::all();
-				$data['waktu_mulai'] = $data['tgl_mulai']." ".$data['wkt_mulai'];
-				$data['waktu_akhir'] = $data['tgl_akhir']." ".$data['wkt_akhir'];
-				Event::insertGetId(array(
-					'judul' => $data['judul'], 
-					'konten' => $data['konten'], 
-					'waktu_mulai' => $data['waktu_mulai'], 
-					'waktu_akhir' => $data['waktu_akhir'],
-					'kelas' => $this->data['kelas'],
-					'ip' => $data['ip'],
-					'conn_username' => $data['conn_username'],
-					'conn_password' => $data['conn_password'],
-					'db_name' => $data['db_name']
-				));
-				return redirect('admin/event');
-			}
-
-		}
 		else {
 			return redirect('/');
 		}
@@ -222,10 +206,13 @@ except:
 	 */
 	public function parserStart($id)
 	{
-		Event::where('id', $id)->update(array(
+		/*sudah*/
+		/*Event::where('id', $id)->update(array(
 			'status' => '1'
-		));
+		));*/
 		//http_get("http://localhost:3000/start?id=".$id);
+		$url = "http://localhost:5000/startParser/".$id;
+    	$quest_id = json_decode(file_get_contents($url));
 		return redirect("http://localhost:3000/start?id=".$id);
 	}
 
@@ -237,9 +224,12 @@ except:
 	 */
 	public function ParserStop($id)
 	{
-		Event::where('id', $id)->update(array(
+		/*sudah*/
+		/*Event::where('id', $id)->update(array(
 			'status' => '0'
-		));
+		));*/
+		$url = "http://localhost:5000/stopParser/".$id;
+    	$quest_id = json_decode(file_get_contents($url));
 		return redirect("http://localhost:3000/stop?id=".$id);
 	}
 
@@ -253,7 +243,56 @@ except:
 	{
 		//
 	}
+	public function viewSubmissions()
+	{
+		/*sudah*/
+		if (Auth::user()->role->id == 1)
+		{
+			if (Request::isMethod('get')) {
+				/*$this->data['event'] = Event::get();*/
+				$url = "http://localhost:5000/getEvent";
+    			$events = json_decode(file_get_contents($url));
+				return view('admin.event.indexViewSubmission',compact('events'));
+			} else {
+				$id = Input::get('event');
+				return redirect('admin/event/viewSubmissionSubmit/'.$id);
+			}
+		}
 
+		/*sudah*/
+		else
+		{
+			if (Request::isMethod('get')) {
+				# code...
+				$kelas = Auth::user()->kelas;
+				/*$this->data['event'] = Event::where('kelas','=',$kelas)->get();*/
+				$url = "http://localhost:5000/getEventKelas/".Auth::user()->kelas;
+    			$events = json_decode(file_get_contents($url));
+				return view('admin.event.indexViewSubmission',$this->data);
+			} else {
+				$id = Input::get('event');
+				return redirect('admin/event/viewSubmissionSubmit/'.$id);
+			}
+		}
+	}
+
+	public function viewSubmissionsSubmit($id)
+	{
+		/*sudah*/
+		//echo "asadd".$id;
+		$event = Event::find($id);
+		$url = "http://localhost:5000/getQuestionByEventId/".$id;
+    	$quest_id = json_decode(file_get_contents($url));
+		$pertanyaan = array();
+		foreach ($quest_id->data as $key => $value) {
+			array_push($pertanyaan, $value->id);
+		}
+		//dd($pertanyaan);
+		$submissions = Submission::whereIn('question_id', $pertanyaan)->get();
+		//dd($submissions);
+		return view('admin.event.viewSubmission', compact('submissions', 'event'));
+
+	}
 	/**
 	 * Update the specified resource in storage.
 	 *
@@ -281,8 +320,8 @@ except:
 					'waktu_akhir' => $data['waktu_akhir'],
 					'kelas' => $data['kelas'],
 					'ip' => $data['ip'],
-					'conn_username' => $data['conn_username'],
-					'conn_password' => $data['conn_password'],
+					'db_username' => $data['conn_username'],
+					'db_password' => $data['conn_password'],
 					'db_name' => $data['db_name']
 				));
 				return redirect('admin/event');
@@ -308,8 +347,8 @@ except:
 					'waktu_akhir' => $data['waktu_akhir'],
 					'kelas' => $this->data['kelas'],
 					'ip' => $data['ip'],
-					'conn_username' => $data['conn_username'],
-					'conn_password' => $data['conn_password'],
+					'db_username' => $data['conn_username'],
+					'db_password' => $data['conn_password'],
 					'db_name' => $data['db_name']
 				));
 				return redirect('admin/event');

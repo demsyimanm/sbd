@@ -32,20 +32,20 @@ Route::get('assistant', 'AdminController@index');
 
 /*Admin*/
 Route::get('admin', 'AdminController@index');
-Route::get('admin/user', 'AccountController@index');
+Route::get('admin/user', 'AccountController@index'); /*sudah*/
 Route::get('admin/user/create', 'AccountController@create');
 
 
 /*<!--Event-->*/
-Route::get('admin/event', 'EventController@index');
+Route::get('admin/event', 'EventController@index'); /*sudah*/
 Route::get('admin/event/create', 'EventController@create');
 Route::post('admin/event/create', array('before' => 'csrf', 'uses' => 'EventController@create'));
 Route::get('admin/event/update/{id}', 'EventController@update');
 Route::post('admin/event/update/{id}', array('before' => 'csrf', 'uses' => 'EventController@update'));
 Route::get('admin/event/delete/{id}', 'EventController@destroy');
 Route::post('admin/event/delete/{id}', array('before' => 'csrf', 'uses' => 'EventController@destroy'));
-Route::get('admin/event/parser/start/{id}', 'EventController@parserStart');
-Route::get('admin/event/parser/stop/{id}', 'EventController@parserStop');
+Route::get('admin/event/parser/start/{id}', 'EventController@parserStart');/*sudah*/
+Route::get('admin/event/parser/stop/{id}', 'EventController@parserStop');/*sudah*/
 
 /*Question*/
 Route::get('admin/question/{id}', 'QuestionController@index');
@@ -60,15 +60,21 @@ Route::post('admin/question/{id1}/delete/{id2}', array('before' => 'csrf', 'uses
 /*Calendar*/
 Route::get('admin/calendar', 'AdminController@calendar');
 
+/*View Submission*/
+Route::get('admin/event/viewSubmission', 'EventController@viewSubmissions');/*sudah*/
+Route::post('admin/event/viewSubmission', 'EventController@viewSubmissions');/*sudah*/
+Route::get('admin/event/viewSubmissionSubmit/{id}', 'EventController@viewSubmissionsSubmit');/*sudah*/
+
+
 /*Scoreboard*/
-Route::get('admin/scoreboards', 'AdminController@scoreboards');
+Route::get('admin/scoreboards', 'AdminController@scoreboards');/*sudah*/
 Route::post('admin/scoreboards', array('before' => 'csrf', 'uses' => 'AdminController@scoreboards'));
-Route::get('user/scoreboards', 'AdminController@scoreboardsUser');
-Route::post('user/scoreboards', array('before' => 'csrf', 'uses' => 'AdminController@scoreboardsUser'));
+Route::get('user/scoreboards', 'UserController@scoreboardsUser');
+Route::post('user/scoreboards', array('before' => 'csrf', 'uses' => 'UserController@scoreboardsUser'));
 Route::get('admin/scoreboard/{id}', 'AdminController@scoreboard');
 Route::get('admin/scoreboard/refresh/{id}', 'AdminController@refresh');
-Route::get('user/scoreboard/{id}', 'AdminController@scoreboard');
-Route::get('user/scoreboard/refresh/{id}', 'AdminController@refresh');
+Route::get('user/scoreboard/{id}', 'UserController@scoreboard');
+Route::get('user/scoreboard/refresh/{id}', 'UserController@refresh');
 
 Route::post('admin/user/create', array('before' => 'csrf', 'uses' => 'AccountController@create'));
 Route::get('admin/user/update/{id}', 'AccountController@update');

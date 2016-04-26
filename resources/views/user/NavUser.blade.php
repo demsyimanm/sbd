@@ -25,31 +25,37 @@ ul li .date1{ display:inline; font-size:16px;color:white;display: inline; margin
 
 </style>
 <script type="text/javascript">
+function checkTime(i) {
+    if (i<10) {i = "0" + i};  // add zero in front of numbers < 10
+    return i;
+}
+
 $(document).ready(function() {
-var monthNames = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ]; 
-var dayNames= ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]
 
+  var monthNames = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ]; 
+  var dayNames= ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+   <?php date_default_timezone_set('Asia/Jakarta'); // CDT?>
+  var newDate = new Date('<?php print date("F d, Y H:i:s", time())?>');
+  
+  function setTime(){
+    newDate.setSeconds(newDate.getSeconds() + 1);
+    newDate.setDate(newDate.getDate());
+    $('#Date').html(dayNames[newDate.getDay()] + " " + newDate.getDate() + ' ' + monthNames[newDate.getMonth()] + ' ' + newDate.getFullYear());
 
-var newDate = new Date();
-newDate.setDate(newDate.getDate());
-$('#Date').html(dayNames[newDate.getDay()] + " " + newDate.getDate() + ' ' + monthNames[newDate.getMonth()] + ' ' + newDate.getFullYear());
-setInterval( function() {
-  var seconds = new Date().getSeconds();
-  $("#sec").html(( seconds < 10 ? "0" : "" ) + seconds);
-  },1000);
-  
-setInterval( function() {
-  var minutes = new Date().getMinutes();
-  $("#min").html(( minutes < 10 ? "0" : "" ) + minutes);
-    },1000);
-  
-setInterval( function() {
-  var hours = new Date().getHours();
-  $("#hours").html(( hours < 10 ? "0" : "" ) + hours);
-    }, 1000);
-  
+    
+    var seconds = newDate.getSeconds();
+    $("#sec").html(( seconds < 10 ? "0" : "" ) + seconds);
+    
+    var minutes = newDate.getMinutes();
+    $("#min").html(( minutes < 10 ? "0" : "" ) + minutes);
+
+    var hours = newDate.getHours();
+    $("#hours").html(( hours < 10 ? "0" : "" ) + hours);
+  };
+  setInterval(setTime, 1000);
 }); 
 </script>
+
       <header class="main-header">
         <!-- Logo -->
         <a href="{{URL::to('/')}}" class="logo">

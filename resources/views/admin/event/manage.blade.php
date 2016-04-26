@@ -36,7 +36,7 @@
 	      	</tr>
 	    </thead>
 	    <tbody>
-	    	@foreach($event as $eve)
+	    	@foreach($events->data as $eve)
 	      	<tr>
 	      		<td class="text-center"><?php echo $i++ ?></td>
 	      		<td><a href="{{ URL::to('admin/question/'. $eve->id) }}" >{{ $eve->judul }}</td>
@@ -55,8 +55,9 @@
 	      			@endif
 	      		</td>
 	      		<td>
-      				<a href="{{ URL::to('admin/event/update/'. $eve->id) }}" class="btn btn-default"><i class="fa fa-pencil"></i>
-      				<a href="{{ URL::to('admin/event/delete/'. $eve->id) }}" class="btn btn-default" ><i class="fa fa-times"></i>
+      				<a href="{{ URL::to('admin/event/update/'. $eve->id) }}" class="btn btn-warning"><i class="fa fa-pencil"></i></a>
+
+      				<a href="{{ URL::to('admin/event/delete/'. $eve->id) }}" class="btn btn-danger" ><i class="fa fa-times"></i></a>
 	      		</td>
 	      	</tr>
 	      	@endforeach

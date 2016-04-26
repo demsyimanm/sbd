@@ -24,32 +24,39 @@ ul li .date1{ display:inline; font-size:16px;color:white;display: inline; margin
 }
 
 </style>
+
 <script type="text/javascript">
+function checkTime(i) {
+    if (i<10) {i = "0" + i};  // add zero in front of numbers < 10
+    return i;
+}
+
 $(document).ready(function() {
-var monthNames = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ]; 
-var dayNames= ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]
 
+  var monthNames = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ]; 
+  var dayNames= ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+   <?php date_default_timezone_set('Asia/Jakarta'); // CDT?>
+  var newDate = new Date('<?php print date("F d, Y H:i:s", time())?>');
 
-var newDate = new Date();
-newDate.setDate(newDate.getDate());
-$('#Date').html(dayNames[newDate.getDay()] + " " + newDate.getDate() + ' ' + monthNames[newDate.getMonth()] + ' ' + newDate.getFullYear());
-setInterval( function() {
-  var seconds = new Date().getSeconds();
-  $("#sec").html(( seconds < 10 ? "0" : "" ) + seconds);
-  },1000);
-  
-setInterval( function() {
-  var minutes = new Date().getMinutes();
-  $("#min").html(( minutes < 10 ? "0" : "" ) + minutes);
-    },1000);
-  
-setInterval( function() {
-  var hours = new Date().getHours();
-  $("#hours").html(( hours < 10 ? "0" : "" ) + hours);
-    }, 1000);
-  
+  function setTime(){
+    newDate.setSeconds(newDate.getSeconds() + 1);
+    newDate.setDate(newDate.getDate());
+    $('#Date').html(dayNames[newDate.getDay()] + " " + newDate.getDate() + ' ' + monthNames[newDate.getMonth()] + ' ' + newDate.getFullYear());
+
+    newDate.setSeconds(newDate.getSeconds());
+    var seconds = newDate.getSeconds();
+    $("#sec").html(( seconds < 10 ? "0" : "" ) + seconds);
+    
+    var minutes = newDate.getMinutes();
+    $("#min").html(( minutes < 10 ? "0" : "" ) + minutes);
+
+    var hours = newDate.getHours();
+    $("#hours").html(( hours < 10 ? "0" : "" ) + hours);
+  };
+  setInterval(setTime, 1000);
 }); 
 </script>
+
       <header class="main-header">
         <!-- Logo -->
         <a href="{{URL::to('/')}}" class="logo">
@@ -70,7 +77,7 @@ setInterval( function() {
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <img src="{{ URL::to('assets/AdminLTE/dist/img/user.png')}}" class="user-image" alt="User Image">
-                  <span class="hidden-xs">{{ Auth::user()->role->nama }}</span>
+                  <span class="hidden-xs">{{ Auth::user()->nama }}</span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- User image -->
@@ -114,7 +121,7 @@ setInterval( function() {
               </a>
             </li>
              
-             @if(Auth::user()->role->id == 1)
+             @if(Auth::user()->role->id == 1 || Auth::user()->role->id == 2)
             <li class="treeview">
               <a href="{{ URL::to('admin/user')}}">
                 <i class="fa fa-user"></i> <span>Akun</span>
@@ -127,7 +134,13 @@ setInterval( function() {
                 <i class="fa fa-calendar"></i> <span>Event</span>
               </a>
             </li>
-
+			
+			 <li class="treeview">
+              <a href="{{ URL::to('admin/event/viewSubmission')}}">
+                <i class="fa fa-list"></i> <span>View Submissons</span>
+              </a>
+            </li>
+			
             <li class="treeview">
               <a href="{{ URL::to('admin/scoreboards')}}">
                 <i class="fa fa-trophy"></i> <span>Scoreboard</span>

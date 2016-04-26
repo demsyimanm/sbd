@@ -30,7 +30,7 @@ class Submission extends Model
 		return $this->belongsTo('App\Question');
 	}
 
-	public function user()
+	public function users()
 	{
 		return $this->belongsTo('App\User');
 	}	

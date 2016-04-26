@@ -17,9 +17,19 @@ class AccountController extends Controller {
 	 */
 	public function index()
 	{
+		/*sudah*/
 		if(Auth::user()->role->id == 1){
-			$this->data['users'] = User::get();
-			return view('admin.account.manage', $this->data);
+			$url = "http://localhost:5000/getUser";
+    		$users = json_decode(file_get_contents($url));
+			return view('admin.account.manage', compact('users'));
+		}
+
+		/*sudah*/
+		else if(Auth::user()->role->id == 2){
+			/*$this->data['users'] = User::where('kelas',Auth::user()->kelas)->where('role_id','!=','1')->get();*/
+			$url = "http://localhost:5000/getUserKelas/".Auth::user()->kelas;
+    		$users = json_decode(file_get_contents($url));
+			return view('admin.account.manage', compact('users'));
 		}
 		return redirect('/');
 	}
@@ -34,6 +44,8 @@ class AccountController extends Controller {
 		if(Auth::user()->role->id == 1){
 			if (Request::isMethod('get')) {
 				$this->data = array();
+				$this->data['kelas'] = Auth::user()->kelas;
+				$this->data['user'] = Auth::user()->role->id;
 				$this->data['role'] = Role::get();
 				return View::make('admin.account.create', $this->data);
 			} else if (Request::isMethod('post')) {
@@ -48,7 +60,28 @@ class AccountController extends Controller {
 				));
 				return redirect('admin/user');
 			}
-		} else {
+		} 
+
+		else if(Auth::user()->role->id == 2){
+			if (Request::isMethod('get')) {
+				$this->data = array();
+				$this->data['kelas'] = Auth::user()->kelas;
+				$this->data['user'] = Auth::user()->role->id;
+				$this->data['role'] = Role::where('id','!=','1')->get();
+				return View::make('admin.account.create', $this->data);
+			} else if (Request::isMethod('post')) {
+				$data = Input::all();
+				
+				User::insertGetId(array(
+					'nama' => $data['nama'], 
+					'username' => $data['username'], 
+					'password' => bcrypt($data['password']), 
+					'kelas' => $data['kelas'], 
+					'role_id' => $data['role_id']
+				));
+				return redirect('admin/user');
+			}
+		}else {
 			return redirect('/');
 		}
 	}
@@ -104,13 +137,32 @@ class AccountController extends Controller {
 				
 				User::where('id', $id)->update(array(
 					'nama' => $data['nama'], 
-					'username' => $data['username'], 
+					'username' => $data['username'],
+					'password' => bcrypt($data['password']), 					
 					'kelas' => $data['kelas'], 
 					'role_id' => $data['role_id']
 				));
 				return redirect('admin/user');
 			}
-		} else {
+		} 
+		else if( Auth::user()->role->id == 2){
+			if (Request::isMethod('get')) {
+				$this->data = array();
+				$this->data['user'] = User::find($id);
+				$this->data['role'] = Role::where('id','!=','1')->get();
+				return View::make('admin.account.update', $this->data);
+			} else if (Request::isMethod('post')) {
+				$data = Input::all();
+				
+				User::where('id', $id)->update(array(
+					'nama' => $data['nama'], 
+					'username' => $data['username'], 
+					'password' => bcrypt($data['password']), 	
+					'role_id' => $data['role_id']
+				));
+				return redirect('admin/user');
+			}
+		}else {
 			return redirect('/');
 		}
 	}
@@ -123,7 +175,7 @@ class AccountController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		if(Auth::user()->role->id == 1){
+		if(Auth::user()->role->id == 1 || Auth::user()->role->id == 2){
 			if (Request::isMethod('get')) {
 				$this->data = array();
 				$this->data['user'] = User::find($id);

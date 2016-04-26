@@ -12,6 +12,7 @@ app.get('/start', function (req, res) {
   //res.json({status:200,message:"Pengiriman pesan sedang di proses"});
   var command ='C://xampp/htdocs/sbd/parser/parser_'+req.query.id+'.py' ;
   var child =require('child_process').spawn('python',[command]);
+  console.log("start parser_"+req.query.id)
   /*child = exec(command, 
 	function (error, stdout, stderr) {      
 	    console.log('stdout: ' + stdout);
@@ -37,7 +38,7 @@ app.get('/stop', function (req, res) {
   {
 	  if(arrChild[i].id==req.query.id){
 		  arrChild[i].child.kill('SIGINT');
-		  console.log("kill"+req.query.id)
+		  console.log("kill parser_"+req.query.id)
 	  }
   }
 
@@ -46,7 +47,7 @@ res.setHeader("Location", "http://localhost/sbd/public/admin/event");
 res.end();
 });
 var server = app.listen(3000, function () {
-  var host = server.address().address;
+  var host = 'localhost';
   var port = server.address().port;
 
 console.log('Example app listening at http://%s:%s', host, port);

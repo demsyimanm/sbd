@@ -13,7 +13,7 @@
 @endforeach
 
 <section class="content">
-    <div class="">
+    <div class="box box-primary">
 		<div class="box-body">
 			<div class="col-md-12">
 		      <div class="nav-tabs-custom">
@@ -28,10 +28,10 @@
 		          	<div class="">
 		          		<div class="box-body ">
 		          			<div class="col-md-10 col-md-offset-1">
-		          			<h2>
+		          			<h1>
 							   {{$eve->judul}}
-							</h2><br>
-		          				{{$eve->konten}}
+							</h1><br>
+		          				<p style="font-size:20px;"><?php echo nl2br($eve->konten) ?></p>
 		          				<br><br>
 		          			</div>
 
@@ -44,14 +44,14 @@
 			          	<div class="">
 			          		<div class="box-body">
 				          		<div class="col-md-10 col-md-offset-1">
-				          			<h2>{{$quest->judul}}</h2><br>
-				          			<?php echo nl2br($quest->konten)?>
+				          			<h1>{{$quest->judul}}</h1><br>
+				          			<p style="font-size:20px;"><?php echo nl2br($quest->konten)?></p>
 				          			<form id="form1" action="{{ URL::to('user/question/'. $eve->id.'/submit/'.$quest->id) }}"  method="POST">
 							        	<input type="hidden" name="_token" value="{{ csrf_token() }}">
 							        	<br><br>
 						          		<h5>Salin query Anda ke textarea di bawah :</h5>
 						          		<div class="form-group">
-						            		<textarea type="text" name="jawaban" class="form-control input-sm" style="resize:vertical;height:250px;"></textarea>
+						            		<textarea type="text" name="jawaban" class="form-control input-sm" style="resize:vertical;height:250px;font-size:18px;"></textarea>
 							          	</div>
 							          	<br>
 							          	<div class="form-group">

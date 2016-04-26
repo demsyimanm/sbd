@@ -43,13 +43,33 @@ class AdminController extends Controller {
 	 */
 	public function scoreboards()
 	{
-		if (Request::isMethod('get')) {
-			# code...
-			$this->data['event'] = Event::get();
-			return view('admin.scoreboard.index',$this->data);
-		} else {
-			$id = Input::get('event');
-			return redirect('admin/scoreboard/'.$id);
+		if (Auth::user()->role->id == 1)
+		{
+			if (Request::isMethod('get')) {
+				# code...
+				/*$this->data['event'] = Event::get();*/
+				$url = "http://localhost:5000/getEvent";
+    			$events = json_decode(file_get_contents($url));
+				return view('admin.scoreboard.index',compact('events'));
+			} else {
+				$id = Input::get('event');
+				return redirect('admin/scoreboard/'.$id);
+			}
+		}
+
+		else
+		{
+			if (Request::isMethod('get')) {
+				# code...
+				$kelas = Auth::user()->kelas;
+				/*$this->data['event'] = Event::where('kelas','=',$kelas)->get();*/
+				$url = "http://localhost:5000/getEventKelas/".Auth::user()->kelas;
+    			$events = json_decode(file_get_contents($url));
+				return view('admin.scoreboard.index',compact('events'));
+			} else {
+				$id = Input::get('event');
+				return redirect('admin/scoreboard/'.$id);
+			}
 		}
 	}
 
@@ -58,8 +78,10 @@ class AdminController extends Controller {
 		if (Request::isMethod('get')) {
 			# code...
 			$kelas = Auth::user()->kelas;
-			$this->data['event'] = Event::where('kelas','=',$kelas)->get();
-			return view('admin.scoreboard.index',$this->data);
+			/*$this->data['event'] = Event::where('kelas','=',$kelas)->get();*/
+			$url = "http://localhost:5000/getEventKelas/".Auth::user()->kelas;
+    		$events = json_decode(file_get_contents($url));
+			return view('admin.scoreboard.index',compact('events'));
 		} else {
 			$id = Input::get('event');
 			return redirect('user/scoreboard/'.$id);
@@ -68,24 +90,36 @@ class AdminController extends Controller {
 
 	public function scoreboard($id)
 	{
-		$event = Event::find($id);
+		/*$event = Event::find($id);*/
+		
+		$url = "http://localhost:5000/getEventById/".$id;
+    	$event = json_decode(file_get_contents($url));
+    	//dd($event);
+    	/*dd($event->data[0]->id);*/
 		$nilai = array();
-		$user = User::where('kelas',$event->kelas)->where('role_id', 3)->get();
-		$question = Question::where('event_id', $id)->get();
-		$flag_nilai = 0;
-		foreach ($question as $quest) {
-			$submission = Submission::where('question_id',$quest->id)->get();
-			foreach ($submission as $sub) {
-				foreach ($user as $use) {
+		/*$user = User::where('kelas',$event->kelas)->where('role_id', 3)->get();*/
+		$url = "http://localhost:5000/getPraktikanbyKelas/".$event->data[0]->kelas;
+    	$user = json_decode(file_get_contents($url));
+		/*$question = Question::where('event_id', $id)->get();*/
+		$url = "http://localhost:5000/getQuestionByEventId/".$id;
+    	$question = json_decode(file_get_contents($url));
+		foreach ($question->data as $quest) {
+			/*$submission = Submission::where('question_id',$quest->id)->get();*/
+			$url = "http://localhost:5000/getSubmissionByQuestionId/".$quest->id;
+    		$submission = json_decode(file_get_contents($url));
+			foreach ($submission->data as $sub) {
+				foreach ($user->data as $use) {
 					$nilai[$use->username][$sub->question_id] = 0;
-					$flag_nilai = 1;
 				}
 			}
 		}
-		foreach ($question as $quest) {
-			foreach ($user as $use) {
-				$submission = Submission::where('question_id',$quest->id)->where('users_id',$use->id)->max('nilai');
-				if($submission) $nilai[$use->username][$quest->id] = $submission;
+		foreach ($question->data as $quest) {
+			foreach ($user->data as $use) {
+				/*$submission = Submission::where('question_id',$quest->id)->where('users_id',$use->id)->max('nilai');*/
+				$url = "http://localhost:5000/getSubmissionByQuestionIdUserId/".$quest->id."/".$use->id;
+    			$submission = json_decode(file_get_contents($url));
+				if($submission->data) $nilai[$use->username][$quest->id] = $submission;
+				else $nilai[$use->username][$quest->id] = 0;
 			}
 		}
 		foreach ($nilai as $key => $value) {
@@ -95,13 +129,10 @@ class AdminController extends Controller {
 			}
 		}
 		$this->data['question'] = $question;
-		$this->data['nilai'] = 0;
 		$this->data['user'] = $user;
-		if ($flag_nilai == 1) {
-			$this->data['nilai'] = $nilai;
-		}
-		$this->data['flag_nilai'] = $flag_nilai;
+		$this->data['nilai'] = $nilai;
 		$this->data['id'] = $id;
+		$this->data['event'] = $event;
 		//var_dump($this->data);
 		//break;
 		return view('admin.scoreboard.board',$this->data);
@@ -139,6 +170,7 @@ class AdminController extends Controller {
 						foreach ($user as $use) {
 							$submission = Submission::where('question_id',$quest->id)->where('users_id',$use->id)->max('nilai');
 							if($submission) $nilai[$use->username][$quest->id] = $submission;
+							else $nilai[$use->username][$quest->id] = 0;
 						}
 					}
 					foreach ($nilai as $key => $value) {

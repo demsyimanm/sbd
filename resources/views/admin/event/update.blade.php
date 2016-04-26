@@ -102,14 +102,14 @@
 			<div class="form-group">
 				<label class="col-md-2 control-label">Connection Username</label>
 				<div class="col-md-6">
-					<input type="text" class="form-control " name="conn_username" value="{{$eve->conn_username}}">
+					<input type="text" class="form-control " name="conn_username" value="{{$eve->db_username}}">
 				</div>
 			</div>
 
 			<div class="form-group">
 				<label class="col-md-2 control-label">Connection Password</label>
 				<div class="col-md-6">
-					<input type="text" class="form-control " name="conn_password" value="{{$eve->conn_password}}">
+					<input type="text" class="form-control " name="conn_password" value="{{$eve->db_password}}">
 				</div>
 			</div>
 

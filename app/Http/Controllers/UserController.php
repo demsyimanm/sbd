@@ -1,11 +1,14 @@
-<?php namespace App\Http\Controllers;
-
-use App\Http\Requests;
+<?php 
+namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
-
-use Illuminate\Http\Request;
+use Request;
 use Auth;
+use Input;
 use App\Event;
+use App\User;
+use App\Question;
+use App\Submission;
+
 class UserController extends Controller {
 
 	/**
@@ -75,6 +78,69 @@ class UserController extends Controller {
 	public function update($id)
 	{
 		//
+	}
+
+	public function scoreboards()
+	{
+		if (Request::isMethod('get')) {
+			# code...
+			$kelas = Auth::user()->kelas;
+			$this->data['event'] = Event::where('kelas','=',$kelas)->get();
+			return view('user.scoreboard.index',$this->data);
+		} else {
+			$id = Input::get('event');
+			return redirect('user/scoreboard/'.$id);
+		}
+	}
+
+	public function scoreboardsUser()
+	{
+		if (Request::isMethod('get')) {
+			# code...
+			$kelas = Auth::user()->kelas;
+			$this->data['event'] = Event::where('kelas','=',$kelas)->get();
+			return view('user.scoreboard.index',$this->data);
+		} else {
+			$id = Input::get('event');
+			return redirect('user/scoreboard/'.$id);
+		}
+	}
+
+	public function scoreboard($id)
+	{
+		$event = Event::find($id);
+		$nilai = array();
+		$user = User::where('kelas',$event->kelas)->where('role_id', 3)->get();
+		$question = Question::where('event_id', $id)->get();
+		foreach ($question as $quest) {
+			$submission = Submission::where('question_id',$quest->id)->get();
+			foreach ($submission as $sub) {
+				foreach ($user as $use) {
+					$nilai[$use->username][$sub->question_id] = 0;
+				}
+			}
+		}
+		foreach ($question as $quest) {
+			foreach ($user as $use) {
+				$submission = Submission::where('question_id',$quest->id)->where('users_id',$use->id)->max('nilai');
+				if($submission) $nilai[$use->username][$quest->id] = $submission;
+				else $nilai[$use->username][$quest->id] = 0;
+			}
+		}
+		foreach ($nilai as $key => $value) {
+			$nilai[$key]['total'] = 0;
+			foreach ($value as $val) {
+				$nilai[$key]['total'] += $val;
+			}
+		}
+		$this->data['question'] = $question;
+		$this->data['user'] = $user;
+		$this->data['nilai'] = $nilai;
+		$this->data['id'] = $id;
+		$this->data['event'] = $event;
+		//var_dump($this->data);
+		//break;
+		return view('user.scoreboard.board',$this->data);
 	}
 
 	/**

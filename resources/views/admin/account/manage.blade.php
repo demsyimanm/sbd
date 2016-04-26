@@ -32,16 +32,17 @@
 	      	</tr>
 	    </thead>
 	    <tbody>
-	    	@foreach($users as $user)
+	    	@foreach($users->data as $user)
 	      	<tr>
 	      		<td class="text-center"><?php echo $i++ ?></td>
 	      		<td><a href="{{ URL::to('admin/user/update/'. $user->id) }}" >{{ $user->username }}</td>
 	      		<td>{{ $user->nama }}</td>
-	      		<td>{{ $user->role->nama }}</td>
+	      		<td>{{ $user->role_nama }}</td>
 	      		<td class="text-center">{{ $user->kelas }}</td>
 	      		<td>
-	      				<a href="{{ URL::to('admin/user/update/'. $user->id) }}" class="btn btn-default"><i class="fa fa-pencil"></i>
-	      				<a href="{{ URL::to('admin/user/delete/'. $user->id) }}" class="btn btn-default" ><i class="fa fa-times"></i>
+	      				<a href="{{ URL::to('admin/user/update/'. $user->id) }}" class="btn btn-warning"><i class="fa fa-pencil"></i></a>
+
+	      				<a href="{{ URL::to('admin/user/delete/'. $user->id) }}" class="btn btn-danger" ><i class="fa fa-times"></i></a>
 	      		</td>
 	      	</tr>
 	      	@endforeach

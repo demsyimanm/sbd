@@ -61,7 +61,7 @@
 					</div>
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                    <a type="button" href="{{URL::to('admin/user')}}" class="btn btn-default pull-left" data-dismiss="modal">Close</a>
                     <button type="submit" class="btn btn-danger" >Delete</button>
                   </div>
                 </div><!-- /.modal-content -->

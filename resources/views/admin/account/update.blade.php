@@ -34,7 +34,13 @@
 					<input type="text" class="form-control" name="username" value="{{ $user->username }}" >
 				</div>
 			</div>
-
+			<div class="form-group">
+				<label class="col-md-2 control-label">Password</label>
+				<div class="col-md-6">
+					<input type="password" class="form-control" name="password" >
+				</div>
+			</div>
+			@if(Auth::user()->role->id == 1)
 			<div class="form-group">
 				<label class="col-md-2 control-label">Kelas</label>
 				<div class="col-md-6">
@@ -48,7 +54,7 @@
 					</select>
 				</div>
 			</div>
-
+			@endif
 			<div class="form-group">
 				<label class="col-md-2 control-label">Role</label>
 				<div class="col-md-6">

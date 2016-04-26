@@ -13,7 +13,8 @@
           	<p align="center" style="margin-top:0px;font-size:40px">
           		@foreach ($event as $eve)
 					{{$eve->judul}} Kelas {{$eve->kelas}}
-				@endforeach</p>
+				@endforeach
+			</p>
 			<ul class="countdown">
 				<li> <span class="days">00</span>
 					<p class="days_ref">days</p>
@@ -30,11 +31,7 @@
 				<li> <span class="seconds">00</span>
 					<p class="seconds_ref">seconds</p>
 				</li>
-				<?php
-					/*date_default_timezone_set('Asia/Jakarta'); // CDT
-					$current_date = date('Y-m-d H:i:s');
-					echo $current_date."    ".$nearest;*/
-				?>
+				
 			</ul>
 				<script type="text/javascript" src="{{URL::to('plugin/counter/jquery.downCount.js')}}"></script> 
 				<script class="source" type="text/javascript">

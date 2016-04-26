@@ -38,8 +38,8 @@
 	      		<td><?php echo nl2br(substr($quest->konten,0,30))." ..."?></td>
 	      		<td><?php echo nl2br(substr($quest->jawaban,0,30))." ..."?></td>
 	      		<td>
-	      				<a href="{{ URL::to('admin/question/'. $eve->id.'/update/'.$quest->id) }}" class="btn btn-default"><i class="fa fa-pencil"></i>
-	      				<a href="{{ URL::to('admin/question/'. $eve->id.'/delete/'.$quest->id) }}" class="btn btn-default" ><i class="fa fa-times"></i>
+	      				<a href="{{ URL::to('admin/question/'. $eve->id.'/update/'.$quest->id) }}" class="btn btn-warning"><i class="fa fa-pencil"></i></a>
+	      				<a href="{{ URL::to('admin/question/'. $eve->id.'/delete/'.$quest->id) }}" class="btn btn-danger" ><i class="fa fa-times"></i></a>
 	      		</td>
 	      	</tr>
 	      	@endforeach

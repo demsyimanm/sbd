@@ -36,7 +36,9 @@
 	    <tbody>
 	    	<?php
       			date_default_timezone_set('Asia/Jakarta'); // CDT
-				$current_date = date('Y-m-d H:i:s');
+
+				$current_date = date("Y-m-d H:i:s", time());
+
       		?>
 	    	@foreach($event as $eve)
 	      	<tr>

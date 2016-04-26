@@ -2,26 +2,26 @@
 @section('content')
 <section class="content-header">
 	<h1>
-	    Scoreboard
+	    Scoreboard {{$event->judul}} Kelas {{$event->kelas}}
 	</h1>
 </section>
 <section class="content">
-	<div class="box">
+	<div class="box box-primary">
 	<div class="box-body">
 		<?php $jum = $question->count()?>
 		<script> 
-		    var table = $(function () {
+		    /*var table = $(function () {
 		    	$("#data_table").DataTable({
 		    		"paging" : false,
 		    		"order" : [[ {{ $jum + 2 }},"desc" ]],
-				    		ajax: "refresh/{{$id}}"
+				    		ajax: "{{url('admin/scoreboard/refresh/'.$id)}}"
 		    	});
 		    });
 			
-			table.ajax.url( 'refresh/{{$id}}' ).load();
+			table.ajax.url( 'refresh/'+<?php echo $id?>) ).load();
 			setInterval( function () {
 			    table.ajax.reload(); // user paging is not reset on reload
-			}, 3000 );
+			}, 300 );*/
 		 //    repeatAjax();
 
 			// function repeatAjax(){
@@ -57,42 +57,18 @@
 	      	</tr>
 	    </thead>
 	    <tbody>
-	    	<?php if ($flag_nilai == 1)
-	    	{
-	    		$i = 1; ?>
-		    	@foreach($nilai as $key	 => $value)
-		    	<tr>
-			    	<td class="text-center"><?php echo $i++ ?></td>
-			    	<td class="text-center"><?php echo $key ?></td>
-			    		<?php $nilai_tot = 0;?>
-		    			@foreach($value as $item)
-					    	<td class="text-center"><?php echo $item ?></td>
-					    	<?php $nilai_tot += $item;?>
-				        @endforeach
-				    	<td class="text-center" style="display:none"><?php echo $nilai_tot;?></td>
-		    	</tr>
-			    @endforeach
-			<?php 
-			}
-		    else
-		    {
-		    	$num = 1; ?>
-		    	@foreach($user as $key)
-		    	<tr>
-			    	<td class="text-center"><?php echo $num++ ?></td>
-			    	<td class="text-center"><?php echo $key->nama ?></td>
-			    		<?php
-		    			for ($a=0; $a < $sum; $a++) { 
-		    			?>
-		    				<td class="text-center">0</td>
-		    			<?php
-		    			}?>
-		    		<td class="text-center">0</td>
-		    	</tr>
-			    @endforeach
-		    <?php 
-		    }
-		    ?>
+	    	<?php $i = 1; ?>
+	    	@foreach($nilai as $key	 => $value)
+	    	<tr>
+		    	<td class="text-center"><?php echo $i++ ?></td>
+		    	<td class="text-center"><?php echo $key ?></td>
+		    		<?php $nilai_tot = 0;?>
+	    			@foreach($value as $item)
+				    	<td class="text-center"><?php echo $item ?></td>
+			        @endforeach
+			    	
+	    	</tr>
+		    @endforeach
 	    </tbody>
 	    <tfoot>
 	      	<tr>

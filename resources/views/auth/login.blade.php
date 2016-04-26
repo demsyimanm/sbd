@@ -26,7 +26,7 @@
             </div>
         </form>
         <div class="pull-right">
-          <p>by : Bilfash & Demsy | 2013</p>
+          <p>by : SBDOJ</p>
         </div>
         <br>
 
