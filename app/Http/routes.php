@@ -40,7 +40,7 @@ Route::post('admin/user/delete/{id}', array('before' => 'csrf', 'uses' => 'Accou
 /*Event*/
 Route::get('admin/event', 'EventController@index'); /*sudah*/
 Route::get('admin/event/create', 'EventController@create');/*sudah*/
-Route::post('admin/event/create', array('before' => 'csrf', 'uses' => 'EventController@create'));
+Route::post('admin/event/create', array('before' => 'csrf', 'uses' => 'EventController@create'));//now
 Route::get('admin/event/update/{id}', 'EventController@update');
 Route::post('admin/event/update/{id}', array('before' => 'csrf', 'uses' => 'EventController@update'));
 Route::get('admin/event/delete/{id}', 'EventController@destroy');
@@ -50,6 +50,7 @@ Route::get('admin/event/parser/stop/{id}', 'EventController@parserStop');/*sudah
 Route::get('event/list/peserta/{id}', 'EventController@listParticipant');
 Route::get('event/add/peserta/{id}', 'EventController@addParticipant');
 Route::post('event/add/peserta/{id}', 'EventController@addParticipant');
+Route::get('admin/event/create/parser/{maxid}/{dbname}', 'EventController@createParser');
 
 /*Question*/
 Route::get('admin/question/{id}', 'QuestionController@index');

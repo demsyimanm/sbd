@@ -4,6 +4,7 @@ from flask import Flask, request, redirect, jsonify
 import MySQLdb
 import MySQLdb.cursors
 from flask.ext.cors import CORS
+import bcrypt
 
 app = Flask(__name__)
 CORS(app)
@@ -99,6 +100,26 @@ def getUserToEvent(event_id):
 	cur.execute(query)
 	return jsonify(data=cur.fetchall())
 
+@app.route("/createEvent/<user_id>", methods=['POST'])
+def createEvent(user_id):
+    waktuMulai = request.form['tgl_mulai']+" "+request.form['wkt_mulai']
+    waktuAkhir = request.form['tgl_akhir']+" "+request.form['wkt_akhir']
+    query = "INSERT INTO event (id, judul, konten, waktu_mulai, waktu_akhir, users_id, status, db_name) VALUES (NULL, '"+request.form['judul']+"', '"+request.form['konten']+"', '"+waktuMulai+"', '"+waktuAkhir+"', '"+user_id+"', '0', '"+request.form['db_name']+"')"
+    cur.execute(query)
+    db.commit()
+    idTerakhir = str(cur.lastrowid)
+    query2 = "INSERT INTO user_event (users_id, event_id, status) VALUES ('"+user_id+"','"+idTerakhir+"',1)"
+    cur.execute(query2)
+    db.commit()
+    queryGetMaxEvent = "SELECT MAX(id) FROM event"
+    db2 = MySQLdb.connect("localhost", "root", "","sbd")
+    cur2 = db2.cursor()
+    cur2.execute(queryGetMaxEvent)
+    row = cur2.fetchone()
+    return redirect("http://localhost/sbd/public/admin/event/create/parser/"+str(row[0])+"/"+request.form['db_name'], code = 302)
+    
+    # return redirect("http://localhost/sbd/public/admin/event/create/parser/"+str(row[0])+"/"+request.form['db_name'],code=302)
+    
 if __name__ == "__main__":
 	port = int(os.environ.get('PORT', 5000))
 	app.debug = True
