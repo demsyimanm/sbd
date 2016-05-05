@@ -27,12 +27,12 @@ class Question extends Model
 
 	public function event()
 	{
-		return $this->belongsTo('App\Models\EventModel');
+		return $this->belongsTo('App\EventModel');
 	}
 
 	public function submission()
 	{
-		return $this->hasMany('App\Models\SubmissionModel');
+		return $this->hasMany('App\SubmissionModel');
 	}
 
 	

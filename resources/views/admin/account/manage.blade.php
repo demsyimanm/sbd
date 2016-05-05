@@ -7,57 +7,57 @@
 </section>
 <section class="content">
 	<div class="box">
+		<div ng-app="myApp" ng-controller="accountCtrl"> 
+		<div class="box-body">
+			<br><br>
+		  	<table id="data_table" class="table table-bordered table-striped">
+		    <thead>
+			    <tr>
+			        <th width="5%" class="text-center">No</th>
+			        <th width="25%">Username</th>
+			        <th width="25%">Nama</th>
+		        	<th width="25%">Paket</th>
+		        	<th width="10%">Action</th>
+		      	</tr>
+		    </thead>
+		    <tbody>
+		      	<tr ng-repeat="x in names" on-finish-render="ngRepeatFinished">
+		      		<td class="text-center">[[$index+1]]</td>
+		      		<td><a href="{{URL::to('admin/user/update/')}}/[[x.id]]" >[[ x.username ]]</td>
+		      		<td>[[ x.nama ]]</td>
+		      		<td>[[ x.paket_nama ]]</td>
+		      		<td>
+		      			<center>
+		      				<a href="{{ URL::to('admin/user/delete/') }}/[[x.id]]" class="btn btn-danger" ><i class="fa fa-times"></i></a>
+		      			</center>
+		      		</td>
+		      	</tr>
+		    </tbody>
+		    <tfoot>
+		      	<tr>
+		       		<th class="text-center">No</th>
+			        <th>Username</th>
+			        <th>Nama</th>
+		        	<th>Paket</th>
+		        	<th>Action</th>
+		      	</tr>
+		    </tfoot>
+		  	</table>
+		</div><!-- /.box-body -->
+	</div>
+	@if(Auth::user()->paket->id == 1 || Auth::user()->paket->id == 2)
+		<input type="hidden" value="http://{{$_ENV['PC_IP']}}:5000/getUser" id="url">
+	@endif
 
-	<div class="box-body">
-		<br><div class="col-xs-2 text-left">
-	        <a href="{{ URL::to('admin/user/create') }}" class="btn btn-block btn-social btn-instagram">
-            	<i class="fa fa-plus"></i> Tambah User
-          	</a>
-      	</div><br><br><br>
-		<script> 
-		    $(function () {
-		    	$("#data_table").DataTable();
-		    });
-	    </script>
-	  	<table id="data_table" class="table table-bordered table-striped">
-	  	<?php $i = 1;?>
-	    <thead>
-		    <tr>
-		        <th width="5%" class="text-center">No</th>
-		        <th width="25%">Username</th>
-		        <th width="25%">Nama</th>
-	        	<th width="25%">Role</th>
-	        	<th width="10%" class="text-center">Kelas</th>
-	        	<th width="10%">Action</th>
-	      	</tr>
-	    </thead>
-	    <tbody>
-	    	@foreach($users->data as $user)
-	      	<tr>
-	      		<td class="text-center"><?php echo $i++ ?></td>
-	      		<td><a href="{{ URL::to('admin/user/update/'. $user->id) }}" >{{ $user->username }}</td>
-	      		<td>{{ $user->nama }}</td>
-	      		<td>{{ $user->role_nama }}</td>
-	      		<td class="text-center">{{ $user->kelas }}</td>
-	      		<td>
-	      				<a href="{{ URL::to('admin/user/update/'. $user->id) }}" class="btn btn-warning"><i class="fa fa-pencil"></i></a>
-
-	      				<a href="{{ URL::to('admin/user/delete/'. $user->id) }}" class="btn btn-danger" ><i class="fa fa-times"></i></a>
-	      		</td>
-	      	</tr>
-	      	@endforeach
-	    </tbody>
-	    <tfoot>
-	      	<tr>
-	       		<th class="text-center">No</th>
-		        <th>Nama</th>
-		        <th>Username</th>
-	        	<th>Role</th>
-	        	<th class="text-center">Kelas</th>
-	        	<th>Action</th>
-	      	</tr>
-	    </tfoot>
-	  	</table>
-	</div><!-- /.box-body -->
+	<script>
+		app.controller('accountCtrl', function($scope, $http) {
+			var url = document.getElementById('url').value;
+		    $http.get(url)
+		    .then(function (response) {$scope.names = response.data.data;});
+		    $scope.$on('ngRepeatFinished', function(ngRepeatFinishedEvent){
+			    $("#data_table").DataTable();
+		    })
+		});
+	</script>
 </section>
 @endsection

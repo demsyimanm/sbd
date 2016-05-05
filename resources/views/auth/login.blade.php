@@ -20,17 +20,25 @@
               <span class="glyphicon glyphicon-lock form-control-feedback"></span>
             </div>
             <div class="row">
-              <div class="col-xs-4">
+              <div class="col-xs-12">
                   <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
               </div><!-- /.col -->
             </div>
         </form>
-        <div class="pull-right">
-          <p>by : SBDOJ</p>
-        </div>
-        <br>
-
       </div><!-- /.login-box-body -->
+      <div class="login-box-body" style="">
+          <div class="text-center">
+            <h4>Don't have an account?</h4>
+          </div>
+          <div class="">
+              <a type="button" class="btn btn-success btn-block btn-flat" href="{{url('register')}}">Sign Up</a>
+          </div><!-- /.col -->
+                <br>
+          <div class="pull-right">
+            <p>by : SBDOJ</p>
+          </div>
+          <br>
+      </div>
     </div><!-- /.login-box -->
 </div>
 </body>

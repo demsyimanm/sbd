@@ -5,6 +5,7 @@
 	<!-- Tell the browser to be responsive to screen width -->
 	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 	<!-- Bootstrap 3.3.5 -->
+	<link href="{{URL::to('plugin/select2/dist/css/select2.min.css')}}" rel="stylesheet" />
 	<link rel="stylesheet" href="{{ URL::to('assets/AdminLTE/bootstrap/css/bootstrap.min.css')}}">
 	<!-- Font Awesome -->
 	<link rel="stylesheet" href="{{ URL::to('assets/css/font-awesome/css/font-awesome.min.css')}}">
@@ -27,6 +28,9 @@
 
 	
     <link rel="stylesheet" href="{{ URL::to('assets/AdminLTE/plugins/datatables/dataTables.bootstrap.css')}}">
+    
+
+
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 	<!--[if lt IE 9]>
@@ -43,6 +47,36 @@
 	<script src="{{ URL::to('assets/AdminLTE/bootstrap/js/bootstrap.min.js') }}"></script>
 	<script src="{{ URL::to('assets/AdminLTE/plugins/datepicker/bootstrap-datepicker.js') }}"></script>
     <script src="{{ URL::to('assets/AdminLTE/plugins/timepicker/bootstrap-timepicker.min.js') }}"></script>
+    <script src="{{ URL::to('plugin/select2/dist/js/select2.min.js')}}"></script>
+    <script type="text/javascript" src="{{URL::to('assets/angular/angular.min.js')}}"></script>
+    <script type="text/javascript">
+        var app = angular.module('myApp', []);
+        app.config(["$interpolateProvider",function($interpolateProvider)
+        {
+            $interpolateProvider.startSymbol('[[');
+            $interpolateProvider.endSymbol(']]');
+        }]);
+
+        app.directive('onFinishRender', function($timeout)
+        {
+        	return {
+        		restrict : 'A',
+        		link: function (scope, element, attr){
+        			if (scope.$last === true){
+        				$timeout(function(){
+        					scope.$emit('ngRepeatFinished');
+        				})
+        			}
+        		}
+        	}
+        });
+
+    </script>
+    <script type="text/javascript">
+  		$('select').select2();
+	</script>
+
+    
   
   <style>
       .example-modal .modal {

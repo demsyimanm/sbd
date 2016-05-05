@@ -12,6 +12,8 @@
     <script>
       $.widget.bridge('uibutton', $.ui.button);
     </script>
+    <!-- Angular -->
+    
 
     <script src="{{ URL::to('assets/AdminLTE/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js') }}"></script>
 

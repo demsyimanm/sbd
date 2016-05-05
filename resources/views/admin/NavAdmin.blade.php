@@ -121,10 +121,18 @@ $(document).ready(function() {
               </a>
             </li>
              
-             @if(Auth::user()->role->id == 1 || Auth::user()->role->id == 2)
+             @if(Auth::user()->paket->id == 1)
             <li class="treeview">
               <a href="{{ URL::to('admin/user')}}">
                 <i class="fa fa-user"></i> <span>Akun</span>
+              </a>
+            </li>
+            @endif
+
+            @if(Auth::user()->paket->id == 1 || Auth::user()->paket->id == 2)
+            <li class="treeview">
+              <a href="{{ URL::to('db')}}">
+                <i class="fa fa-database"></i> <span>Manage Database</span>
               </a>
             </li>
             @endif

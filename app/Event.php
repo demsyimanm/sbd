@@ -32,7 +32,12 @@ class Event extends Model
 
 	public function question()
 	{
-		return $this->hasMany('App\Models\QuestionModel');
+		return $this->hasMany('App\QuestionModel');
+	}
+
+	public function user_event()
+	{
+		return $this->hasMany('App\User_Event');
 	}
 	
 }

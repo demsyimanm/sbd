@@ -32,13 +32,13 @@ class HomeController extends Controller {
 	 */
 	public function index()
 	{
-		if(Auth::user()->role_id == 1){
-			return redirect('admin'); 
-		} else if (Auth::user()->role_id == 2){
-			return redirect('assistant');
+		if(Auth::user()->paket_id == 1){
+			return redirect('gold'); 
+		} else if (Auth::user()->paket_id == 2){
+			return redirect('premium');
 
-		} else if (Auth::user()->role_id == 3){
-			return redirect('user'); 
+		} else if (Auth::user()->paket_id == 3){
+			return redirect('regular'); 
 		}
 	}
 

@@ -9,11 +9,15 @@ use Illuminate\Http\Request;
 use Input;
 use View;
 use Auth;
+use DB;
 use Request;
+use File;
 use App\Role;
 use App\User;
 use App\Event;
+use App\User_Event;
 use App\Submission;
+use App\History_Upload;
 use App\Question;
 
 class EventController extends Controller {
@@ -26,29 +30,29 @@ class EventController extends Controller {
 	public function index()
 	{
 		/*sudah*/
-		if(Auth::user()->role->id == 1){
+		if(Auth::user()->paket->id == 1 || Auth::user()->paket->id == 2){
 			/*$this->data['event'] = Event::get();*/
-			$url = "http://localhost:5000/getEvent";
-    		$events = json_decode(file_get_contents($url));
+			/*$url = "http://localhost:5000/getEvent";
+    		$events = json_decode(file_get_contents($url));*/
 			return view('admin.event.manage',compact('events'));
 		}
 
-		/*sudah*/
+		/*sudah
 		else if (Auth::user()->role->id == 2 )
 		{
-			$url = "http://localhost:5000/getEventKelas/".Auth::user()->kelas;
-    		$events = json_decode(file_get_contents($url));
-			/*$this->data['event'] = Event::where('kelas','=',Auth::user()->kelas)->get();*/
+			/*$url = "http://localhost:5000/getEventKelas/".Auth::user()->kelas;
+    		$events = json_decode(file_get_contents($url));*/
+			/*$this->data['event'] = Event::where('kelas','=',Auth::user()->kelas)->get();
 			return view('admin.event.manage',compact('events'));
 		}
 
-		/*sudah*/
+		/*sudah
 		elseif (Auth::user()->role->id == 3) {
-			$url = "http://localhost:5000/getEventKelas/".Auth::user()->kelas;
-    		$events = json_decode(file_get_contents($url));
-			/*$this->data['event'] = Event::where('kelas','=',Auth::user()->kelas)->get();*/
+			/*$url = "http://localhost:5000/getEventKelas/".Auth::user()->kelas;
+    		$events = json_decode(file_get_contents($url));*/
+			/*$this->data['event'] = Event::where('kelas','=',Auth::user()->kelas)->get();
 			return view('user.event.manage',compact('events'));		
-		}
+		}*/
 	}
 
 	/**
@@ -58,30 +62,48 @@ class EventController extends Controller {
 	 */
 	public function create()
 	{
-		if(Auth::user()->role->id == 1 || Auth::user()->role->id == 2){
-			$this->data['user'] = Auth::user()->role->id;
-			$this->data['kelas'] = Auth::user()->kelas;
+		if(Auth::user()->paket->id == 1 || Auth::user()->paket->id == 2){
+			/*$this->data['user'] = Auth::user()->role->id;
+			$this->data['kelas'] = Auth::user()->kelas;*/
 			if (Request::isMethod('get')) {
-				return View::make('admin.event.create',$this->data);
+				$url = "http://localhost:5000/getListDB/".Auth::user()->id;
+				$dbs = json_decode(file_get_contents($url));
+				return View::make('admin.event.create', compact('dbs'));
 			} 
 
 			else if (Request::isMethod('post')) {
 				$data = Input::all();
-				$max_id = Event::max('id');
-				$max_id += 1;
+				
 				$data['waktu_mulai'] = $data['tgl_mulai']." ".$data['wkt_mulai'];
 				$data['waktu_akhir'] = $data['tgl_akhir']." ".$data['wkt_akhir'];
-				Event::insertGetId(array(
+				$event = Event::insertGetId(array(
 					'judul' => $data['judul'], 
 					'konten' => $data['konten'], 
 					'waktu_mulai' => $data['waktu_mulai'], 
 					'waktu_akhir' => $data['waktu_akhir'],
-					'kelas' => $data['kelas'],
-					'ip' => $data['ip'],
-					'db_username' => $data['conn_username'],
-					'db_password' => $data['conn_password'],
+					'users_id'	=> Auth::user()->id,
 					'db_name' => $data['db_name']
 				));
+
+				User_Event::insertGetId(array(
+					'users_id' => Auth::user()->id, 
+					'event_id' => $event, 
+					'status' => 1, 
+				));
+
+				/*DB::statement(DB::raw('CREATE DATABASE '.$data['db_name']));
+				$max_id = Event::max('id');
+				$file = Input::file('fileToUpload');
+				$file_name = $file->getClientOriginalName();
+				$file_size = round($file->getSize() / 1024);
+				$file_ex = $file->getClientOriginalExtension();
+				$file_mime = $file->getMimeType();
+				$newname = 'sql'.$max_id.'.sql';
+				$file->move('C:\xampp\htdocs\CloudSBD\sqlFile', $newname);
+				$loc = 'C:\xampp\htdocs\CloudSBD\sqlFile\\'.$newname;
+				exec("mysql -u root ".$data['db_name']." < ".$loc);*/
+
+				$max_id = Event::max('id');
 				$temp_file = "parser_".$max_id.".py";
 				$file = fopen("../parser/parser_".$max_id.".py", "wb") or die("Unable to open file!");
 				$content = "#!/usr/bin/python
@@ -89,10 +111,10 @@ import MySQLdb
 import time
 import sys
 try:
-  db_kunci= MySQLdb.connect(".'"'.$data['ip'].'"'.", ".'"'.$data['conn_username'].'"'.", ".'"'.$data['conn_password'].'"'.", ".'"'.$data['db_name'].'"'.")
+  db_kunci= MySQLdb.connect('localhost', 'root','', ".'"'.$data['db_name'].'"'.")
   cursor_kunci = db_kunci.cursor()
   while True:
-    db= MySQLdb.connect('localhost', 'root', 'komputer,.oyeoye', 'sbd')
+    db= MySQLdb.connect('localhost', 'root', '', 'sbd')
     cursor = db.cursor()
     
     try:
@@ -301,7 +323,7 @@ except:
 	 */
 	public function update($id)
 	{
-		if(Auth::user()->role->id == 1 ){
+		if(Auth::user()->paket->id == 1 ){
 			$this->data = array();
 			$this->data['user'] = Auth::user()->role->id;
 			$this->data['kelas'] = "";
@@ -328,10 +350,10 @@ except:
 			}
 		} 
 	
-		else if(Auth::user()->role->id == 2){
+		else if(Auth::user()->paket->id == 2){
 			$this->data = array();
 			$this->data['kelas'] = Auth::user()->kelas;
-			$this->data['user'] = Auth::user()->role->id;
+			/*$this->data['user'] = Auth::user()->role->id;*/
 			$this->data['eve'] = Event::find($id);
 			if (Request::isMethod('get')) {
 				return View::make('admin.event.update', $this->data);
@@ -380,6 +402,85 @@ except:
 			}
 		} else {
 			return redirect('/');
+		}
+	}
+
+	public function db_list()
+	{
+		if(Auth::user()->paket->id == 1 || Auth::user()->paket->id == 2){
+			if (Request::isMethod('get')) {
+				return View::make('admin.event.listDB');
+			} 
+		} else {
+			return redirect('home');
+		}
+	}
+
+	public function db()
+	{
+		if(Auth::user()->paket->id == 1 || Auth::user()->paket->id == 2){
+			if (Request::isMethod('get')) {
+				return View::make('admin.event.createDB');
+			} 
+			else if (Request::isMethod('post')) {
+				$data = Input::all();
+				
+				$max_id = History_Upload::max('id');
+				$file = Input::file('fileToUpload');
+				$file_name = $file->getClientOriginalName();
+				$file_size = round($file->getSize() / 1024);
+				$file_ex = $file->getClientOriginalExtension();
+				$file_mime = $file->getMimeType();
+				$newname = 'sql'.$max_id.'.sql';
+				$file->move('C:\xampp\htdocs\CloudSBD\sqlFile', $newname);
+				$loc = 'C:\xampp\htdocs\CloudSBD\sqlFile\\'.$newname;
+
+				History_Upload::insertGetId(array(
+					'users_id' => Auth::user()->id, 
+					'namafile' => $newname, 
+					'db_name'  => $data['db_name']
+				));
+
+				DB::statement(DB::raw('CREATE DATABASE '.$data['db_name']));
+				
+				exec("mysql -u root ".$data['db_name']." < ".$loc);
+				return redirect('db');
+			}
+		} else {
+			return redirect('home');
+		}
+	}
+
+	public function listParticipant($id)
+	{
+		if(Auth::user()->paket->id == 1 || Auth::user()->paket->id == 2){
+			if (Request::isMethod('get')) {
+				return View::make('admin.event.listPeserta', compact('id'));
+			} 
+		} else {
+			return redirect('home');
+		}
+	}
+
+	public function addParticipant($id)
+	{
+		if(Auth::user()->paket->id == 1 || Auth::user()->paket->id == 2){
+			if (Request::isMethod('get')) {
+				$url = "http://localhost:5000/getUserToEvent/".$id;
+				$users = json_decode(file_get_contents($url));
+				return View::make('admin.event.addPeserta', compact('id', 'users'));
+			}
+			else if (Request::isMethod('post')) {
+				$data = Input::all();
+				User_Event::insertGetId(array(
+					'users_id' => $data['user'], 
+					'event_id' => $id, 
+					'status' => $data['role']
+				));				
+				return redirect('event/list/peserta/'.$id);
+			} 
+		} else {
+			return redirect('home');
 		}
 	}
 

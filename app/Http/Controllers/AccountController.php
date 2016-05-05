@@ -1,4 +1,5 @@
-<?php namespace App\Http\Controllers;
+<?php 
+namespace App\Http\Controllers;
 
 use Input;
 use View;
@@ -6,6 +7,8 @@ use Auth;
 use Request;
 use App\Role;
 use App\User;
+use App\Paket;
+use App\Payment;
 use App\Http\Controllers\Controller;
 
 class AccountController extends Controller {
@@ -18,17 +21,17 @@ class AccountController extends Controller {
 	public function index()
 	{
 		/*sudah*/
-		if(Auth::user()->role->id == 1){
-			$url = "http://localhost:5000/getUser";
-    		$users = json_decode(file_get_contents($url));
+		if(Auth::user()->paket->id == 1){
+			/*$url = "http://localhost:5000/getUser";
+    		$users = json_decode(file_get_contents($url));*/
 			return view('admin.account.manage', compact('users'));
 		}
 
 		/*sudah*/
-		else if(Auth::user()->role->id == 2){
+		else if(Auth::user()->paket->id == 2){
 			/*$this->data['users'] = User::where('kelas',Auth::user()->kelas)->where('role_id','!=','1')->get();*/
-			$url = "http://localhost:5000/getUserKelas/".Auth::user()->kelas;
-    		$users = json_decode(file_get_contents($url));
+			/*$url = "http://localhost:5000/getUserKelas/".Auth::user()->kelas;
+    		$users = json_decode(file_get_contents($url));*/
 			return view('admin.account.manage', compact('users'));
 		}
 		return redirect('/');
@@ -191,4 +194,32 @@ class AccountController extends Controller {
 		}
 	}
 
+	public function register()
+	{
+		if (Request::isMethod('get'))
+		{
+			return view('auth.register');	
+		}
+		else if(Request::isMethod('post'))
+		{
+			date_default_timezone_set('Asia/Jakarta'); // CDT
+			$current_date = getdate();
+			$data = Input::all();
+			User::insertGetId(array(
+				'nama' => $data['nama'], 
+				'username' => $data['username'], 
+				'password' => bcrypt($data['password']), 
+				'paket_id' => $data['paket'], 
+			));
+			$user = User::where('username',$data['username'])->first();
+			Payment::insertGetId(array(
+				'users_id' => $user->id, 
+				'paket_id' => $data['paket'], 
+				'bulan'	   => $current_date['mon'],
+				'tahun'	   => $current_date['year']
+			));
+			return redirect('home');
+		}
+		
+	}
 }

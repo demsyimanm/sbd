@@ -22,15 +22,14 @@ class AdminController extends Controller {
 		date_default_timezone_set('Asia/Jakarta'); // CDT
 		$current_date = date('Y-m-d H:i:s');
 
-		if (Auth::user()->role->id == 1)
+		if (Auth::user()->paket->id == 1)
 		{
 			$this->data['nearest'] = Event::where('waktu_mulai','>=',$current_date)->min('waktu_mulai');
 		}
 
-		else if (Auth::user()->role->id == 2)
+		else if (Auth::user()->paket->id == 2)
 		{
-			$kelas = Auth::user()->kelas;
-			$this->data['nearest'] = Event::where('kelas','=',$kelas)->where('waktu_mulai','>=',$current_date)->min('waktu_mulai');
+			$this->data['nearest'] = Event::where('waktu_mulai','>=',$current_date)->min('waktu_mulai');
 		}
 		$this->data['event'] = Event::where('waktu_mulai','=',$this->data['nearest'])->get();
 		$this->data['nearest'] = date('m/d/Y H:i:s', strtotime($this->data['nearest']));

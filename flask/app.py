@@ -3,9 +3,11 @@ import os
 from flask import Flask, request, redirect, jsonify
 import MySQLdb
 import MySQLdb.cursors
+from flask.ext.cors import CORS
 
 app = Flask(__name__)
-db = MySQLdb.connect("10.151.34.15", "root", "komputer,.oyeoye","sbd",cursorclass=MySQLdb.cursors.DictCursor)
+CORS(app)
+db = MySQLdb.connect("localhost", "root", "","sbd",cursorclass=MySQLdb.cursors.DictCursor)
 cur = db.cursor()
 
 @app.route("/home", methods=['GET'])
@@ -15,7 +17,7 @@ def home():
 
 @app.route("/getUser", methods=['GET'])
 def getUser():	
-	query = "SELECT u.*,r.nama as role_nama from users u, role r where u.role_id = r.id"
+	query = "SELECT u.*,p.nama as paket_nama from users u, paket p where u.paket_id = p.id"
 	cur.execute(query)
 	return jsonify(data=cur.fetchall())
 
@@ -31,9 +33,9 @@ def getEvent():
 	cur.execute(query)
 	return jsonify(data=cur.fetchall())
 
-@app.route("/getEventKelas/<kelas>/", methods=['GET'])
-def getEventKelas(kelas):
-	query = "SELECT * from event where kelas ="+kelas
+@app.route("/getEventByUserID/<id>/", methods=['GET'])
+def getEventKelas(id):
+	query = "SELECT * from event where users_id ="+id
 	cur.execute(query)
 	return jsonify(data=cur.fetchall())
 
@@ -75,14 +77,33 @@ def getSubmissionByQuestionId(id):
 
 @app.route("/getSubmissionByQuestionIdUserId/<question_id>/<user_id>/", methods=['GET']) #gak bisa
 def getSubmissionByQuestionIdUserId(question_id,user_id):
-	query = "SELECT * from submission where question_id="+question_id+"and users_id="+user_id
+	query = "SELECT * from submission where question_id="+question_id+" and users_id="+user_id
+	cur.execute(query)
+	return jsonify(data=cur.fetchall())
+
+@app.route("/getListDB/<user_id>/", methods=['GET'])
+def getListDB(user_id):
+	query = "SELECT h.*, u.nama from history_upload h, users u where h.users_id = u.id and h.users_id="+user_id
+	cur.execute(query)
+	return jsonify(data=cur.fetchall())
+
+@app.route("/getListParticipant/<event_id>/", methods=['GET'])
+def getListParticipant(event_id):
+	query = "SELECT eu.status, u.id,u.nama, u.username, e.judul from user_event eu, event e, users u where eu.users_id = u.id and eu.event_id = e.id and eu.event_id="+event_id
+	cur.execute(query)
+	return jsonify(data=cur.fetchall())
+
+@app.route("/getUserToEvent/<event_id>", methods=['GET'])
+def getUserToEvent(event_id):	
+	query = "SELECT u.*,p.nama as paket_nama from users u, paket p where u.paket_id = p.id and u.id NOT IN ( SELECT users_id from user_event where event_id= "+event_id+")"
 	cur.execute(query)
 	return jsonify(data=cur.fetchall())
 
 if __name__ == "__main__":
 	port = int(os.environ.get('PORT', 5000))
-	app.run(host='0.0.0.0', port=port)
 	app.debug = True
+	app.run(host='0.0.0.0', port=port)
+	
 
 
 

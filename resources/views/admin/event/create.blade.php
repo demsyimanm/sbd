@@ -18,7 +18,7 @@
 			</ul>
 		</div>
 	@endif
-	<form action="" method="POST" class="form-horizontal">
+	<form action="" method="POST" class="form-horizontal" >
 		<input type="hidden" name="_token" value="{{ csrf_token() }}">
 		<div class="box-body">
 			<div class="form-group">
@@ -62,53 +62,22 @@
 					<input type="text" class="form-control datepicker" name="tgl_akhir">
 				</div>
 			</div>
-			
-			<div class="form-group">
-				<label class="col-md-2 control-label">Kelas</label>
-				<div class="col-md-6">
-				@if($user == 1)
-					<select class="form-control" name="kelas">
-	                        <option selected='selected'> -- </option>
-	                        <option value="A">A</option>
-	                        <option value="B">B</option>
-	                        <option value="C">C</option>
-	                        <option value="D">D</option>
-	                        <option value="E">E</option>
-					</select>
-
-				@else
-					<input type="text" class="form-control" value="{{$kelas}}" disabled="">
-					<input type="hidden" class="form-control" name="kelas" value="{{$kelas}}">
-				@endif
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-md-2 control-label">Database IP</label>
-				<div class="col-md-6">
-					<input type="text" class="form-control" name="ip">
-				</div>
-			</div>
-
-			<div class="form-group">
-				<label class="col-md-2 control-label">Connection Username</label>
-				<div class="col-md-6">
-					<input type="text" class="form-control " name="conn_username">
-				</div>
-			</div>
-
-			<div class="form-group">
-				<label class="col-md-2 control-label">Connection Password</label>
-				<div class="col-md-6">
-					<input type="text" class="form-control " name="conn_password">
-				</div>
-			</div>
-
 			<div class="form-group">
 				<label class="col-md-2 control-label">Database Name</label>
 				<div class="col-md-6">
-					<input type="text" class="form-control " name="db_name">
+					<select class="form-control " name="db_name">
+						@foreach ($dbs->data as $db)
+							<option value="{{$db->db_name}}">{{$db->db_name}}</option>
+						@endforeach
+					</select>
 				</div>
 			</div>
+			<!-- <div class="form-group">
+				<label class="col-md-2 control-label">Select sql file to import:</label>
+				<div class="col-md-6">
+			    	<input type="file" name="fileToUpload" id="fileToUpload" class="form-control ">
+			    </div>
+			</div> -->
 			 <div class=" col-md-6 col-md-offset-2 box-footer">
             	<button type="submit" class="btn btn-info pull-right">Create</button>
         	 </div><!-- /.box-footer -->
@@ -136,5 +105,8 @@
 			     autoclose: true
 			});
     </script>
+    <script type="text/javascript">
+  		$('select').select2();
+	</script>
     </section><!-- /.content -->
 @endsection
