@@ -103,15 +103,24 @@ class EventController extends Controller {
 				$loc = 'C:\xampp\htdocs\CloudSBD\sqlFile\\'.$newname;
 				exec("mysql -u root ".$data['db_name']." < ".$loc);*/
 
-				$max_id = Event::max('id');
-				$temp_file = "parser_".$max_id.".py";
-				$file = fopen("../parser/parser_".$max_id.".py", "wb") or die("Unable to open file!");
-				$content = "#!/usr/bin/python
+			}
+		} 
+		else {
+			return redirect('/');
+		}
+	}
+
+	public function createParser($maxid, $dbname){
+		$max_id = $maxid;
+		$db_name = $dbname;
+		$temp_file = "parser_".$max_id.".py";
+		$file = fopen("../parser/parser_".$max_id.".py", "wb") or die("Unable to open file!");
+		$content = "#!/usr/bin/python
 import MySQLdb
 import time
 import sys
 try:
-  db_kunci= MySQLdb.connect('localhost', 'root','', ".'"'.$data['db_name'].'"'.")
+  db_kunci= MySQLdb.connect('localhost', 'root','', ".'"'.$dbname.'"'.")
   cursor_kunci = db_kunci.cursor()
   while True:
     db= MySQLdb.connect('localhost', 'root', '', 'sbd')
@@ -211,15 +220,11 @@ except KeyboardInterrupt:
 except:
   print 'berhenti'
   execfile(".$temp_file.")";
-				fwrite($file, $content);
-				fclose($file);
-				return redirect('admin/event');
+		fwrite($file, $content);
+		fclose($file);
+		return redirect('admin/event');
 			}
-		} 
-		else {
-			return redirect('/');
-		}
-	}
+	
 
 	/**
 	 * Store a newly created resource in storage.
