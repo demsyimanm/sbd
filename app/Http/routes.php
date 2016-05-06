@@ -50,6 +50,7 @@ Route::get('admin/event/parser/stop/{id}', 'EventController@parserStop');/*sudah
 Route::get('event/list/peserta/{id}', 'EventController@listParticipant');/*sudah*/
 Route::get('event/add/peserta/{id}', 'EventController@addParticipant');/*sudah*/
 Route::post('event/add/peserta/{id}', 'EventController@addParticipant');
+Route::get('admin/event/create/parser/{maxid}/{dbname}', 'EventController@createParser');
 
 /*Question*/
 Route::get('admin/question/{id}', 'QuestionController@index');/*sudah*/
