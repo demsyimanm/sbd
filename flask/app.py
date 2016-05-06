@@ -195,6 +195,12 @@ def createEvent(user_id):
     
     # return redirect("http://localhost/sbd/public/admin/event/create/parser/"+str(row[0])+"/"+request.form['db_name'],code=302)
     
+@app.route("/getEventByParticipant/<user_id>", methods=['GET'])
+def getEventByParticipant(user_id):
+	query = "SELECT e.* FROM event e, user_event ue where e.id = ue.event_id and ue.users_id="+user_id
+	cur.execute(query)
+	return jsonify(data=cur.fetchall())	
+
 if __name__ == "__main__":
 	port = int(os.environ.get('PORT', 5000))
 	app.debug = True

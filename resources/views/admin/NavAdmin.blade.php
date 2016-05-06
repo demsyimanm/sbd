@@ -118,13 +118,24 @@ $(document).ready(function() {
                 <li id="sec"class="date1" style="display:inline"> </li>
             </ul>
             </li>
+
+            @if(Auth::user()->paket->id == 1 || Auth::user()->paket->id == 2 )
             <li class="treeview">
               <a href="{{ URL::to('admin')}}">
                 <i class="fa fa-dashboard"></i> <span>Dashboard</span>
               </a>
             </li>
-             
-             @if(Auth::user()->paket->id == 1)
+            @endif
+
+            @if(Auth::user()->paket->id == 3)
+            <li class="treeview">
+              <a href="{{ URL::to('regular')}}">
+                <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+              </a>
+            </li>
+            @endif
+
+            @if(Auth::user()->paket->id == 4)
             <li class="treeview">
               <a href="{{ URL::to('admin/user')}}">
                 <i class="fa fa-user"></i> <span>Akun</span>
@@ -138,15 +149,21 @@ $(document).ready(function() {
                 <i class="fa fa-database"></i> <span>Manage Database</span>
               </a>
             </li>
-            @endif
+            
 
             <li class="treeview">
               <a href="{{ URL::to('admin/event')}}">
-                <i class="fa fa-calendar"></i> <span>Event</span>
+                <i class="fa fa-calendar"></i> <span>Manage Event</span>
+              </a>
+            </li>
+
+            <li class="treeview">
+              <a href="{{ URL::to('user/list/event')}}">
+                <i class="fa fa-desktop"></i> <span>Joined Event</span>
               </a>
             </li>
 			
-			 <li class="treeview">
+			      <li class="treeview">
               <a href="{{ URL::to('admin/event/viewSubmission')}}">
                 <i class="fa fa-list"></i> <span>View Submissons</span>
               </a>
@@ -157,7 +174,21 @@ $(document).ready(function() {
                 <i class="fa fa-trophy"></i> <span>Scoreboard</span>
               </a>
             </li>
+            @endif
 
+            @if(Auth::user()->paket->id == 3)
+            <li class="treeview">
+              <a href="{{ URL::to('user/event')}}">
+                <i class="fa fa-calendar"></i> <span>Event</span>
+              </a>
+            </li>
+
+            <li class="treeview">
+              <a href="{{ URL::to('user/scoreboards')}}">
+                <i class="fa fa-trophy"></i> <span>Scoreboard</span>
+              </a>
+            </li>
+            @endif
           </ul>
         </section>
         <!-- /.sidebar -->

@@ -9,6 +9,8 @@ use App\Event;
 use App\User;
 use App\Question;
 use App\Submission;
+use App\User_Event;
+use DB;
 
 class AdminController extends Controller {
 
@@ -42,12 +44,12 @@ class AdminController extends Controller {
 	 */
 	public function scoreboards()
 	{
-		if (Auth::user()->paket->id == 1)
+		if (Auth::user()->paket->id == 4)
 		{
 			if (Request::isMethod('get')) {
 				# code...
 				/*$this->data['event'] = Event::get();*/
-				$url = "http://localhost:5000/getEvent";
+				$url = "http://localhost:5000/getEvent/".Auth::user()->id;
     			$events = json_decode(file_get_contents($url));
 				return view('admin.scoreboard.index',compact('events'));
 			} else {
@@ -56,13 +58,12 @@ class AdminController extends Controller {
 			}
 		}
 
-		else
+		else 
 		{
 			if (Request::isMethod('get')) {
 				# code...
-				$kelas = Auth::user()->kelas;
 				/*$this->data['event'] = Event::where('kelas','=',$kelas)->get();*/
-				$url = "http://localhost:5000/getEventByUserID/".Auth::user()->id;
+				$url = "http://localhost:5000/getEventByParticipant/".Auth::user()->id;
     			$events = json_decode(file_get_contents($url));
 				return view('admin.scoreboard.index',compact('events'));
 			} else {
@@ -89,35 +90,35 @@ class AdminController extends Controller {
 
 	public function scoreboard($id)
 	{
-		/*$event = Event::find($id);*/
+		$event = Event::find($id);
 		
-		$url = "http://localhost:5000/getEventById/".$id;
-    	$event = json_decode(file_get_contents($url));
-    	//dd($event);
-    	/*dd($event->data[0]->id);*/
+		/*$url = "http://localhost:5000/getEventById/".$id;
+    	$event = json_decode(file_get_contents($url));*/
+
 		$nilai = array();
-		/*$user = User::where('kelas',$event->kelas)->where('role_id', 3)->get();*/
-		$url = "http://localhost:5000/getPraktikanbyKelas/".$event->data[0]->kelas;
-    	$user = json_decode(file_get_contents($url));
-		/*$question = Question::where('event_id', $id)->get();*/
-		$url = "http://localhost:5000/getQuestionByEventId/".$id;
-    	$question = json_decode(file_get_contents($url));
-		foreach ($question->data as $quest) {
-			/*$submission = Submission::where('question_id',$quest->id)->get();*/
-			$url = "http://localhost:5000/getSubmissionByQuestionId/".$quest->id;
-    		$submission = json_decode(file_get_contents($url));
-			foreach ($submission->data as $sub) {
-				foreach ($user->data as $use) {
+
+		$user = DB::select('SELECT u.*,p.nama as paket_nama from users u, paket p where u.paket_id = p.id and u.id IN ( SELECT users_id from user_event where event_id='.$id.')');
+		/*$url = "http://localhost:5000/getUserToEvent/".$id;
+    	$user = json_decode(file_get_contents($url));*/
+		$question = Question::where('event_id', $id)->get();
+		/*$url = "http://localhost:5000/getQuestionByEventId/".$id;
+    	$question = json_decode(file_get_contents($url));*/
+		foreach ($question as $quest) {
+			$submission = Submission::where('question_id',$quest->id)->get();
+			/*$url = "http://localhost:5000/getSubmissionByQuestionId/".$quest->id;
+    		$submission = json_decode(file_get_contents($url));*/
+			foreach ($submission as $sub) {
+				foreach ($user as $use) {
 					$nilai[$use->username][$sub->question_id] = 0;
 				}
 			}
 		}
-		foreach ($question->data as $quest) {
-			foreach ($user->data as $use) {
-				/*$submission = Submission::where('question_id',$quest->id)->where('users_id',$use->id)->max('nilai');*/
-				$url = "http://localhost:5000/getSubmissionByQuestionIdUserId/".$quest->id."/".$use->id;
-    			$submission = json_decode(file_get_contents($url));
-				if($submission->data) $nilai[$use->username][$quest->id] = $submission;
+		foreach ($question as $quest) {
+			foreach ($user as $use) {
+				$submission = Submission::where('question_id',$quest->id)->where('users_id',$use->id)->max('nilai');
+				/*$url = "http://localhost:5000/getSubmissionByQuestionIdUserId/".$quest->id."/".$use->id;
+    			$submission = json_decode(file_get_contents($url));*/
+				if($submission) $nilai[$use->username][$quest->id] = $submission;
 				else $nilai[$use->username][$quest->id] = 0;
 			}
 		}

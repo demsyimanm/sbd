@@ -11,9 +11,7 @@
         <section class="content">
             <h3 align="center" style="margin-top:0px;">Event Terdekat</h3>
             <p align="center" style="margin-top:0px;font-size:40px">
-                @foreach ($event as $eve)
-                    {{$eve->judul}}
-                @endforeach</p>
+                {{$eve->judul}}
             <ul class="countdown">
                 <li> <span class="days">00</span>
                     <p class="days_ref">days</p>

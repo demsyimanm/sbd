@@ -3,7 +3,7 @@
 @include('header')
 <body class="hold-transition skin-blue fixed sidebar-mini">
 	<div class="wrapper">
-		@include('user.NavUser')
+		@include('admin.NavAdmin')
 		<div class="content-wrapper">
 			@yield('content')
 		</div>

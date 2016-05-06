@@ -34,11 +34,13 @@ class QuestionController extends Controller {
 		if(Auth::user()->paket->id == 1 || Auth::user()->paket->id == 2){
 			return view('admin.event.question.manage',$this->data);
 		}
-		else if(Auth::user()->role->id == 3){
+		else if(Auth::user()->paket->id == 3){
 			return view('user.event.question.manage',$this->data);
 		}
 
 	}
+
+	
 
 	/**
 	 * Show the form for creating a new resource.

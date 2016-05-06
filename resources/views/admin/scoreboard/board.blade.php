@@ -47,7 +47,7 @@
 	    <thead>
 		    <tr>
 		    	<th width="5%" class="text-center">No</th>
-		        <th width="30%" class="text-center">NRP</th>
+		        <th width="30%" class="text-center">Username</th>
 		        <?php $sum = 0;?>
 		        @foreach($question as $quest)
 		        	<th class="text-center">{{ $quest->judul }}</th>

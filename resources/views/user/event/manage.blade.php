@@ -29,7 +29,6 @@
 		        <th width="30%">Konten</th>
 	        	<th width="12.5%">Waktu Mulai</th>
 	        	<th width="12.5%">Waktu Akhir</th>
-	        	<th width="5%" class="text-center">Kelas</th>
 	        	<th width="5%" class="text-center">Action</th>
 	      	</tr>
 	    </thead>
@@ -40,7 +39,7 @@
 				$current_date = date("Y-m-d H:i:s", time());
 
       		?>
-	    	@foreach($event as $eve)
+	    	@foreach($events->data as $eve)
 	      	<tr>
 	      		<td class="text-center"><?php echo $i++ ?></td>
 	      		@if($eve->waktu_mulai < $current_date && $eve->waktu_akhir < $current_date || $current_date < $eve->waktu_mulai)
@@ -51,7 +50,6 @@
 	      		<td><?php echo nl2br(substr($eve->konten,0,10))." ..."?></td>
 	      		<td>{{ $eve->waktu_mulai }}</td>
 	      		<td>{{ $eve->waktu_akhir }}</td>
-	      		<td class="text-center">{{ $eve->kelas }}</td>
 	      		<td>
 	      		
 	      		@if($eve->waktu_mulai < $current_date && $eve->waktu_akhir < $current_date || $current_date < $eve->waktu_mulai )
@@ -70,13 +68,12 @@
 		        <th>Konten</th>
 	        	<th>Waktu Mulai</th>
 	        	<th>Waktu Akhir</th>
-	        	<th class="text-center">Kelas</th>
 	        	<th>Action</th>
 	      	</tr>
 	    </tfoot>
 	  	</table>
 	</div><!-- /.box-body -->
 
-	
+
 </section>
 @endsection

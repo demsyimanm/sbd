@@ -4,7 +4,7 @@
 	
 </section>
 <?php $i=0; ?>
-@foreach ($judul as $jud)
+@foreach ($judul->data as $jud)
 	<?php
 		$temp_jud[$i] = $jud->judul;
 		$temp_jud_id[$i] = $jud->id;
@@ -29,9 +29,9 @@
 		          		<div class="box-body ">
 		          			<div class="col-md-10 col-md-offset-1">
 		          			<h1>
-							   {{$eve->judul}}
+							   {{$eve->data[0]->judul}}
 							</h1><br>
-		          				<p style="font-size:20px;"><?php echo nl2br($eve->konten) ?></p>
+		          				<p style="font-size:20px;"><?php echo nl2br($eve->data[0]->konten) ?></p>
 		          				<br><br>
 		          			</div>
 
@@ -39,14 +39,14 @@
 		          	</div>
 		          </div>
 		          <?php $x=0; ?>
-		          @foreach ($question as $quest)
+		          @foreach ($question->data as $quest)
 		          	<div class="tab-pane" id="{{$temp_jud_id[$x]}}">
 			          	<div class="">
 			          		<div class="box-body">
 				          		<div class="col-md-10 col-md-offset-1">
 				          			<h1>{{$quest->judul}}</h1><br>
 				          			<p style="font-size:20px;"><?php echo nl2br($quest->konten)?></p>
-				          			<form id="form1" action="{{ URL::to('user/question/'. $eve->id.'/submit/'.$quest->id) }}"  method="POST">
+				          			<form id="form1" action="{{ URL::to('user/question/'. $eve->data[0]->id.'/submit/'.$quest->id) }}"  method="POST">
 							        	<input type="hidden" name="_token" value="{{ csrf_token() }}">
 							        	<br><br>
 						          		<h5>Salin query Anda ke textarea di bawah :</h5>

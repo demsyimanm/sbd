@@ -21,7 +21,7 @@ class UserController extends Controller {
 		date_default_timezone_set('Asia/Jakarta'); // CDT
 		$current_date = date('Y-m-d H:i:s');
 		$this->data['nearest'] = Event::where('waktu_mulai','>=',$current_date)->min('waktu_mulai');
-		$this->data['event'] = Event::where('waktu_mulai','=',$this->data['nearest'])->get();
+		$this->data['eve'] = Event::where('waktu_mulai','=',$this->data['nearest'])->first();
 		$this->data['nearest'] = date('m/d/Y H:i:s', strtotime($this->data['nearest']));
 		return view('user.HomeUser',$this->data);
 	}

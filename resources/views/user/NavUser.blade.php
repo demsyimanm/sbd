@@ -118,7 +118,7 @@ $(document).ready(function() {
             </li>
             
             <li class="treeview">
-              <a href="{{ URL::to('user')}}">
+              <a href="{{ URL::to('regular')}}">
                 <i class="fa fa-dashboard"></i> <span>Dashboard</span>
               </a>
             </li>

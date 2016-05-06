@@ -37,6 +37,13 @@ class EventController extends Controller {
 			return view('admin.event.manage',compact('events'));
 		}
 
+		else if(Auth::user()->paket->id == 3){
+			/*$this->data['event'] = Event::get();*/
+			$url = "http://localhost:5000/getEventByParticipant/".Auth::user()->id;
+    		$events = json_decode(file_get_contents($url));
+			return view('user.event.manage',compact('events'));
+		}
+
 		/*sudah
 		else if (Auth::user()->role->id == 2 )
 		{
@@ -53,6 +60,14 @@ class EventController extends Controller {
 			/*$this->data['event'] = Event::where('kelas','=',Auth::user()->kelas)->get();
 			return view('user.event.manage',compact('events'));		
 		}*/
+	}
+
+	public function ListEventPremium()
+	{
+
+		$url = "http://localhost:5000/getEventByParticipant/".Auth::user()->id;
+		$events = json_decode(file_get_contents($url));
+		return view('user.event.manage',compact('events'));
 	}
 
 	/**
@@ -273,7 +288,7 @@ except:
 	public function viewSubmissions()
 	{
 		/*sudah*/
-		if (Auth::user()->paket->id == 1)
+		if (Auth::user()->paket->id == 4)
 		{
 			if (Request::isMethod('get')) {
 				/*$this->data['event'] = Event::get();*/
@@ -287,15 +302,13 @@ except:
 		}
 
 		/*sudah*/
-		else
+		else if (Auth::user()->paket->id == 1 || Auth::user()->paket->id == 2 || Auth::user()->paket->id == 3)
 		{
 			if (Request::isMethod('get')) {
-				# code...
-				$kelas = Auth::user()->kelas;
 				/*$this->data['event'] = Event::where('kelas','=',$kelas)->get();*/
-				$url = "http://localhost:5000/getEventKelas/".Auth::user()->kelas;
+				$url = "http://localhost:5000/getEventByParticipant/".Auth::user()->id;
     			$events = json_decode(file_get_contents($url));
-				return view('admin.event.indexViewSubmission',$this->data);
+				return view('admin.event.indexViewSubmission',compact('events'));
 			} else {
 				$id = Input::get('event');
 				return redirect('admin/event/viewSubmissionSubmit/'.$id);
@@ -314,9 +327,7 @@ except:
 		foreach ($quest_id->data as $key => $value) {
 			array_push($pertanyaan, $value->id);
 		}
-		//dd($pertanyaan);
 		$submissions = Submission::whereIn('question_id', $pertanyaan)->get();
-		//dd($submissions);
 		return view('admin.event.viewSubmission', compact('submissions', 'event'));
 
 	}
