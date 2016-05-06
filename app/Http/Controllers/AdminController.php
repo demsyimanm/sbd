@@ -31,7 +31,7 @@ class AdminController extends Controller {
 		{
 			$this->data['nearest'] = Event::where('waktu_mulai','>=',$current_date)->min('waktu_mulai');
 		}
-		$this->data['event'] = Event::where('waktu_mulai','=',$this->data['nearest'])->get();
+		$this->data['event'] = Event::where('waktu_mulai','=',$this->data['nearest'])->first();
 		$this->data['nearest'] = date('m/d/Y H:i:s', strtotime($this->data['nearest']));
 		return view('admin.HomeAdmin',$this->data);
 	}
@@ -42,7 +42,7 @@ class AdminController extends Controller {
 	 */
 	public function scoreboards()
 	{
-		if (Auth::user()->role->id == 1)
+		if (Auth::user()->paket->id == 1)
 		{
 			if (Request::isMethod('get')) {
 				# code...
@@ -62,7 +62,7 @@ class AdminController extends Controller {
 				# code...
 				$kelas = Auth::user()->kelas;
 				/*$this->data['event'] = Event::where('kelas','=',$kelas)->get();*/
-				$url = "http://localhost:5000/getEventKelas/".Auth::user()->kelas;
+				$url = "http://localhost:5000/getEventByUserID/".Auth::user()->id;
     			$events = json_decode(file_get_contents($url));
 				return view('admin.scoreboard.index',compact('events'));
 			} else {

@@ -268,7 +268,7 @@ except:
 	public function viewSubmissions()
 	{
 		/*sudah*/
-		if (Auth::user()->role->id == 1)
+		if (Auth::user()->paket->id == 1)
 		{
 			if (Request::isMethod('get')) {
 				/*$this->data['event'] = Event::get();*/
@@ -323,13 +323,15 @@ except:
 	 */
 	public function update($id)
 	{
-		if(Auth::user()->paket->id == 1 ){
+		if(Auth::user()->paket->id == 1 || Auth::user()->paket->id == 2 ){
 			$this->data = array();
-			$this->data['user'] = Auth::user()->role->id;
-			$this->data['kelas'] = "";
-			$this->data['eve'] = Event::find($id);
+			
 			if (Request::isMethod('get')) {
-				return View::make('admin.event.update', $this->data);
+				$url = "http://localhost:5000/getListDB/".Auth::user()->id;
+				$dbs = json_decode(file_get_contents($url));
+				$url = "http://localhost:5000/getEventById/".$id;
+				$eve = json_decode(file_get_contents($url));
+				return View::make('admin.event.update', compact('eve','dbs'));
 			} 
 			else if (Request::isMethod('post')) {
 				$data = Input::all();
@@ -350,34 +352,8 @@ except:
 			}
 		} 
 	
-		else if(Auth::user()->paket->id == 2){
-			$this->data = array();
-			$this->data['kelas'] = Auth::user()->kelas;
-			/*$this->data['user'] = Auth::user()->role->id;*/
-			$this->data['eve'] = Event::find($id);
-			if (Request::isMethod('get')) {
-				return View::make('admin.event.update', $this->data);
-			} 
-			else if (Request::isMethod('post')) {
-				$data = Input::all();
-				$data['waktu_mulai'] = $data['tgl_mulai']." ".$data['wkt_mulai'];
-				$data['waktu_akhir'] = $data['tgl_akhir']." ".$data['wkt_akhir'];
-				Event::where('id', $id)->update(array(
-					'judul' => $data['judul'], 
-					'konten' => $data['konten'], 
-					'waktu_mulai' => $data['waktu_mulai'], 
-					'waktu_akhir' => $data['waktu_akhir'],
-					'kelas' => $this->data['kelas'],
-					'ip' => $data['ip'],
-					'db_username' => $data['conn_username'],
-					'db_password' => $data['conn_password'],
-					'db_name' => $data['db_name']
-				));
-				return redirect('admin/event');
-			}
-		} 
 		else {
-			return redirect('/');
+			return redirect('/home');
 		}
 	}
 

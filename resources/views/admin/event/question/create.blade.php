@@ -2,7 +2,7 @@
 @section('content')
     <section class="content-header">
         <h1>
-        	Add Question for {{$eve->judul}} Kelas {{$eve->kelas}}
+        	Add Question for {{$eve->data[0]->judul}}
         </h1>
     </section>
 
@@ -21,7 +21,7 @@
 	<form action="" method="POST" class="form-horizontal">
 		<input type="hidden" name="_token" value="{{ csrf_token() }}">
 		<div class="box-body">
-			<input type="hidden" class="form-control" name="judul" value="{{$eve->id}}">
+			<input type="hidden" class="form-control" name="judul" value="{{$eve->data[0]->id}}">
 			<div class="form-group">
 				<label class="col-md-2 control-label">Judul pertanyaan</label>
 				<div class="col-md-6">

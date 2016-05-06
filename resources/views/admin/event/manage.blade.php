@@ -27,7 +27,7 @@
 		      	</tr>
 		    </thead>
 		    <tbody>
-		    	<tr ng-repeat="x in names" on-finish-render="ngRepeatFinished">
+		    	<tr ng-repeat="x in names" on-finish-render="ngRepeatFinished" class="data">
 		      		<td class="text-center">[[$index+1]]</td>
 		      		<td><a href="{{ URL::to('admin/question/')}}/[[ x.id ]]" >[[ x.judul ]]</td>
 		      		<td>[[ x.waktu_mulai ]]</td>
@@ -47,7 +47,7 @@
 		      			<center>
 		      				<a href="{{ URL::to('event/list/peserta//')}}/[[ x.id ]]" class="btn btn-primary"><i class="fa fa-eye"></i> List Peserta</a>
 	      					<a href="{{ URL::to('admin/event/update/')}}/[[ x.id ]]" class="btn btn-warning"><i class="fa fa-pencil"></i></a>
-	      					<a href="{{ URL::to('admin/event/delete/')}}/[[ x.id ]]" class="btn btn-danger" ><i class="fa fa-times"></i></a>
+	      					<button ng-click="delet(x.id)" class="btn btn-danger del" ><i class="fa fa-times"></i></button>
 		      			</center>
 		      		</td>
 		      	</tr>
@@ -67,10 +67,29 @@
 		</div><!-- /.box-body -->
 	</div>
 
+	<div id="modaldiv" class="modal modal-primary fade">
+	    <div class="modal-dialog">
+	        <div class="modal-content">
+	            <div class="modal-header">
+	                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+	                <h4 class="modal-title">Hapus data Event</h4>
+	            </div>
+	            <div class="modal-body">
+	                <p>Anda yakin ingin menghapus data tersebut?</p>
+	            </div>
+	            <div class="modal-footer">
+	                <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Tutup</button>
+	                <a type="submit" id="delete_link"  class="btn btn-danger button_modal">Hapus</a>
+	            </div>
+	        </div><!-- /.modal-content -->
+	    </div><!-- /.modal-dialog -->
+	</div>
+
+
 	@if(Auth::user()->paket->id == 1)
-		<input type="hidden" value="http://{{$_ENV['PC_IP']}}:5000/getEvent" id="url">
+		<input type="hidden" value="http://localhost:5000/getEvent" id="url">
 	@elseif(Auth::user()->paket->id == 2)
-		<input type="hidden" value="http://{{$_ENV['PC_IP']}}:5000/getEventByUserID/{{Auth::user()->id}}" id="url">
+		<input type="hidden" value="http://localhost:5000/getEventByUserID/{{Auth::user()->id}}" id="url">
 	@endif
 
 	<script>
@@ -78,9 +97,14 @@
 			var url = document.getElementById('url').value;
 		    $http.get(url)
 		    .then(function (response) {$scope.names = response.data.data;});
+		    
 		    $scope.$on('ngRepeatFinished', function(ngRepeatFinishedEvent){
 			    $("#data_table").DataTable();
-		    })
+		    });
+		    $scope.delet = function (id){
+		        $('#modaldiv').modal('show');
+		        $('.button_modal').attr({href:'http://localhost:5000/deleteEvent/'+id});
+			};
 		});
 	</script>
 </section>

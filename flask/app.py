@@ -1,8 +1,10 @@
+#!/usr/bin/python
 import json
 import os
 from flask import Flask, request, redirect, jsonify
 import MySQLdb
 import MySQLdb.cursors
+import datetime
 from flask.ext.cors import CORS
 
 app = Flask(__name__)
@@ -98,6 +100,79 @@ def getUserToEvent(event_id):
 	query = "SELECT u.*,p.nama as paket_nama from users u, paket p where u.paket_id = p.id and u.id NOT IN ( SELECT users_id from user_event where event_id= "+event_id+")"
 	cur.execute(query)
 	return jsonify(data=cur.fetchall())
+
+@app.route("/getUserData/<user_id>", methods=['GET'])
+def getUserData(user_id):	
+	query = "SELECT u.nama as nama_user,u.username,p.* from users u, paket p where u.paket_id = p.id and u.id="+user_id
+	cur.execute(query)
+	return jsonify(data=cur.fetchall())
+
+@app.route("/getLatesPayment/<user_id>", methods=['GET'])
+def getLatestPayment(user_id):
+	query = " select max(p.bulan) as bulan, max(p.tahun) as tahun, u.paket_id, p.paket_id, u.id from users u, payment p where u.id = p.users_id and u.paket_id = p.paket_id and u.id = "+user_id
+	cur.execute(query)
+	return jsonify(data=cur.fetchall())	
+
+@app.route("/update/paket/<user_id>/<paket_id>", methods=['GET'])
+def updatePaket(user_id,paket_id):	
+	now = datetime.datetime.now()
+	query = "UPDATE users SET paket_id="+paket_id+" where id="+user_id
+	cur.execute(query)
+	db.commit()
+	query2 = "INSERT INTO payment (users_id, paket_id, bulan, tahun) values ("+user_id+", "+paket_id+", '"+str(now.month)+"', '"+str(now.year)+"')"
+	cur.execute(query2)
+	db.commit()
+	return redirect("http://localhost/CloudSBD/public/account/setting")
+
+@app.route("/payment/<user_id>", methods=['POST'])
+def payment(user_id):	
+	bulan = request.form['bulan']
+	tahun = request.form['tahun']
+	paket_id = request.form['paket_id']
+	query = "INSERT INTO payment (users_id, paket_id, bulan, tahun) values ("+user_id+", "+paket_id+", '"+bulan+"', '"+tahun+"')"
+	cur.execute(query)
+	db.commit()
+	return redirect("http://localhost/CloudSBD/public/account/setting")
+
+@app.route("/deleteEvent/<event_id>", methods=['GET'])
+def deleteEvent(event_id):
+	query = "DELETE FROm EVENT where id="+event_id
+	cur.execute(query)
+	db.commit()
+	return redirect('http://localhost/CloudSBD/public/admin/event')	
+
+@app.route("/deleteParticipant/<event_id>/<user_id>", methods=['GET'])
+def deleteParticipant(event_id, user_id):
+	query = "DELETE FROM user_event where event_id="+event_id+" and users_id="+user_id
+	cur.execute(query)
+	db.commit()
+	return redirect('http://localhost/CloudSBD/public/event/list/peserta/'+event_id)	
+
+@app.route("/getJudulQuestionByEventID/<event_id>", methods=['GET'])
+def getJudulQuestionByEventID(event_id):
+	query = "SELECT id, judul FROM question where event_id="+event_id
+	cur.execute(query)
+	return jsonify(data=cur.fetchall())	
+
+@app.route("/getQuestionByEventID/<event_id>", methods=['GET'])
+def getQuestionByEventID(event_id):
+	query = "SELECT * FROM question where event_id="+event_id
+	cur.execute(query)
+	return jsonify(data=cur.fetchall())	
+
+@app.route("/getQuestionByID/<quest_id>", methods=['GET'])
+def getQuestionByID(quest_id):
+	query = "SELECT * FROM question where id="+quest_id
+	cur.execute(query)
+	return jsonify(data=cur.fetchall())	
+
+@app.route("/deleteQuestion/<event_id>/<quest_id>", methods=['GET'])
+def deleteQuestion(event_id,quest_id):
+	query = "DELETE FROM question where id="+quest_id
+	cur.execute(query)
+	db.commit()
+	return redirect('http://localhost/CloudSBD/public/admin/question/'+event_id)	
+
 
 if __name__ == "__main__":
 	port = int(os.environ.get('PORT', 5000))

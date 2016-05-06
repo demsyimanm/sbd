@@ -20,27 +20,29 @@
 	@endif
 	<form action="" method="POST" class="form-horizontal">
 		<input type="hidden" name="_token" value="{{ csrf_token() }}">
-		<input type="hidden" name="id" value="{{ $eve->id }}">
+		<input type="hidden" name="id" value="{{ $eve->data[0]->id }}">
 		<div class="box-body">
 			<div class="form-group">
 				<label class="col-md-2 control-label">Judul Event</label>
 				<div class="col-md-6">
-					<input type="text" class="form-control" name="judul" value="{{ $eve->judul }}">
+					<input type="text" class="form-control" name="judul" value="{{ $eve->data[0]->judul }}">
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-md-2 control-label">Konten</label>
 				<div class="col-md-6">
-					<textarea type="text" class="form-control" name="konten" style="resize:vertical;"  >{{ $eve->konten }}</textarea>
+					<textarea type="text" class="form-control" name="konten" style="resize:vertical;"  >{{ $eve->data[0]->konten }}</textarea>
 				</div>
 			</div>
 			<?php
-				$timestamp1 = $eve->waktu_mulai;
+				$newDate = date("d-m-Y h:i:s", strtotime($eve->data[0]->waktu_mulai));
+				$timestamp1 = $newDate;
 				$datetime1 = explode(" ", $timestamp1);
 				$date1 = $datetime1[0];
 				$time1 = $datetime1[1];
 
-				$timestamp2 = $eve->waktu_akhir;
+				$newDate2 = date("d-m-Y h:i:s", strtotime($eve->data[0]->waktu_akhir));
+				$timestamp2 = $newDate2;
 				$datetime2 = explode(" ", $timestamp2);
 				$date2 = $datetime2[0];
 				$time2 = $datetime2[1];
@@ -48,7 +50,7 @@
 			<div class="form-group">
 				<label class="col-md-2 control-label">Tanggal Mulai</label>
 				<div class="col-md-6">
-					<input type="text" name="tgl_mulai" class="form-control datepicker" value="  {{$date1}}">
+					<input type="text" name="tgl_mulai" class="form-control datepicker" value="{{$date1}}">
 				</div>
 			</div>
 
@@ -76,47 +78,16 @@
 			</div>
 
 			<div class="form-group">
-				<label class="col-md-2 control-label">Kelas</label>
-				<div class="col-md-6">
-				@if($user == 1)
-					<select class="form-control" name="kelas">
-	                        <option> -- </option>
-	                        <option <?php if ($eve->kelas == 'A') echo "selected";?> value="A">A</option>
-	                        <option <?php if ($eve->kelas == 'B') echo "selected";?>value="B">B</option>
-	                        <option <?php if ($eve->kelas == 'C') echo "selected";?>value="C">C</option>
-	                        <option <?php if ($eve->kelas == 'D') echo "selected";?>value="D">D</option>
-	                        <option <?php if ($eve->kelas == 'E') echo "selected";?>value="E">E</option>
-					</select>
-				@else
-					<input type="text" class="form-control" name="kelas" value="{{$kelas}}" disabled="">
-				@endif
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-md-2 control-label">Database IP</label>
-				<div class="col-md-6">
-					<input type="text" class="form-control" name="ip" value="{{$eve->ip}}">
-				</div>
-			</div>
-
-			<div class="form-group">
-				<label class="col-md-2 control-label">Connection Username</label>
-				<div class="col-md-6">
-					<input type="text" class="form-control " name="conn_username" value="{{$eve->db_username}}">
-				</div>
-			</div>
-
-			<div class="form-group">
-				<label class="col-md-2 control-label">Connection Password</label>
-				<div class="col-md-6">
-					<input type="text" class="form-control " name="conn_password" value="{{$eve->db_password}}">
-				</div>
-			</div>
-
-			<div class="form-group">
 				<label class="col-md-2 control-label">Database Name</label>
 				<div class="col-md-6">
-					<input type="text" class="form-control " name="db_name" value="{{$eve->db_name}}">
+					<select class="form-control " name="db_name">
+						<option value="{{$eve->data[0]->db_name}}">{{$eve->data[0]->db_name}}</option>
+						@foreach ($dbs->data as $db)
+							@if ($eve->data[0]->db_name != $db->db_name)
+								<option value="{{$db->db_name}}">{{$db->db_name}}</option>
+							@endif
+						@endforeach
+					</select>
 				</div>
 			</div>
 

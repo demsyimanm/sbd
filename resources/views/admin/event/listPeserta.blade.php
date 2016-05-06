@@ -41,7 +41,7 @@
 		      		<td>[[ x.judul ]]</td>
 		      		<td>
 		      			<center>
-	      					<a href="{{ URL::to('peserta/delete/')}}/[[ x.id ]]" class="btn btn-danger" ><i class="fa fa-times"></i></a>
+	      					<button ng-click="delet({{$id}},x.id)" class="btn btn-danger del" ><i class="fa fa-times"></i></button>
 		      			</center>
 		      		</td>
 		      	</tr>
@@ -49,8 +49,24 @@
 		  	</table>
 		</div><!-- /.box-body -->
 	</div>
-
-	<input type="hidden" value="http://{{$_ENV['PC_IP']}}:5000/getListParticipant/{{$id}}" id="url">
+	<div id="modaldiv" class="modal modal-primary fade">
+	    <div class="modal-dialog">
+	        <div class="modal-content">
+	            <div class="modal-header">
+	                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+	                <h4 class="modal-title">Hapus data Event</h4>
+	            </div>
+	            <div class="modal-body">
+	                <p>Anda yakin ingin menghapus data tersebut?</p>
+	            </div>
+	            <div class="modal-footer">
+	                <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Tutup</button>
+	                <a type="submit" id="delete_link"  class="btn btn-danger button_modal">Hapus</a>
+	            </div>
+	        </div><!-- /.modal-content -->
+	    </div><!-- /.modal-dialog -->
+	</div>
+	<input type="hidden" value="http://localhost:5000/getListParticipant/{{$id}}" id="url">
 
 	<script>
 		app.controller('accountCtrl', function($scope, $http) {
@@ -59,7 +75,12 @@
 		    .then(function (response) {$scope.names = response.data.data;});
 		    $scope.$on('ngRepeatFinished', function(ngRepeatFinishedEvent){
 			    $("#data_table").DataTable();
-		    })
+		    });
+
+		    $scope.delet = function (event_id,user_id){
+		        $('#modaldiv').modal('show');
+		        $('.button_modal').attr({href:'http://localhost:5000/deleteParticipant/'+event_id+'/'+user_id});
+			};
 		});
 	</script>
 </section>

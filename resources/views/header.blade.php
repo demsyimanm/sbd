@@ -15,7 +15,7 @@
 	<link rel="stylesheet" href="{{ URL::to('assets/AdminLTE/dist/css/AdminLTE.min.css')}}">
 	<!-- AdminLTE Skins. Choose a skin from the css/skins
 		 folder instead of downloading all of them to reduce the load. -->
-	<link rel="stylesheet" href="{{ URL::to('assets/AdminLTE/dist/css/skins/_all-skins.min.css')}}">
+	<link rel="stylesheet" href="{{ URL::to('assets/AdminLTE/dist/css/skins/_all-skins.css')}}">
 	<!-- iCheck -->
 	<link rel="stylesheet" href="{{ URL::to('assets/AdminLTE/plugins/iCheck/flat/blue.css')}}">
 	<!-- Morris chart -->
@@ -28,7 +28,7 @@
 
 	
     <link rel="stylesheet" href="{{ URL::to('assets/AdminLTE/plugins/datatables/dataTables.bootstrap.css')}}">
-    
+    <link rel='stylesheet' href="{{URL::to('assets/angular/angular-loading-bar-master/build/loading-bar.min.css')}}" type='text/css' media='all' />
 
 
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -49,8 +49,10 @@
     <script src="{{ URL::to('assets/AdminLTE/plugins/timepicker/bootstrap-timepicker.min.js') }}"></script>
     <script src="{{ URL::to('plugin/select2/dist/js/select2.min.js')}}"></script>
     <script type="text/javascript" src="{{URL::to('assets/angular/angular.min.js')}}"></script>
+    
+	<script type='text/javascript' src="{{URL::to('assets/angular/angular-loading-bar-master/build/loading-bar.min.js')}}"></script>
     <script type="text/javascript">
-        var app = angular.module('myApp', []);
+        var app = angular.module('myApp', ['angular-loading-bar']);
         app.config(["$interpolateProvider",function($interpolateProvider)
         {
             $interpolateProvider.startSymbol('[[');

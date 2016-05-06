@@ -89,6 +89,9 @@ $(document).ready(function() {
                   </li>
                   <!-- Menu Footer-->
                   <li class="user-footer">
+                    <div class="pull-left">
+                      <a href="{{ URL::to('account/setting')}}" class="btn btn-default btn-flat">Setting</a>
+                    </div>
                     <div class="pull-right">
                       <a href="{{ URL::to('auth/logout')}}" class="btn btn-default btn-flat">Sign out</a>
                     </div>

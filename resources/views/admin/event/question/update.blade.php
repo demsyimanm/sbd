@@ -24,19 +24,19 @@
 			<div class="form-group">
 				<label class="col-md-2 control-label">Judul Event</label>
 				<div class="col-md-6">
-					<input type="text" class="form-control" name="judul" value="{{ $quest->judul }}">
+					<input type="text" class="form-control" name="judul" value="{{ $quest->data[0]->judul }}">
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-md-2 control-label">Pertanyan</label>
 				<div class="col-md-6">
-					<textarea type="text" class="form-control" name="konten" style="resize:vertical;"  >{{ $quest->konten }}</textarea>
+					<textarea type="text" class="form-control" name="konten" style="resize:vertical;"  >{{ $quest->data[0]->konten }}</textarea>
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-md-2 control-label">Jawaban</label>
 				<div class="col-md-6">
-					<textarea type="text" class="form-control" name="jawaban" style="resize:vertical;"  >{{ $quest->jawaban }}</textarea>
+					<textarea type="text" class="form-control" name="jawaban" style="resize:vertical;"  >{{ $quest->data[0]->jawaban }}</textarea>
 				</div>
 			</div>
 			

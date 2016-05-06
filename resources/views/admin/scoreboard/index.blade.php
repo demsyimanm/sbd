@@ -18,7 +18,7 @@
 						<select onchange="this.form.submit()" class="form-control" name="event">
 		                        <option value="0" selected='selected'> -- </option>
 		                        @foreach( $events->data as $eve)
-		                        <option value="{{ $eve->id }}" >{{ $eve->judul }} Kelas {{ $eve->kelas }}</option>
+		                        <option value="{{ $eve->id }}" >{{ $eve->judul }}</option>
 		                        @endforeach
 						</select>
 					</div>

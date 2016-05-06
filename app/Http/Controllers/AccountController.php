@@ -222,4 +222,18 @@ class AccountController extends Controller {
 		}
 		
 	}
+
+	public function setting()
+	{
+		if (Request::isMethod('get'))
+		{
+			$url = "http://localhost:5000/getUserData/".Auth::user()->id;
+			$user = json_decode(file_get_contents($url));
+
+			$url2 = "http://localhost:5000/getLatesPayment/".Auth::user()->id;
+			$payment = json_decode(file_get_contents($url2)); 
+
+			return view('admin.account.setting', compact('user', 'payment'));	
+		}
+	}
 }

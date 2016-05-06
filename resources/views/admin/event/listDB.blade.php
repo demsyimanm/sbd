@@ -14,6 +14,7 @@
 	            	<i class="fa fa-plus"></i> Tambah Database
 	          	</a>
 	      	</div><br><br><br>
+	      	
 		  	<table id="data_table" class="table table-bordered table-striped">
 		    <thead>
 			    <tr>
@@ -41,7 +42,7 @@
 		</div><!-- /.box-body -->
 	</div>
 
-		<input type="hidden" value="http://{{$_ENV['PC_IP']}}:5000/getListDB/{{Auth::user()->id}}" id="url">
+		<input type="hidden" value="http://localhost:5000/getListDB/{{Auth::user()->id}}" id="url">
 
 	<script>
 		app.controller('accountCtrl', function($scope, $http) {
