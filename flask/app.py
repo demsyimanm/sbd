@@ -4,7 +4,7 @@ from flask import Flask, request, redirect, jsonify
 import MySQLdb
 import MySQLdb.cursors
 from flask.ext.cors import CORS
-import bcrypt
+import urllib2
 
 app = Flask(__name__)
 CORS(app)
@@ -119,6 +119,63 @@ def createEvent(user_id):
     return redirect("http://localhost/sbd/public/admin/event/create/parser/"+str(row[0])+"/"+request.form['db_name'], code = 302)
     
     # return redirect("http://localhost/sbd/public/admin/event/create/parser/"+str(row[0])+"/"+request.form['db_name'],code=302)
+
+@app.route("/addParticipant/<id>", methods=['POST'])
+def addParticipant(id):
+    if (paket == 1) or (paket ==2) :
+    	query = "INSERT INTO user_event (users_id, event_id, status) VALUES '"+request.form['user']+"',"+id+","+request.form['role']
+    	cur.execute(query)
+    	db.commit()
+    	return redirect("http://localhost/sbd/public/event/list/peserta/"+id, code=302)
+    else :
+    	return redirect ("http://localhost/sbd/public/home",code=302)
+
+@app.route("/submitEvent/<id1>/<id2>/<id_user>", methods=['POST'])
+def submit(id1,id2,id_user):
+    query = "INSERT INTO submission (question_id, users_id, nilai, jawaban, status) VALUES ("+id2+","+id_user+",0,'"+request.form['jawaban']+"',0)"
+    cur.execute(query)
+    db.commit()
+    return redirect("http://localhost/sbd/public/user/question/"+id1,code=302)
+
+@app.route("/updateEvent/<paket_id>", methods=['POST'])
+def updateEvent(paket_id):
+	if (paket_id == 3) or (paket_id == 4):
+		return redirect("http://localhost/sbd/public")
+
+	waktu_mulai = request.form['tgl_mulai']+" "+request.form['wkt_mulai']
+	waktu_akhir = request.form['tgl_akhir']+" "+request.form['wkt_akhir']
+	query = "UPDATE event SET judul ='"+request.form['judul']+"', konten='"+request.form['konten']+"', waktu_mulai='"+waktu_mulai+"',waktu_akhir='"+waktu_akhir+"', db_name='"+request.form['db_name']+"'  WHERE id="+request.form['id']
+	cur.execute(query)
+	db.commit()
+	return redirect("http://localhost/sbd/public/admin/event",code=302)
+
+
+#QUESTION
+@app.route("/updateQuestion/<id1>/<id2>/<paket_id>", methods=['POST'])
+def updateQuestion(id1, id2, paket_id):
+	if (paket_id==1) or (paket_id==2):
+		query = "UPDATE question SET judul = '"+request.form['judul']+"', konten= '"+request.form['konten']+"', jawaban='"+request.form['jawaban']+"'"
+		cur.execute(query)
+		db.commit()
+		return redirect("http://localhost/sbd/public/admin/question/"+id1,code=302)
+	else:
+		return redirect("http://localhost/sbd/public/"+id1,code=302)
+
+@app.route("/createQuestion/<id>/<paket_id>", methods=['POST'])
+def createQuestion(id,paket_id):
+	if (paket_id==1) or (paket_id==2):
+		query = "INSERT INTO question (event_id, judul, konten, jawaban) VALUES("+id+",'"+request.form['judul']+"','"+request.form['konten']+"','"+request.form['jawaban']+"')"
+		return redirect("http://localhost/sbd/public/admin/question/"+id,code=302)
+	else :
+		return redirect("http://localhost/sbd/public/")
+
+# submission
+
+@app.route("/viewSubmission", methods=['POST'])
+def viewSubmission():
+	return redirect("http://localhost/sbd/public/admin/event/viewSubmissionSubmit/"+request.form['event'])
+
+
     
 if __name__ == "__main__":
 	port = int(os.environ.get('PORT', 5000))

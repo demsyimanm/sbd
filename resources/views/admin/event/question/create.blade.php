@@ -18,11 +18,11 @@
 			</ul>
 		</div>
 	@endif
-	<form action="" method="POST" class="form-horizontal">
+	<form action="http://localhost:5000/createQuestion/{{$eve->id}}/{{Auth::user->paket->id}}" method="POST" class="form-horizontal">
 		<input type="hidden" name="_token" value="{{ csrf_token() }}">
 		<div class="box-body">
-			<input type="hidden" class="form-control" name="judul" value="{{$eve->id}}">
-			<div class="form-group">
+			<!-- <input type="hidden" class="form-control" name="judul" value="{{$eve->id}}">
+ -->			<div class="form-group">
 				<label class="col-md-2 control-label">Judul pertanyaan</label>
 				<div class="col-md-6">
 					<input type="text" class="form-control" name="judul" value="{{ old('judul') }}">

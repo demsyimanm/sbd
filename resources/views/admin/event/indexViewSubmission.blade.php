@@ -9,7 +9,7 @@
 	<div class="box box-primary">
 	<div class="box-body">
 		<h4>Pilih Event :</h4>
-		<form action="" method="POST" class="form-horizontal" >
+		<form action="http://localhost:5000/viewSubmission" method="POST" class="form-horizontal" >
 			<div class="col-xs-6">
 			<div class="box-body">
 			  	<div class="form-group">
