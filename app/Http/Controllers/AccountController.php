@@ -22,7 +22,7 @@ class AccountController extends Controller {
 	{
 		/*sudah*/
 		if(Auth::user()->paket->id == 1){
-			/*$url = "http://localhost:5000/getUser";
+			/*$url = "http://10.151.63.181:5000/getUser";
     		$users = json_decode(file_get_contents($url));*/
 			return view('admin.account.manage', compact('users'));
 		}
@@ -30,7 +30,7 @@ class AccountController extends Controller {
 		/*sudah*/
 		else if(Auth::user()->paket->id == 2){
 			/*$this->data['users'] = User::where('kelas',Auth::user()->kelas)->where('role_id','!=','1')->get();*/
-			/*$url = "http://localhost:5000/getUserKelas/".Auth::user()->kelas;
+			/*$url = "http://10.151.63.181:5000/getUserKelas/".Auth::user()->kelas;
     		$users = json_decode(file_get_contents($url));*/
 			return view('admin.account.manage', compact('users'));
 		}
@@ -227,10 +227,10 @@ class AccountController extends Controller {
 	{
 		if (Request::isMethod('get'))
 		{
-			$url = "http://localhost:5000/getUserData/".Auth::user()->id;
+			$url = "http://10.151.63.181:5000/getUserData/".Auth::user()->id;
 			$user = json_decode(file_get_contents($url));
 
-			$url2 = "http://localhost:5000/getLatesPayment/".Auth::user()->id;
+			$url2 = "http://10.151.63.181:5000/getLatesPayment/".Auth::user()->id;
 			$payment = json_decode(file_get_contents($url2)); 
 
 			return view('admin.account.setting', compact('user', 'payment'));	

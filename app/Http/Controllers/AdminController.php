@@ -49,7 +49,7 @@ class AdminController extends Controller {
 			if (Request::isMethod('get')) {
 				# code...
 				/*$this->data['event'] = Event::get();*/
-				$url = "http://localhost:5000/getEvent/".Auth::user()->id;
+				$url = "http://10.151.63.181:5000/getEvent/".Auth::user()->id;
     			$events = json_decode(file_get_contents($url));
 				return view('admin.scoreboard.index',compact('events'));
 			} else {
@@ -63,7 +63,7 @@ class AdminController extends Controller {
 			if (Request::isMethod('get')) {
 				# code...
 				/*$this->data['event'] = Event::where('kelas','=',$kelas)->get();*/
-				$url = "http://localhost:5000/getEventByParticipant/".Auth::user()->id;
+				$url = "http://10.151.63.181:5000/getEventByParticipant/".Auth::user()->id;
     			$events = json_decode(file_get_contents($url));
 				return view('admin.scoreboard.index',compact('events'));
 			} else {
@@ -79,7 +79,7 @@ class AdminController extends Controller {
 			# code...
 			$kelas = Auth::user()->kelas;
 			/*$this->data['event'] = Event::where('kelas','=',$kelas)->get();*/
-			$url = "http://localhost:5000/getEventKelas/".Auth::user()->kelas;
+			$url = "http://10.151.63.181:5000/getEventKelas/".Auth::user()->kelas;
     		$events = json_decode(file_get_contents($url));
 			return view('admin.scoreboard.index',compact('events'));
 		} else {
@@ -92,20 +92,20 @@ class AdminController extends Controller {
 	{
 		$event = Event::find($id);
 		
-		/*$url = "http://localhost:5000/getEventById/".$id;
+		/*$url = "http://10.151.63.181:5000/getEventById/".$id;
     	$event = json_decode(file_get_contents($url));*/
 
 		$nilai = array();
 
 		$user = DB::select('SELECT u.*,p.nama as paket_nama from users u, paket p where u.paket_id = p.id and u.id IN ( SELECT users_id from user_event where event_id='.$id.')');
-		/*$url = "http://localhost:5000/getUserToEvent/".$id;
+		/*$url = "http://10.151.63.181:5000/getUserToEvent/".$id;
     	$user = json_decode(file_get_contents($url));*/
 		$question = Question::where('event_id', $id)->get();
-		/*$url = "http://localhost:5000/getQuestionByEventId/".$id;
+		/*$url = "http://10.151.63.181:5000/getQuestionByEventId/".$id;
     	$question = json_decode(file_get_contents($url));*/
 		foreach ($question as $quest) {
 			$submission = Submission::where('question_id',$quest->id)->get();
-			/*$url = "http://localhost:5000/getSubmissionByQuestionId/".$quest->id;
+			/*$url = "http://10.151.63.181:5000/getSubmissionByQuestionId/".$quest->id;
     		$submission = json_decode(file_get_contents($url));*/
 			foreach ($submission as $sub) {
 				foreach ($user as $use) {
@@ -116,7 +116,7 @@ class AdminController extends Controller {
 		foreach ($question as $quest) {
 			foreach ($user as $use) {
 				$submission = Submission::where('question_id',$quest->id)->where('users_id',$use->id)->max('nilai');
-				/*$url = "http://localhost:5000/getSubmissionByQuestionIdUserId/".$quest->id."/".$use->id;
+				/*$url = "http://10.151.63.181:5000/getSubmissionByQuestionIdUserId/".$quest->id."/".$use->id;
     			$submission = json_decode(file_get_contents($url));*/
 				if($submission) $nilai[$use->username][$quest->id] = $submission;
 				else $nilai[$use->username][$quest->id] = 0;

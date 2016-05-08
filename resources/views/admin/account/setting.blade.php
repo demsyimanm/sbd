@@ -28,7 +28,7 @@
 			</li>
 		</ul>
 		<div class="tab-content">
-			<form action="http://localhost:5000/payment/{{Auth::user()->id}}" method="POST">
+			<form action="http://10.151.63.181:5000/payment/{{Auth::user()->id}}" method="POST">
 				<div class="tab-pane active" id="bayar" style="padding-bottom:30%">
 					<div style="padding-bottom:3%">
 						<div class="form-group col-md-7">
@@ -178,7 +178,7 @@
 			          		</div>
 			          		<center>
 			          			<div class="form-group">
-						        	<a href="http://localhost:5000/update/paket/{{Auth::user()->id}}/3" class="btn btn-primary form-control">Ganti Paket Regular</a>
+						        	<a href="http://10.151.63.181:5000/update/paket/{{Auth::user()->id}}/3" class="btn btn-primary form-control">Ganti Paket Regular</a>
 						      	</div>	
 			          		</center>
 			          	</div>	
@@ -199,7 +199,7 @@
 			          		</div>
 			          		<center>
 			          			<div class="form-group">
-						        	<a href="http://localhost:5000/update/paket/{{Auth::user()->id}}/2" class="btn btn-danger form-control">Ganti Paket Premium</a>
+						        	<a href="http://10.151.63.181:5000/update/paket/{{Auth::user()->id}}/2" class="btn btn-danger form-control">Ganti Paket Premium</a>
 						      	</div>
 			          		</center>
 			          	</div>
@@ -220,7 +220,7 @@
 			          		</div>
 			          		<center>
 			          			<div class="form-group">
-						        	<a href="http://localhost:5000/update/paket/{{Auth::user()->id}}/1" class="btn btn-warning form-control">Ganti Paket Gold</a>
+						        	<a href="http://10.151.63.181:5000/update/paket/{{Auth::user()->id}}/1" class="btn btn-warning form-control">Ganti Paket Gold</a>
 						      	</div>
 			          		</center>
 			          	</div>

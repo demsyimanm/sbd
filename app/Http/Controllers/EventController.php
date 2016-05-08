@@ -32,14 +32,14 @@ class EventController extends Controller {
 		/*sudah*/
 		if(Auth::user()->paket->id == 1 || Auth::user()->paket->id == 2){
 			/*$this->data['event'] = Event::get();*/
-			/*$url = "http://localhost:5000/getEvent";
+			/*$url = "http://10.151.63.181:5000/getEvent";
     		$events = json_decode(file_get_contents($url));*/
 			return view('admin.event.manage',compact('events'));
 		}
 
 		else if(Auth::user()->paket->id == 3){
 			/*$this->data['event'] = Event::get();*/
-			$url = "http://localhost:5000/getEventByParticipant/".Auth::user()->id;
+			$url = "http://10.151.63.181:5000/getEventByParticipant/".Auth::user()->id;
     		$events = json_decode(file_get_contents($url));
 			return view('user.event.manage',compact('events'));
 		}
@@ -47,7 +47,7 @@ class EventController extends Controller {
 		/*sudah
 		else if (Auth::user()->role->id == 2 )
 		{
-			/*$url = "http://localhost:5000/getEventKelas/".Auth::user()->kelas;
+			/*$url = "http://10.151.63.181:5000/getEventKelas/".Auth::user()->kelas;
     		$events = json_decode(file_get_contents($url));*/
 			/*$this->data['event'] = Event::where('kelas','=',Auth::user()->kelas)->get();
 			return view('admin.event.manage',compact('events'));
@@ -55,7 +55,7 @@ class EventController extends Controller {
 
 		/*sudah
 		elseif (Auth::user()->role->id == 3) {
-			/*$url = "http://localhost:5000/getEventKelas/".Auth::user()->kelas;
+			/*$url = "http://10.151.63.181:5000/getEventKelas/".Auth::user()->kelas;
     		$events = json_decode(file_get_contents($url));*/
 			/*$this->data['event'] = Event::where('kelas','=',Auth::user()->kelas)->get();
 			return view('user.event.manage',compact('events'));		
@@ -65,8 +65,10 @@ class EventController extends Controller {
 	public function ListEventPremium()
 	{
 
-		$url = "http://localhost:5000/getEventByParticipant/".Auth::user()->id;
+		$url = "http://10.151.63.181:5000/getEventByParticipant/".Auth::user()->id;
 		$events = json_decode(file_get_contents($url));
+
+		
 		return view('user.event.manage',compact('events'));
 	}
 
@@ -81,7 +83,7 @@ class EventController extends Controller {
 			/*$this->data['user'] = Auth::user()->role->id;
 			$this->data['kelas'] = Auth::user()->kelas;*/
 			if (Request::isMethod('get')) {
-				$url = "http://localhost:5000/getListDB/".Auth::user()->id;
+				$url = "http://10.151.63.181:5000/getListDB/".Auth::user()->id;
 				$dbs = json_decode(file_get_contents($url));
 				return View::make('admin.event.create', compact('dbs'));
 			} 
@@ -252,10 +254,10 @@ except:
 		/*Event::where('id', $id)->update(array(
 			'status' => '1'
 		));*/
-		//http_get("http://localhost:3000/start?id=".$id);
-		$url = "http://localhost:5000/startParser/".$id;
+		//http_get("http://10.151.63.181:3000/start?id=".$id);
+		$url = "http://10.151.63.181:5000/startParser/".$id;
     	$quest_id = json_decode(file_get_contents($url));
-		return redirect("http://localhost:3000/start?id=".$id);
+		return redirect("http://10.151.63.181:3000/start?id=".$id);
 	}
 
 	/**
@@ -270,9 +272,9 @@ except:
 		/*Event::where('id', $id)->update(array(
 			'status' => '0'
 		));*/
-		$url = "http://localhost:5000/stopParser/".$id;
+		$url = "http://10.151.63.181:5000/stopParser/".$id;
     	$quest_id = json_decode(file_get_contents($url));
-		return redirect("http://localhost:3000/stop?id=".$id);
+		return redirect("http://10.151.63.181:3000/stop?id=".$id);
 	}
 
 	/**
@@ -292,7 +294,7 @@ except:
 		{
 			if (Request::isMethod('get')) {
 				/*$this->data['event'] = Event::get();*/
-				$url = "http://localhost:5000/getEvent";
+				$url = "http://10.151.63.181:5000/getEvent";
     			$events = json_decode(file_get_contents($url));
 				return view('admin.event.indexViewSubmission',compact('events'));
 			} else {
@@ -306,7 +308,7 @@ except:
 		{
 			if (Request::isMethod('get')) {
 				/*$this->data['event'] = Event::where('kelas','=',$kelas)->get();*/
-				$url = "http://localhost:5000/getEventByParticipant/".Auth::user()->id;
+				$url = "http://10.151.63.181:5000/getEventByParticipant/".Auth::user()->id;
     			$events = json_decode(file_get_contents($url));
 				return view('admin.event.indexViewSubmission',compact('events'));
 			} else {
@@ -321,7 +323,7 @@ except:
 		/*sudah*/
 		//echo "asadd".$id;
 		$event = Event::find($id);
-		$url = "http://localhost:5000/getQuestionByEventId/".$id;
+		$url = "http://10.151.63.181:5000/getQuestionByEventId/".$id;
     	$quest_id = json_decode(file_get_contents($url));
 		$pertanyaan = array();
 		foreach ($quest_id->data as $key => $value) {
@@ -343,9 +345,9 @@ except:
 			$this->data = array();
 			
 			if (Request::isMethod('get')) {
-				$url = "http://localhost:5000/getListDB/".Auth::user()->id;
+				$url = "http://10.151.63.181:5000/getListDB/".Auth::user()->id;
 				$dbs = json_decode(file_get_contents($url));
-				$url = "http://localhost:5000/getEventById/".$id;
+				$url = "http://10.151.63.181:5000/getEventById/".$id;
 				$eve = json_decode(file_get_contents($url));
 				return View::make('admin.event.update', compact('eve','dbs'));
 			} 
@@ -401,7 +403,13 @@ except:
 	{
 		if(Auth::user()->paket->id == 1 || Auth::user()->paket->id == 2){
 			if (Request::isMethod('get')) {
-				return View::make('admin.event.listDB');
+				$url = "http://10.151.63.181:5000/getListDB/".Auth::user()->id;
+				$dbs = json_decode(file_get_contents($url));
+
+				$url2 = "http://10.151.63.181:5000/kapasitasDB/".Auth::user()->id;
+				$cap = json_decode(file_get_contents($url2));
+
+				return View::make('admin.event.listDB',compact('dbs','cap'));
 			} 
 		} else {
 			return redirect('home');
@@ -417,7 +425,7 @@ except:
 			else if (Request::isMethod('post')) {
 				$data = Input::all();
 				
-				$max_id = History_Upload::max('id');
+				$max_id = History_Upload::max('id')+1;
 				$file = Input::file('fileToUpload');
 				$file_name = $file->getClientOriginalName();
 				$file_size = round($file->getSize() / 1024);
@@ -427,20 +435,26 @@ except:
 				$file->move('C:\xampp\htdocs\CloudSBD\sqlFile', $newname);
 				$loc = 'C:\xampp\htdocs\CloudSBD\sqlFile\\'.$newname;
 
-				History_Upload::insertGetId(array(
+
+				/*History_Upload::insertGetId(array(
 					'users_id' => Auth::user()->id, 
 					'namafile' => $newname, 
-					'db_name'  => $data['db_name']
-				));
-
-				DB::statement(DB::raw('CREATE DATABASE '.$data['db_name']));
-				
-				exec("mysql -u root ".$data['db_name']." < ".$loc);
-				return redirect('db');
+					'db_name'  => $data['db_name'],
+					'size'	   => $file_size
+				));*/
+				$url = "http://10.151.63.181:5000/createDB/".Auth::user()->id."/".$max_id."/".$data['db_name']."/".$file_size;
+				return redirect($url);
 			}
 		} else {
 			return redirect('home');
 		}
+	}
+
+	public function db_exec($dbname,$max_id)
+	{
+		DB::statement(DB::raw('CREATE DATABASE '.$dbname));
+		exec('mysql -u root '.$dbname.' < '.'C:\xampp\htdocs\CloudSBD\sqlFile\sql'.$max_id.'.sql');
+		return redirect('db');
 	}
 
 	public function listParticipant($id)
@@ -458,7 +472,7 @@ except:
 	{
 		if(Auth::user()->paket->id == 1 || Auth::user()->paket->id == 2){
 			if (Request::isMethod('get')) {
-				$url = "http://localhost:5000/getUserToEvent/".$id;
+				$url = "http://10.151.63.181:5000/getUserToEvent/".$id;
 				$users = json_decode(file_get_contents($url));
 				return View::make('admin.event.addPeserta', compact('id', 'users'));
 			}

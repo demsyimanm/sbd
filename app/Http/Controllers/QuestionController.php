@@ -20,15 +20,15 @@ class QuestionController extends Controller {
 	public function index($id)
 	{
 		$this->data = array();
-		$url = "http://localhost:5000/getEventById/".$id;
+		$url = "http://10.151.63.181:5000/getEventById/".$id;
 		$this->data['eve'] = json_decode(file_get_contents($url));
 
-		$url2 = "http://localhost:5000/getJudulQuestionByEventID/".$id;
+		$url2 = "http://10.151.63.181:5000/getJudulQuestionByEventID/".$id;
 		$this->data['judul'] = json_decode(file_get_contents($url2));
 
 		/*$this->data['question'] = Question::where('event_id','=',$id)->get();*/
 
-		$url3 = "http://localhost:5000/getQuestionByEventID/".$id;
+		$url3 = "http://10.151.63.181:5000/getQuestionByEventID/".$id;
 		$this->data['question'] = json_decode(file_get_contents($url3));
 
 		if(Auth::user()->paket->id == 1 || Auth::user()->paket->id == 2){
@@ -53,7 +53,7 @@ class QuestionController extends Controller {
 			
 			if (Request::isMethod('get')) {
 				/*$this->data['eve'] = Event::find($id);*/
-				$url = "http://localhost:5000/getEventById/".$id;
+				$url = "http://10.151.63.181:5000/getEventById/".$id;
 				$this->data['eve'] = json_decode(file_get_contents($url));
 
 				return View::make('admin.event.question.create',$this->data);
@@ -135,11 +135,11 @@ class QuestionController extends Controller {
 			if (Request::isMethod('get')) {
 				$this->data = array();
 				/*$this->data['eve'] = Event::find($id1);*/
-				$url = "http://localhost:5000/getEventById/".$id1;
+				$url = "http://10.151.63.181:5000/getEventById/".$id1;
 				$this->data['eve'] = json_decode(file_get_contents($url));
 
 				/*$this->data['quest'] = Question::find($id2);*/
-				$url = "http://localhost:5000/getQuestionByID/".$id2;
+				$url = "http://10.151.63.181:5000/getQuestionByID/".$id2;
 				$this->data['quest'] = json_decode(file_get_contents($url));
 				return View::make('admin.event.question.update', $this->data);
 			} 

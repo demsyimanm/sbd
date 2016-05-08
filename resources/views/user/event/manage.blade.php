@@ -20,6 +20,26 @@
 		    	$("#data_table").DataTable();
 		    });
 	    </script>
+	    <div class="col-md-12">
+		    	<div class="col-md-3"></div>
+		    	<div class="col-md-6">
+				    <div class="info-box bg-aqua">
+					  <span class="info-box-icon"><i class="fa fa-get-pocket"></i></span>
+					  <div class="info-box-content">
+					    <span class="info-box-text">Today Submitted Queries</span>
+					    
+					    <span class="info-box-number"> Queries</span>
+					    <!-- The progress section is optional -->
+					    <div class="progress">
+					      <div class="progress-bar" style="width: 70%"></div>
+					    </div>
+					    <span class="progress-description">
+
+					    </span>
+					  </div><!-- /.info-box-content -->
+					</div>
+				</div>
+			</div>
 	  	<table id="data_table" class="table table-bordered table-striped">
 	  	<?php $i = 1;?>
 	    <thead>

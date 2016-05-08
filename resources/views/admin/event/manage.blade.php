@@ -87,9 +87,9 @@
 
 
 	@if(Auth::user()->paket->id == 1)
-		<input type="hidden" value="http://localhost:5000/getEvent" id="url">
+		<input type="hidden" value="http://10.151.63.181:5000/getEvent" id="url">
 	@elseif(Auth::user()->paket->id == 2)
-		<input type="hidden" value="http://localhost:5000/getEventByUserID/{{Auth::user()->id}}" id="url">
+		<input type="hidden" value="http://10.151.63.181:5000/getEventByUserID/{{Auth::user()->id}}" id="url">
 	@endif
 
 	<script>
@@ -103,7 +103,7 @@
 		    });
 		    $scope.delet = function (id){
 		        $('#modaldiv').modal('show');
-		        $('.button_modal').attr({href:'http://localhost:5000/deleteEvent/'+id});
+		        $('.button_modal').attr({href:'http://10.151.63.181:5000/deleteEvent/'+id});
 			};
 		});
 	</script>

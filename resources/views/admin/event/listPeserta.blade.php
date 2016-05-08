@@ -66,7 +66,7 @@
 	        </div><!-- /.modal-content -->
 	    </div><!-- /.modal-dialog -->
 	</div>
-	<input type="hidden" value="http://localhost:5000/getListParticipant/{{$id}}" id="url">
+	<input type="hidden" value="http://10.151.63.181:5000/getListParticipant/{{$id}}" id="url">
 
 	<script>
 		app.controller('accountCtrl', function($scope, $http) {
@@ -79,7 +79,7 @@
 
 		    $scope.delet = function (event_id,user_id){
 		        $('#modaldiv').modal('show');
-		        $('.button_modal').attr({href:'http://localhost:5000/deleteParticipant/'+event_id+'/'+user_id});
+		        $('.button_modal').attr({href:'http://10.151.63.181:5000/deleteParticipant/'+event_id+'/'+user_id});
 			};
 		});
 	</script>

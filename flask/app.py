@@ -8,6 +8,7 @@ import datetime
 from flask.ext.cors import CORS
 import bcrypt
 
+
 app = Flask(__name__)
 CORS(app)
 db = MySQLdb.connect("localhost", "root", "","sbd",cursorclass=MySQLdb.cursors.DictCursor)
@@ -16,7 +17,7 @@ cur = db.cursor()
 @app.route("/home", methods=['GET'])
 def home():
 	if request.method == 'GET':
-		return redirect("http://localhost/sbd/public",code=302)
+		return redirect("http://10.151.63.181/sbd/public",code=302)
 
 @app.route("/getUser", methods=['GET'])
 def getUser():	
@@ -86,6 +87,7 @@ def getSubmissionByQuestionIdUserId(question_id,user_id):
 
 @app.route("/getListDB/<user_id>/", methods=['GET'])
 def getListDB(user_id):
+
 	query = "SELECT h.*, u.nama from history_upload h, users u where h.users_id = u.id and h.users_id="+user_id
 	cur.execute(query)
 	return jsonify(data=cur.fetchall())
@@ -123,7 +125,7 @@ def updatePaket(user_id,paket_id):
 	query2 = "INSERT INTO payment (users_id, paket_id, bulan, tahun) values ("+user_id+", "+paket_id+", '"+str(now.month)+"', '"+str(now.year)+"')"
 	cur.execute(query2)
 	db.commit()
-	return redirect("http://localhost/CloudSBD/public/account/setting")
+	return redirect("http://10.151.63.181/CloudSBD/public/account/setting")
 
 @app.route("/payment/<user_id>", methods=['POST'])
 def payment(user_id):	
@@ -133,21 +135,21 @@ def payment(user_id):
 	query = "INSERT INTO payment (users_id, paket_id, bulan, tahun) values ("+user_id+", "+paket_id+", '"+bulan+"', '"+tahun+"')"
 	cur.execute(query)
 	db.commit()
-	return redirect("http://localhost/CloudSBD/public/account/setting")
+	return redirect("http://10.151.63.181/CloudSBD/public/account/setting")
 
 @app.route("/deleteEvent/<event_id>", methods=['GET'])
 def deleteEvent(event_id):
 	query = "DELETE FROm EVENT where id="+event_id
 	cur.execute(query)
 	db.commit()
-	return redirect('http://localhost/CloudSBD/public/admin/event')	
+	return redirect('http://10.151.63.181/CloudSBD/public/admin/event')	
 
 @app.route("/deleteParticipant/<event_id>/<user_id>", methods=['GET'])
 def deleteParticipant(event_id, user_id):
 	query = "DELETE FROM user_event where event_id="+event_id+" and users_id="+user_id
 	cur.execute(query)
 	db.commit()
-	return redirect('http://localhost/CloudSBD/public/event/list/peserta/'+event_id)	
+	return redirect('http://10.151.63.181/CloudSBD/public/event/list/peserta/'+event_id)	
 
 @app.route("/getJudulQuestionByEventID/<event_id>", methods=['GET'])
 def getJudulQuestionByEventID(event_id):
@@ -172,7 +174,7 @@ def deleteQuestion(event_id,quest_id):
 	query = "DELETE FROM question where id="+quest_id
 	cur.execute(query)
 	db.commit()
-	return redirect('http://localhost/CloudSBD/public/admin/question/'+event_id)	
+	return redirect('http://10.151.63.181/CloudSBD/public/admin/question/'+event_id)	
 
 
 @app.route("/createEvent/<user_id>", methods=['POST'])
@@ -191,13 +193,36 @@ def createEvent(user_id):
     cur2 = db2.cursor()
     cur2.execute(queryGetMaxEvent)
     row = cur2.fetchone()
-    return redirect("http://localhost/CloudSBD/public/admin/event/create/parser/"+str(row[0])+"/"+request.form['db_name'], code = 302)
+    return redirect("http://10.151.63.115:2345/CloudSBD/public/admin/event/create/parser/"+str(row[0])+"/"+request.form['db_name'], code = 302)
     
-    # return redirect("http://localhost/sbd/public/admin/event/create/parser/"+str(row[0])+"/"+request.form['db_name'],code=302)
+    # return redirect("http://10.151.63.181/sbd/public/admin/event/create/parser/"+str(row[0])+"/"+request.form['db_name'],code=302)
     
 @app.route("/getEventByParticipant/<user_id>", methods=['GET'])
 def getEventByParticipant(user_id):
 	query = "SELECT e.* FROM event e, user_event ue where e.id = ue.event_id and ue.users_id="+user_id
+	cur.execute(query)
+	return jsonify(data=cur.fetchall())	
+
+@app.route("/deleteDb/<db_id>/<db_name>", methods=['GET'])
+def deleteDb(db_id,db_name):
+	query = "DELETE FROM history_upload where id="+db_id
+	cur.execute(query)
+	db.commit()
+	query2 = "DROP DATABASE "+db_name
+	cur.execute(query2)
+	db.commit()
+	return redirect('http://10.151.63.181/CloudSBD/public/db')
+
+@app.route("/createDB/<user_id>/<max_id>/<db_name>/<size>", methods=['GET'])
+def createDB(user_id, max_id, db_name, size):	
+	query = "INSERT INTO history_upload (users_id, namafile, db_name, size) values ("+user_id+", 'sql"+max_id+".sql', '"+db_name+"', "+size+")"
+	cur.execute(query)
+	db.commit()
+	return redirect("http://10.151.63.181/CloudSBD/public/db/exec/"+str(db_name)+"/"+max_id)
+
+@app.route("/kapasitasDB/<user_id>", methods=['GET'])
+def kapasitasDB(user_id):	
+	query = "SELECT SUM(size) as ukuran from history_upload where users_id="+user_id
 	cur.execute(query)
 	return jsonify(data=cur.fetchall())	
 

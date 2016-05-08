@@ -18,6 +18,8 @@ class History_Upload extends Model
 	protected $fillable = array(
 		'users_id',
 		'namafile',
+		'db_name',
+		'size'
 	);
 
 	protected $SoftDelete = true;

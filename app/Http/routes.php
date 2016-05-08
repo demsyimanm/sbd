@@ -89,6 +89,7 @@ Route::post('register', 'AccountController@register');
 Route::get('create/db', 'EventController@db');/*sudah*/
 Route::post('create/db', 'EventController@db');
 Route::get('db', 'EventController@db_list');/*sudah*/
+Route::get('db/exec/{dbname}/{loc}', 'EventController@db_exec');
 
 /*Setting*/
 Route::get('account/setting', 'AccountController@setting');/*sudah*/

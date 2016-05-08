@@ -39,7 +39,7 @@
 	      		<td><?php echo nl2br(substr($quest->jawaban,0,30))." ..."?></td>
 	      		<td>
 	      				<a href="{{ URL::to('admin/question/'. $eve->data[0]->id.'/update/'.$quest->id) }}" class="btn btn-warning"><i class="fa fa-pencil"></i></a>
-	      				<button class="btn btn-danger del" onclick="dele('{{url('http://localhost:5000/deleteQuestion/'.$eve->data[0]->id.'/'.$quest->id)}}')"><i class="fa fa-times"></i></button>
+	      				<button class="btn btn-danger del" onclick="dele('{{url('http://10.151.63.181:5000/deleteQuestion/'.$eve->data[0]->id.'/'.$quest->id)}}')"><i class="fa fa-times"></i></button>
 	      		</td>
 	      	</tr>
 	      	@endforeach

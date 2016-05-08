@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.0.2
+-- version 4.5.1
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 03, 2016 at 11:19 AM
--- Server version: 10.0.17-MariaDB
--- PHP Version: 5.6.14
+-- Generation Time: May 07, 2016 at 07:04 AM
+-- Server version: 10.1.10-MariaDB
+-- PHP Version: 5.5.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -32,11 +32,8 @@ CREATE TABLE `event` (
   `konten` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `waktu_mulai` datetime DEFAULT NULL,
   `waktu_akhir` datetime DEFAULT NULL,
-  `kelas` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `users_id` int(11) DEFAULT NULL,
   `status` tinyint(1) NOT NULL DEFAULT '0',
-  `ip` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
-  `db_username` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
-  `db_password` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
   `db_name` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
@@ -47,38 +44,63 @@ CREATE TABLE `event` (
 -- Dumping data for table `event`
 --
 
-INSERT INTO `event` (`id`, `judul`, `konten`, `waktu_mulai`, `waktu_akhir`, `kelas`, `status`, `ip`, `db_username`, `db_password`, `db_name`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(18, 'Kelas D', 'konten kelas D', '2015-12-01 20:26:30', '2015-12-31 20:26:30', 'D', 0, '10.151.63.115', 'bridge', 'bridge', 'bridge', '2015-12-09 06:42:17', '0000-00-00 00:00:00', '2015-12-09 06:42:17'),
-(19, 'kelas d baru', 'lalalalaa', '2015-12-09 20:37:30', '2015-12-25 23:37:30', 'D', 0, '10.151.63.115', 'bridge', 'bridge', 'bridge', '2015-12-09 06:42:21', '0000-00-00 00:00:00', '2015-12-09 06:42:21'),
-(20, 'aku', 'akuy', '2015-12-01 20:38:15', '2015-12-30 20:38:15', 'A', 0, '10.151.63.115', 'bridge', 'bridge', 'bridge', '2015-12-10 06:47:51', '0000-00-00 00:00:00', '2015-12-10 06:47:51'),
-(21, 'Praktikum Susulan Modul 2', 'Kerjakand dengan sungguh sungguh', '2015-12-10 20:39:00', '2015-12-17 20:37:00', 'A', 0, '10.151.63.115', 'siakad', 'siakad', 'siakad', '2015-12-10 06:47:45', '0000-00-00 00:00:00', '2015-12-10 06:47:45'),
-(22, 'STRESS TEST', 'BISMILLAH', '2015-12-10 22:08:30', '2015-12-09 22:09:30', 'A', 0, '10.151.63.115', 'siakad', 'siakad', 'siakad', NULL, '0000-00-00 00:00:00', '2016-04-26 10:22:32'),
-(23, 'Percobaan Praktikum SBD B SOJ', 'Nyohh', '2015-12-12 10:54:00', '2015-12-12 13:00:00', 'B', 0, '10.151.63.115', 'siakad', 'siakad', 'siakad', NULL, '0000-00-00 00:00:00', '2015-12-11 22:00:36'),
-(24, 'Percobaan 2', 'nihh', '2015-12-11 14:13:15', '2015-12-11 15:11:15', 'B', 0, '10.151.63.115', 'siakad', 'siakad', 'siakad', '2015-12-11 19:06:20', '0000-00-00 00:00:00', '2015-12-11 19:06:20'),
-(25, 'Praktikum Upik', 'Kerjakan dengan baik\r\nSilahkan copy query Anda ke field submission', '2015-12-11 18:23:15', '2015-12-12 20:00:15', 'A', 0, '10.151.63.115', 'siakad', 'siakad', 'siakad', NULL, '0000-00-00 00:00:00', '2015-12-12 04:09:09'),
-(26, 'Praktikum SBD C 2015', '', '2015-12-12 19:47:45', '2015-12-12 19:47:45', 'C', 0, '10.151.63.115', 'siakad', 'siakad', 'siakad', '2015-12-11 06:45:24', '0000-00-00 00:00:00', '2015-12-11 06:45:24'),
-(27, 'Tes Praktikum Malem', 'Nothing', '2015-12-11 20:00:00', '2015-12-11 23:59:59', 'C', 1, '10.151.63.115', 'siakad', 'siakad', 'siakad', '2015-12-11 06:44:57', '0000-00-00 00:00:00', '2015-12-11 06:44:57'),
-(28, 'asdf', '', '2015-12-11 20:45:30', '2015-12-11 23:45:30', 'C', 0, '10.151.63.115', 'siakad', 'siakad', 'siakad', '2015-12-11 06:48:45', '0000-00-00 00:00:00', '2015-12-11 06:48:45'),
-(29, 'asdfdsaf', '', '2015-12-11 20:49:00', '2015-12-11 23:49:00', 'C', 0, '10.151.63.115', 'siakad', 'siakad', 'siakad', '2015-12-11 07:35:26', '0000-00-00 00:00:00', '2015-12-11 07:35:26'),
-(30, 'Praktikum Kelas SBD C 2015', '', '2015-12-12 12:40:00', '2015-12-12 13:30:00', 'C', 0, '10.151.63.115', 'siakad', 'siakad', 'siakad', NULL, '0000-00-00 00:00:00', '2015-12-11 22:20:44'),
-(31, 'coba akhir', 'akauauaua', '2015-12-12 00:24:15', '2015-12-23 00:21:00', 'A', 0, '10.151.63.115', 'siakad', 'siakad', 'siakad', '2015-12-11 10:26:23', '0000-00-00 00:00:00', '2015-12-11 10:26:23'),
-(32, 'Praktikum Modul 2', 'Gameplay :\r\n1. Kerjakan soal dengan menggunakan Sqldeveloper\r\n2. Copy query ke field yang telah disediakan di halaman submission\r\n\r\nPeraturan :\r\n1. Dilarang mencontek / meng-copy jawaban teman, karena akan ketahuan siapa yang mencontek\r\n2. Kerjakan dengan', '2015-12-12 10:05:00', '2015-12-12 20:00:00', 'A', 0, '10.151.63.115', 'siakad', 'siakad', 'siakad', NULL, '0000-00-00 00:00:00', '2015-12-12 04:09:22'),
-(33, 'cobaaa', 'aaa', '2015-12-01 02:42:00', '2015-12-30 02:42:00', 'A', 0, '10.151.63.115', 'siakad', 'siakad', 'siakad', '2015-12-11 12:42:49', '0000-00-00 00:00:00', '2015-12-11 12:42:49'),
-(34, 'aaa', 'aaa', '2015-12-01 02:42:45', '2015-12-31 02:42:45', 'A', 0, '10.151.63.115', 'siakad', 'siakad', 'siakad', '2015-12-11 12:43:31', '0000-00-00 00:00:00', '2015-12-11 12:43:31'),
-(35, 'conaaa', 'aaa', '2015-12-09 02:43:30', '2015-12-29 02:43:30', 'A', 0, '10.151.63.115', 'siakad', 'siakad', 'siakad', '2015-12-11 12:47:04', '0000-00-00 00:00:00', '2015-12-11 12:47:04'),
-(36, 'aaa', 'aa', '2015-12-12 02:47:30', '2015-12-16 02:47:30', 'A', 0, '10.151.63.115', 'siakad', 'siakad', 'siakad', '2015-12-11 12:51:33', '0000-00-00 00:00:00', '2015-12-11 12:51:33'),
-(37, 'bbb', 'aaa', '2015-12-08 02:48:15', '2015-12-25 02:48:15', 'A', 0, '10.151.63.115', 'siakad', 'siakad', 'siakad', '2015-12-11 12:51:30', '0000-00-00 00:00:00', '2015-12-11 12:51:30'),
-(38, 'aa', 'aaa', '2015-12-16 02:48:45', '2016-01-04 02:48:45', 'A', 0, '10.151.63.115', 'siakad', 'siakad', 'siakad', '2015-12-11 12:51:26', '0000-00-00 00:00:00', '2015-12-11 12:51:26'),
-(39, 'Sss', 'sss', '2015-12-17 02:50:30', '2015-12-29 02:50:30', 'A', 0, '10.151.63.115', 'siakad', 'siakad', 'siakad', '2015-12-11 12:51:23', '0000-00-00 00:00:00', '2015-12-11 12:51:23'),
-(40, 'Praktikum 1', 'ssds', '2015-12-03 08:43:45', '2015-12-30 08:43:45', 'D', 0, '10.151.63.115', 'siakad', 'siakad', 'siakad', '2015-12-11 18:48:44', '0000-00-00 00:00:00', '2015-12-11 18:48:44'),
-(41, 'Praktikum SBD B Master', 'Soal Praktikum SBD B Sesi 2', '2015-12-12 13:00:00', '2015-12-12 14:00:00', 'B', 0, '10.151.63.115', 'siakad', 'siakad', 'siakad', NULL, '0000-00-00 00:00:00', '2015-12-11 23:01:34'),
-(42, 'Happy Testing', '', '2015-12-12 09:30:00', '2015-12-12 10:00:00', 'C', 0, '10.151.63.115', 'siakad', 'siakad', 'siakad', '2015-12-11 19:30:56', '0000-00-00 00:00:00', '2015-12-11 19:30:56'),
-(43, 'Syubidubidu', 'Syubidubidu', '2015-12-12 11:19:45', '2015-12-12 13:19:45', 'C', 0, '10.151.63.115', 'siakad', 'siakad', 'siakad', '2015-12-11 21:36:31', '0000-00-00 00:00:00', '2015-12-11 21:36:31'),
-(44, 'Syubidubidu', 'Syalalala', '2015-12-12 11:37:15', '2015-12-12 13:37:15', 'C', 0, '10.151.63.115', 'siakad', 'siakad', 'siakad', '2015-12-11 22:19:25', '0000-00-00 00:00:00', '2015-12-11 22:19:25'),
-(45, 'Praktikum Modul 2 KELAS D SESI 1', 'Praktikum Sistem Basis Data Modul 2', '2015-12-12 13:00:00', '2015-12-12 14:20:00', 'D', 0, '10.151.63.115', 'siakad', 'siakad', 'siakad', NULL, '0000-00-00 00:00:00', '2015-12-11 21:58:55'),
-(46, 'Praktikum Modul 2 KELAS D SESI 2', 'Praktikum Sistem Basis Data Modul 2', '2015-12-12 14:21:00', '2015-12-12 15:05:00', 'D', 0, '10.151.63.115', 'siakad', 'siakad', 'siakad', NULL, '0000-00-00 00:00:00', '2015-12-11 22:00:20'),
-(47, 'Praktikum Modul 2 KELAS D SESI 2', 'Praktikum Sistem Basis Data Modul 2', '2015-12-12 14:21:00', '2015-12-12 15:05:00', 'D', 0, '10.151.63.115', 'siakad', 'siakad', 'siakad', '2015-12-11 22:00:29', '0000-00-00 00:00:00', '2015-12-11 22:00:29'),
-(48, 'Test', 'Test', '2015-12-12 14:36:00', '2015-12-12 16:36:00', 'C', 0, '10.151.63.115', 'siakad', 'siakad', 'siakad', NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+INSERT INTO `event` (`id`, `judul`, `konten`, `waktu_mulai`, `waktu_akhir`, `users_id`, `status`, `db_name`, `deleted_at`, `created_at`, `updated_at`) VALUES
+(25, 'Praktikum Upik', 'Kerjakan dengan baik\r\nSilahkan copy query Anda ke field submission', '2015-12-11 18:23:15', '2015-12-12 20:00:15', 2, 0, 'siakad', NULL, '0000-00-00 00:00:00', '2015-12-12 04:09:09'),
+(30, 'Praktikum Kelas SBD C 2016', 'aaaa', '2016-05-16 02:01:00', '2016-05-11 12:02:00', 12, 0, 'siakad', NULL, '0000-00-00 00:00:00', '2015-12-11 22:20:44'),
+(32, 'Praktikum Modul 2', 'Gameplay :\r\n1. Kerjakan soal dengan menggunakan Sqldeveloper\r\n2. Copy query ke field yang telah disediakan di halaman submission\r\n\r\nPeraturan :\r\n1. Dilarang mencontek / meng-copy jawaban teman, karena akan ketahuan siapa yang mencontek\r\n2. Kerjakan dengan', '2015-12-12 10:05:00', '2015-12-12 20:00:00', 12, 0, 'siakad', NULL, '0000-00-00 00:00:00', '2015-12-12 04:09:22'),
+(41, 'Praktikum SBD B Master', 'Soal Praktikum SBD B Sesi 2', '2015-12-12 13:00:00', '2015-12-12 14:00:00', 13, 0, 'siakad', NULL, '0000-00-00 00:00:00', '2015-12-11 23:01:34'),
+(45, 'Praktikum Modul 2 KELAS D SESI 1', 'Praktikum Sistem Basis Data Modul 2', '2015-12-12 13:00:00', '2015-12-12 14:20:00', 13, 0, 'siakad', NULL, '0000-00-00 00:00:00', '2015-12-11 21:58:55'),
+(46, 'Praktikum Modul 2 KELAS D SESI 2', 'Praktikum Sistem Basis Data Modul 2', '2015-12-12 14:21:00', '2015-12-12 15:05:00', 13, 0, 'siakad', NULL, '0000-00-00 00:00:00', '2015-12-11 22:00:20'),
+(84, 'eventcoba', 'eventcoba', '2016-04-26 01:17:15', '2016-05-24 01:17:15', 12, 0, 'pppp', NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(85, 'eventcoba', 'eventcoba', '2016-04-26 01:17:15', '2016-05-24 01:17:15', 12, 0, 'pppp', NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(86, 'cobalagi', 'cobalagi', '2016-05-02 01:18:00', '2016-05-26 01:18:00', 12, 0, 'cobaan2', NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(87, 'tra', 'tra', '2016-05-16 01:46:30', '2016-05-23 01:46:30', 12, 0, 'cobaan2', NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(88, 'tra', 'tra', '2016-05-16 01:46:30', '2016-05-23 01:46:30', 12, 0, 'cobaan2', NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(89, 'tra2', 'tra', '2016-05-16 01:46:30', '2016-05-23 01:46:30', 12, 0, 'mboh2', NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(90, 'aa', 'aa', '2016-05-04 00:00:00', '2016-05-18 00:00:00', 2, 0, 'sbd', '2016-05-10 17:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(91, 'eventTTT', 'aaaaa', '2016-05-18 19:59:45', '2016-05-19 20:59:45', 12, 0, 'cobaan2', NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(92, 'eventTTT', 'aaaaa', '2016-05-18 19:59:45', '2016-05-19 20:59:45', 12, 0, 'cobaan2', NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(102, 'masuk oi', 'masuk io', '2016-05-19 20:41:15', '2016-05-25 21:41:15', 12, 0, 'cobaan2', NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(103, 'masuk oi', 'masuk io', '2016-05-19 20:41:15', '2016-05-25 21:41:15', 12, 0, 'cobaan2', NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(104, 'masuk oiaaa', 'masuk ioaaa', '2016-05-19 20:41:15', '2016-05-25 21:41:15', 12, 0, 'cobaan2', NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(105, 'kamkam', 'kamkam', '2016-05-19 20:41:15', '2016-05-25 21:41:15', 12, 0, 'cobaan2', NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(106, 'kamkamaaaa', 'kamkamaaaa', '2016-05-19 20:41:15', '2016-05-25 21:41:15', 12, 0, 'cobaan2', NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(107, 'aaaakamkamaaaa', 'aaaakamkamaaaa', '2016-05-19 20:41:15', '2016-05-25 21:41:15', 12, 0, 'cobaan2', NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(108, '1111111aaaakamkamaaaa', '1111111111111aaaakamkamaaaa', '2016-05-19 20:41:15', '2016-05-25 21:41:15', 12, 0, 'cobaan2', NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(109, '2131111111aaaakamkamaaaa', '11132111111111111aaaakamkamaaaa', '2016-05-19 20:41:15', '2016-05-25 21:41:15', 12, 0, 'cobaan2', NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(110, 'asss', 'asdddd', '2016-05-19 20:41:15', '2016-05-25 21:41:15', 12, 0, 'cobaan2', NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(111, 'asss', 'asdddd', '2016-05-19 20:41:15', '2016-05-25 21:41:15', 12, 0, 'cobaan2', NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(112, 'ghhasss', 'asdddd', '2016-05-19 20:41:15', '2016-05-25 21:41:15', 12, 0, 'cobaan2', NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(113, 'ghhasss', 'asdddd', '2016-05-19 20:41:15', '2016-05-25 21:41:15', 12, 0, 'cobaan2', NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(114, 'aaqqghhasss', 'qqqasdddd', '2016-05-19 20:41:15', '2016-05-25 21:41:15', 12, 0, 'cobaan2', NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(115, 'a12aqqghhasss', 'q121qqasdddd', '2016-05-19 20:41:15', '2016-05-25 21:41:15', 12, 0, 'cobaan2', NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(116, 'a12aqqghhasss', 'q121qqasdddd', '2016-05-19 20:41:15', '2016-05-25 21:41:15', 12, 0, 'cobaan2', NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(117, 'ssqqw', 'edswerfd', '2016-05-07 04:59:15', '2016-05-17 04:59:15', 12, 0, 'cobaan2', NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `history_upload`
+--
+
+CREATE TABLE `history_upload` (
+  `id` int(11) NOT NULL,
+  `users_id` int(11) NOT NULL,
+  `namafile` varchar(1000) NOT NULL,
+  `db_name` varchar(256) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `history_upload`
+--
+
+INSERT INTO `history_upload` (`id`, `users_id`, `namafile`, `db_name`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 12, 'sql.sql', 'cobaan2', '2016-05-03 17:53:28', '2016-05-03 17:53:28', NULL),
+(2, 12, 'sql1.sql', 'mboh2', '2016-05-03 17:57:04', '2016-05-03 17:57:04', NULL),
+(3, 12, 'sql2.sql', 'pppp', '2016-05-03 18:09:15', '2016-05-03 18:09:15', NULL);
 
 -- --------------------------------------------------------
 
@@ -103,6 +125,33 @@ INSERT INTO `migrations` (`migration`, `batch`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `paket`
+--
+
+CREATE TABLE `paket` (
+  `id` int(11) NOT NULL,
+  `nama` varchar(20) NOT NULL,
+  `jumlah_query` int(11) NOT NULL,
+  `ukuran_db` int(11) NOT NULL,
+  `harga` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `paket`
+--
+
+INSERT INTO `paket` (`id`, `nama`, `jumlah_query`, `ukuran_db`, `harga`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'Gold', 1000000, 200, 15, '2016-05-03 09:44:38', '2016-05-03 09:44:38', NULL),
+(2, 'Premium', 300, 50, 5, '2016-05-03 09:44:38', '2016-05-03 09:44:38', NULL),
+(3, 'Regular', 50, 0, 0, '2016-05-03 09:45:26', '2016-05-03 09:45:26', NULL),
+(4, 'Admin', 1000000, 1000000, 0, '2016-05-03 09:45:26', '2016-05-03 09:45:26', NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `password_resets`
 --
 
@@ -111,6 +160,30 @@ CREATE TABLE `password_resets` (
   `token` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `payment`
+--
+
+CREATE TABLE `payment` (
+  `id` int(11) NOT NULL,
+  `users_id` int(11) NOT NULL,
+  `paket_id` int(11) NOT NULL,
+  `bulan` int(11) NOT NULL,
+  `tahun` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `payment`
+--
+
+INSERT INTO `payment` (`id`, `users_id`, `paket_id`, `bulan`, `tahun`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 213, 3, 5, 2016, '2016-05-03 14:25:49', '2016-05-03 14:25:49', NULL);
 
 -- --------------------------------------------------------
 
@@ -245,8 +318,8 @@ CREATE TABLE `submission` (
   `jawaban` varchar(1000) COLLATE utf8_unicode_ci DEFAULT NULL,
   `status` int(11) NOT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -1330,8 +1403,7 @@ CREATE TABLE `users` (
   `nama` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `username` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `password` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
-  `kelas` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `role_id` int(11) NOT NULL,
+  `paket_id` int(11) NOT NULL,
   `remember_token` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
@@ -1341,204 +1413,253 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `nama`, `username`, `password`, `kelas`, `role_id`, `remember_token`, `created_at`, `updated_at`) VALUES
-(2, 'bilfash', '5113100091', '$2y$10$SVgRSSp34xdNYR4RIs1LEeiYRf4vsH9465g2/4tZshE6OMB/Wvj/m', 'A', 1, 'fenRCHByXllKw17fGKggP2mEfbKQX6dNapGWI2rG1gfr1BjjehfhiYoZAiRT', '2015-08-17 15:13:22', '2016-05-02 09:04:17'),
-(12, 'Asisten SBD kelas A', 'sbdA', '$2y$10$2oIngVMmkjvwVcAR5dbvl.MN70VpXi2Zi28MWzben/8A/8kBiiVm2', 'A', 2, 'wZJ4jyMS1jolkhMIjSpS8ZUKrZOAf2EAiTBIq9bCj1qi6pGZ2xN5muYiZaZk', '0000-00-00 00:00:00', '2016-05-02 09:00:12'),
-(13, 'Asisten SBD kelas B', 'sbdB', '$2y$10$wuusvnuXI2fiS4h3dllR9OmXcT1DyIivay9Kzn8FNtVi4VSeW5DA.', 'B', 2, 'DB8rVeFNJcvlIzRzYI2Q7loNU8hJAXgKFBcdnHNxMrtyvEbdnIysCsYS5czu', '0000-00-00 00:00:00', '2015-12-11 23:47:46'),
-(14, 'Asisten SBD kelas C', 'sbdC', '$2y$10$45fTTOfitKIPyGpc48FM5uH5LkKjaXdedz3N/XgZShpkU/icjT..K', 'C', 2, 'tLstPjtmKeDQDqH5S40sI5E8vy4en8PWBScHGfVQfgbPTDDcN9LKBNyAzdPD', '0000-00-00 00:00:00', '2015-12-12 00:59:32'),
-(16, 'Asisten SBD kelas E', 'sbdE', '$2y$10$cqafCQkH2fZEZYTv9dedYeiGSXnfBag7BUzm0rDChsI6NEm42KvFa', 'E', 2, 'DQEIiSxAZR6fWpqCr5TUndTeuUUhXEA4Hip8BTUjcA6Ponj6iIvVDCYaHYRH', '0000-00-00 00:00:00', '2015-12-10 07:43:49'),
-(18, 'AQSHA JIDAN KUSUMA', '5113100069', '$2y$10$jAxq6dH9dxqwuN/RtpzAauU.1X1DRBOmn9RFhMcdj5AZ9mnlcQBye', 'A', 3, 'yXojC8fB4LZHmLz1IQJAWITKCzBOzvhblWPs1ljtLr5hlbW2bzmzNMgpcZmL', '0000-00-00 00:00:00', '2015-12-12 05:55:22'),
-(19, 'WILLIAM SUHUD', '5114100002', '$2y$10$X0QgElT1/QBLanFZupfkZurk3JQov1y1fNX5Xu98u1vm3vH16sfI2', 'A', 3, 'fDJ1GJAtalRieXoHo0ilf4yqaQNfPdTyyf63NtOS2pKekhxjNqLxDyC9CH1Z', '0000-00-00 00:00:00', '2015-12-11 19:21:39'),
-(20, 'ZAHRAH CITRA HAFIZHA', '5114100012', '$2y$10$3/kqRT58fPcMe/RD3gP7Ru3yH8w/EfihLqrNzfzAts0aybgnHR0ga', 'A', 3, 'pjtexpcJDD9cMvmwexB1Ed0GGY25a9LR1NL38QwKmrr9LIPBNhOfEDkPApTb', '0000-00-00 00:00:00', '2015-12-10 08:31:17'),
-(21, 'SITA NURJAYANTI', '5114100019', '$2y$10$WAeZFSocyAMc5O2eNXgzM.PzJnvmGYlB7MNex.Fv0pQJSiuCzJU1u', 'A', 3, 'RBxJLko4OGRvuuYNyKTMgB4vi3kNJ6Jyh15zWaKzjE4aJvp8WFzv0CjHBpGu', '0000-00-00 00:00:00', '2015-12-11 21:07:40'),
-(22, 'FATHONI ADI KURNIAWAN', '5114100020', '$2y$10$73g5j41mqeETFom49szX.OXKkk3GIX9BKGsiw4qu89FaHfnyfYr1u', 'A', 3, '1M0oyDCtFvGJZbcieJ04tP0skX8cB9ZAu6zIc7EfJeKhfEn9YYPhtXgROnIC', '0000-00-00 00:00:00', '2015-12-12 04:11:51'),
-(23, 'HERDITO IBNU DEWANGKORO', '5114100023', '$2y$10$TvmCzgEPYNfGbH/tY4RAreBtymdGyHhET1YLL8fc6GYA.l7ZcBK9u', 'A', 3, 'UBOeGwj5tt65AC1aH1S2hwK4lYu7FVbfGVfLPY3LEjhmrwwzORM3fywrlv7G', '0000-00-00 00:00:00', '2015-12-13 22:22:05'),
-(24, 'SETYASSIDA NOVIAN PUTRA DAMARA', '5114100024', '$2y$10$.C71cdhpSdxE5NIvkqDP5.9RpCz1tg8l8lfXC7UF2BGMZIJrjWFB6', 'A', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(25, 'DESY NURBAITI RAHMI', '5114100030', '$2y$10$rSmEDKY6lCdA/UolSYTXx.Lao/V3xP2Lz3DVVIWj1XYhAF/7AFK2.', 'A', 3, 'Uph0mOniHVqQXkPiPPHAvyI5GB1ykMWHnOhX3tZepJkDjZ5HiabwpMI7h4hy', '0000-00-00 00:00:00', '2015-12-12 05:18:04'),
-(26, 'DELIA RISTI NARESWARI', '5114100033', '$2y$10$Xv/uZsd7/UdnmBhLEPddSeKd1X1wYCI3N5gBwv1n8RQGDwuJ.TAru', 'A', 3, '9OM8DjhZqO2F7Ofkelrifk3aKQvk4Yb8HJQXjicJRse1a2RVJNo8OG2cTt1l', '0000-00-00 00:00:00', '2015-12-10 08:32:16'),
-(27, 'SABILA MALAHATI ARNINDYA', '5114100034', '$2y$10$t78lmWfo1RNr3yHr2prk1.CaYG44tiX18/EtCDnENeNGkf2cNsfOm', 'A', 3, 'DNBG3L20MVUm3eHH3w2ws2BsPz5JKV1cChdzuFGi1cRPs0L2rvktzpcQEFjF', '0000-00-00 00:00:00', '2016-04-03 08:53:15'),
-(28, 'RANI AULIA HIDAYAT', '5114100044', '$2y$10$DwixLrPlACWqhUpwByyF2OIyQje7wZpGs5pEEbLGu1QeEK234g0UC', 'A', 3, '7zPh3dqcwF84c6r5w8EP7PXDEI5MiswvfFowLcjsGjypPPfoq99Jxgmx13ff', '0000-00-00 00:00:00', '2015-12-12 04:34:35'),
-(29, 'NURHAMIDAH TYAS PALUPI', '5114100057', '$2y$10$uYImf6Ij4TLjbJUQqDVMX.k5KI/GcKKADc8ZHUAySjAeGw/VxTyPK', 'A', 3, 'D5gwUz7G9llao2re1txpJtNG1plgxoXWZltcfGItxlUvrQaLcAw5EcdkakWT', '0000-00-00 00:00:00', '2015-12-12 06:14:39'),
-(30, 'LUCHA KAMALA PUTRI', '5114100062', '$2y$10$eMxMhlU8LhFYDrIFOlfOmueHZfGAGBKpXlTcn8G5odelA5SNKJfJy', 'A', 3, 'sahzq3ZJJHKECgpud6FXIR3q0QmOHbygZSgafZMK8Wq3jtracMKTZp0Ctjt6', '0000-00-00 00:00:00', '2015-12-12 06:07:18'),
-(31, 'ANGGIT YUDHISTIRA', '5114100065', '$2y$10$xaTaQpKoO9mRJmwFxaVtcOPc0N7IeKeEBFWmTNHKjMmwdR/vd0aMa', 'A', 3, 'zYFiJTcrHmC6vWehthfFPTvJUCrJ409VaSjqcYQtlZQkSNScmOleZweQY6k8', '0000-00-00 00:00:00', '2015-12-12 05:08:16'),
-(32, 'VINSENSIA SIPRIANA ZEGA', '5114100066', '$2y$10$9PrOt2ieE16o5UFmaqTAxOuuX2p94u9WhbzbrOMEictbsymR2I1jK', 'A', 3, 'qdCQ4CP5EFaYobAmh6UxtWyxMcqhCWHySEtL05c8dgqHS0HjFDG0707urtGw', '0000-00-00 00:00:00', '2015-12-10 08:14:06'),
-(33, 'MUHAMMAD HILMAN', '5114100069', '$2y$10$t5chKO0hVjTzqHh/Bc4zc.ES4r9RJcbvzfkGZuzZz4vtmLSsM3Ili', 'A', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(34, 'PANJI RIMAWAN', '5114100075', '$2y$10$H9ahkNETYWoVaa4wJCSq4uZQ0IzhXdCqke.9Sj39yO2QLR3vNdy2K', 'A', 3, 'H6g5RdDmU9bWomyHTLvc9htdcSbw210eKwajK0fXsteUqcR0F6RVcX0JSyUd', '0000-00-00 00:00:00', '2015-12-12 02:04:29'),
-(35, 'FARHAN RAMADHANA', '5114100078', '$2y$10$Pe1hACxEJB.fgCyJmvYyB.kN5acA6zaDeQlqkq43fXKab7bUmibje', 'A', 3, 'kY8aqSNVl2k9TkGPMMFu5okMC9gAwv74rYpeo3Cyx5Scz3ok1gJeWWEEr72c', '0000-00-00 00:00:00', '2015-12-13 00:19:35'),
-(36, 'AVIANANDA DWIRAHMA JULIARTI', '5114100085', '$2y$10$wvEpgYFDZajvOEGi85XcFuWeKGLwEx8/e6dqmU2aFFQxZObiUWjiy', 'A', 3, 'xQ1BxJ8XKd3verzxs5GEkjojZrGqFELS1bVKcMED6IKRoiukE5aZ9kdB7OvH', '0000-00-00 00:00:00', '2015-12-12 05:53:52'),
-(37, 'ADAM WIDI BAGASKARTA', '5114100089', '$2y$10$A2BK4CvinYvKqTNQrVp3KeFcuNifQQRqH0eaWIWVJfY.ge.bzbJAy', 'A', 3, 'iYAJEYqpgQy49FfMykRHyo1otYsQznapoGjg6nukblYcKXtdkUhfrX9pXCyn', '0000-00-00 00:00:00', '2015-12-12 23:57:39'),
-(38, 'SYUKRON RIFA`IL M.', '5114100093', '$2y$10$2E6nvi2.s4Jh69lXqVMwX.8tO0xlUT.lpJR87svAtOL9L8bN3Z3h6', 'A', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(39, 'ABDUL MAJID HASANI', '5114100097', '$2y$10$6EYVp/I4jZhGclk5DDl56u3icbtkhoeGrp5N4CCpgwzPAHCbR/5NG', 'A', 3, 'zZJcGSGHaixrNN1exZ4Wz4D2qwrdLp2v4r6nnE8MWgixLhttD9CAmWw1GgEe', '0000-00-00 00:00:00', '2015-12-12 01:52:14'),
-(40, 'BAYU AJI PAMUNGKAS', '5114100108', '$2y$10$D0zTZG8KacCOtn05ajLiAOJqQIu4fStWsZkgcdhSXKN6hHGLcSSPK', 'A', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(41, 'SHAFLY NAUFAL ADIANT', '5114100114', '$2y$10$RSa7b6kcsCwRpHMqSUvp3OzL7iazhjVxOZuA9ZRtgQFGCtLa5QHpC', 'A', 3, '9o66ZcIjhHk7pbi1rRMAI1aTUCMYXQpkkrTikqgn0qyp46TiDwl7CjHv31OW', '0000-00-00 00:00:00', '2015-12-10 08:33:08'),
-(42, 'HUMAIRA TRI ACANTYA', '5114100116', '$2y$10$GxTXAB913safb/4lCIIkKO1FuygOqwNTHCocfW2VXEO6l5QP/3Qrm', 'A', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(43, 'MUHAMMAD RIF`ATULLAH', '5114100118', '$2y$10$fkFJb3BoBvTZRrA0Mintee2dfgvTWPYX7NPPaAAlHLmAEKX1xpAP2', 'A', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(44, 'MUSTIKA KURNIA MAYANGSARI', '5114100126', '$2y$10$IA9kqCEqQCkscG4W8i5JB.1Un5zlmDd7Lf852wvZXUIdpX2pe0mN2', 'A', 3, 'swmjwPPLJt5mN09hwDFVNvPtWsksbNhBMi0r5xl9g1s8EJdwV59BRRpmbtlp', '0000-00-00 00:00:00', '2015-12-12 05:58:22'),
-(45, 'R.AY. NOORMALA NADYA', '5114100127', '$2y$10$Hmi5XVrkEme1CTeNxPdLC.2HRqLVNApwOYAdefNX4jGmHvCKqY5Wa', 'A', 3, 'Wmr8qbpfHRDZNMtsCcBCYkSAEOd3gq6hGug7x0840HzWktPv7X9vSpM3PfiP', '0000-00-00 00:00:00', '2015-12-12 04:56:39'),
-(46, 'RAHMATIN NADIA', '5114100130', '$2y$10$QX8LVxlglo9q5NOjTvDa1.fdCx6j7btZrTB./NYPH7lAen2trJ9mm', 'A', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(47, 'DWIKA SETYA MUHAMMAD', '5114100142', '$2y$10$vowDkW04.zwQIP8tBBI8tePE.1guS8WTIKBv3m3BeZShs8/XbJ91u', 'A', 3, 'UnSUEvpxcu5Gwu1nt8Xdqq77fLQF4sTbiQdyVY3jH2RLJzTEejYYHx9I8cxn', '0000-00-00 00:00:00', '2015-12-11 21:01:54'),
-(48, 'ANDREAS GALANG ANUGERAH', '5114100153', '$2y$10$kYHEooDcNy6hTxSHNyXuDOc6EHNrMxB.Ohf.xOAJlj/S41xzS6DLa', 'A', 3, '9WlyJ2x5yUHSN1h1LMUWutuO2Em774z2LQ9gegXvCc4mUQs53Sj2Kn1x8z9C', '0000-00-00 00:00:00', '2015-12-12 01:07:40'),
-(49, 'AFIFAH ASMAR SARI', '5114100154', '$2y$10$UI9FW1KcBgDD1pXFkSTWS.Zbdku0NQ1XIRdEgW8KN5UhjE8FzFB.m', 'A', 3, 'Ojg9kxazbr0xGgOGMo8Sk8fb45zfm8z2Sny6MwWr3iYXWQXHahINWrqi6Dmy', '0000-00-00 00:00:00', '2015-12-12 05:24:25'),
-(50, 'YUSUF DIMAS HERMAWAN', '5114100159', '$2y$10$wyBiPAHK0xLDVZaikTPDXuE35KxOC1BAYA6U1CtKbWxIXs9jBLTgO', 'A', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(51, 'MUHAMMAD HABIBUR RAHMAN', '5114100163', '$2y$10$md5odGd/eiFX/4x/XPJL4Od/9Gn2DSYULjIgnHye7grbppIS6H9ZO', 'A', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(52, 'HARIYOSO ARIO BIMO', '5114100166', '$2y$10$hZAQbQutNqE.d3bS4g4lWu1z9R/g2Fnv.otlAxZjfxkc8n3aiT/5q', 'A', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(53, 'KANIA AMALIA', '5114100172', '$2y$10$EW0ky0S1EcI4FLn/PJwZBOuNQIBGBIBt.T3n.xp05JS4DyPcef5Xe', 'A', 3, 'Wn6qjBgPLHJvTo26gPdvljNaaB6BYHrvaj011ufZReb3zSlKMTm4fVQV5y4u', '0000-00-00 00:00:00', '2015-12-12 05:28:39'),
-(54, 'TIARA ANGGITA', '5114100176', '$2y$10$NWKXzizM.PGV/4LUbZdWXOJlmq/9ff7Mqzdjr/unojwHzbM03rR.a', 'A', 3, 'JWkFCJ8YgcKb1MZsqA3roZDfJNuhdK45yFxrMBumOERZSTxdtyMP2eOf7sYQ', '0000-00-00 00:00:00', '2015-12-12 05:45:36'),
-(55, 'HILMA KAMILAH', '5114100188', '$2y$10$0GnpGVuNyxAXhW.mTfliwu74Celn9RB07X3u9XKz1g68WxfdEMwDu', 'A', 3, 'LHCFzz4hEt31GzEs0pxE8F9r5Y8DWUwCea3zjefJNPaoqSjcV9EPsLjNV4Qc', '0000-00-00 00:00:00', '2015-12-12 05:51:07'),
-(56, 'FIKRY KHAIRYTAMIM', '5114100192', '$2y$10$grUWPwVzLCJWgyAck91dreNuMWnNKSsuf/yAeKYAsiSbvHboq8lrG', 'A', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(57, 'NUR MAULIDIAH E', '5114100704', '$2y$10$eZpnKTiH1LJLAWJuA3nVe.ywypTmCNsihmSkJwFHGZppsyHjI9hpO', 'A', 3, '4SBz3byGajqYnZR01f5DyJ0wTgBl4UNXWIsiqYorZSCdw0VizY3DAPO75zij', '0000-00-00 00:00:00', '2015-12-12 06:01:07'),
-(58, 'Dwi', 'dwi', '$2y$10$S7aRXRFma3W9WyRr7Tekx.ho8VwVMVrNruUtpj2WcO32FbkK1cQpS', 'D', 3, 'ww5cjex5zS3UwUA1GZ7wd70zVsH50exdrk6mcHkhvoQvQRjEqQBc1B4vhX0K', '0000-00-00 00:00:00', '2015-12-12 00:17:24'),
-(59, 'Asisten Kelas SBD D', 'sbdD', '$2y$10$olhxSdESNohU1/I7/cnPpuW7Sh.Kp43l3cfgMj2PblCoZ4PXFMsQq', 'D', 2, 'PfiFocVuvKkVdhckx4sd9x15EhtEzewnQxH0v1pZvGB7f6zjxyVhm03WHrhY', '0000-00-00 00:00:00', '2015-12-12 00:26:31'),
-(60, 'blfsh', 'blfsh', '$2y$10$2WTSUY68bGy.nJ1pN8.XsOTptCIbuOVK5MB.ZaxBZyNo4DFG0aW3S', 'A', 3, 'RUZRVSvUMKijIeSgPEg1gG1C2M34BOSGBlON2W0C6lVTxgKAZ1shNGATBASt', '0000-00-00 00:00:00', '2015-12-11 20:52:49'),
-(62, 'ARDHIAN SASMITO', '5109100182', '$2y$10$iXD4cKagHUZ8I8gHENm/ueXd.jDk9P0HbiFKQULctN2LeT2Ezbif2', 'C', 3, NULL, '2015-12-10 11:01:29', '2015-12-10 03:36:12'),
-(63, 'JORDY ADHITYO P', '5111100101', '$2y$10$kkerBhdbfgtPcUo6DU.xsuM9Ksqe/1/SuOnBHeELz.pTyNT.LZ1Zy', 'C', 3, NULL, '2015-12-10 11:01:29', '2015-12-11 07:09:46'),
-(64, 'MOSES KHARIS SATRIO MUKONO', '5113100137', '$2y$10$TyHHsNV/mQQef7WWbz8uL.pfr2VZ7.nU5yJOec/U8On3YTH.PhaaG', 'C', 3, NULL, '2015-12-10 11:01:29', '2015-12-10 03:36:12'),
-(65, 'THEO PRATAMA', '5114100029', '$2y$10$bwZt.InNt5PfLD8SEF8//e5BS7sMlIJbKrYnn0r6/sdz6licUwzA6', 'C', 3, NULL, '2015-12-10 11:01:29', '2015-12-10 03:36:13'),
-(66, 'MUHAMMAD AL FATIH ABIL FIDA`', '5114100039', '$2y$10$TsUJPHDOZkaQZmrX9qxNnu1rly8zfwIWoTGrrRb2kil4SSYNYBX2W', 'C', 3, 'DvPJGqy31ZnFuCQGWpwDxizlsWhbna2wEXdFQIvDNOgiCf6nth0RlkFoxbUS', '2015-12-10 11:01:29', '2015-12-12 02:08:38'),
-(67, 'JEFFRY NASRI FARUKI', '5114100043', '$2y$10$o2mj.FXf3ef209Iqu/WbzuH1KzFP0eaEX6G6F26R0LhTL/kI1077O', 'C', 3, 'oG2iGf0Oosf4ipXsvzYhTfp5elrXIzjo0tkDt01hWEE469zUNNxNE87FGqKy', '2015-12-10 11:01:29', '2015-12-11 23:45:07'),
-(68, 'NURUL WACHIDAH', '5114100052', '$2y$10$HRQDTIde3P9MzqMCmIT/Q.PaA3eqwpjjn9zUPg9p4myg8Iu8K98Ii', 'C', 3, NULL, '2015-12-10 11:01:29', '2015-12-10 03:36:13'),
-(69, 'MONICA INDAH HABSARI', '5114100060', '$2y$10$5RzymvdxLJJ4u/UwY005WeJ7gE6qDorKLhf.Q2ksGgnbJChL8/k.y', 'C', 3, 'mT6L9pIIHmR7nTYM5lhxMWuW8OBrKr4CpWsjGRP3op6Zs0LTVCLwbTNLidoe', '2015-12-10 11:01:29', '2015-12-12 01:41:24'),
-(70, 'HENDRA DARMAWAN', '5114100073', '$2y$10$udGS2JlLBnhKkFLZv.dGGedR1obZjpdJVsA2KeUb86S8SaKxudPF2', 'C', 3, NULL, '2015-12-10 11:01:29', '2015-12-10 03:36:13'),
-(71, 'AGUNG REZKY RAMADHAN', '5114100074', '$2y$10$ThO7IgHGRLzHortydbGJBeZR5YXhen.Hg5YsKEeLDuvRMUeZUDVg2', 'C', 3, NULL, '2015-12-10 11:01:29', '2015-12-10 03:36:14'),
-(72, 'WILDAN LUTFI SYARIATI FIRDAUS SYAWAL', '5114100080', '$2y$10$.E.KBuI74PV.o.4LWd1z1ORpZxkJGTLqqRBwSjsdXOioJCzPHUwEq', 'C', 3, NULL, '2015-12-10 11:01:29', '2015-12-10 03:36:14'),
-(73, 'MUHAMMAD DHANIAR RIEFQY ZAIN', '5114100094', '$2y$10$KuFUGXa/RWNiSvd7zfvQPOSo3QnrkLysT6vlK8uIb2X/CpcnogJVq', 'C', 3, NULL, '2015-12-10 11:01:29', '2015-12-10 03:36:14'),
-(74, 'AHMAD BILAL', '5114100121', '$2y$10$8frXiXn39YClxkWcdHZf6OhypT5UgqrJzBy9dfKxat6RfbhtU6Q8a', 'C', 3, NULL, '2015-12-10 11:01:29', '2015-12-10 03:36:14'),
-(75, 'ANTONIUS KEVIN W', '5114100132', '$2y$10$.CbAe9W.JB7noJHJgXynDuTe.SCjRmwMum/CxfcxLjio4gtKb/xnW', 'C', 3, NULL, '2015-12-10 11:01:29', '2015-12-10 03:36:15'),
-(76, 'FAIZ AINUN KARIMA', '5114100138', '$2y$10$WzYJ3UYvEOL6IAyl8MsgnuhK0WO1Q7L2cQiWIyxLBn63w0KvzFoMe', 'C', 3, NULL, '2015-12-10 11:01:29', '2015-12-10 03:36:15'),
-(77, 'VINCENT DANIEL WIN', '5114100139', '$2y$10$qgAtKhjBh3hzp54bvU/aq.nrjkQaUV4tRFyHEDKu7pAWaTBUDGuIq', 'C', 3, NULL, '2015-12-10 11:01:29', '2015-12-10 03:36:15'),
-(78, 'VALENT CHRISTOPHER JUNIOR', '5114100145', '$2y$10$Q4RFHXJRrDqJ3WlpOTfHUuOEY43thl/XJidJD5Uw/AX8R8pSY5qki', 'C', 3, NULL, '2015-12-10 11:01:29', '2015-12-10 03:36:15'),
-(79, 'DESTIANA NURLIASARI', '5114100148', '$2y$10$YMQetapF9L1ZOVOX4eL7YO2cS8XonqTYP7SusSMkd6UqsMawCtzAm', 'C', 3, NULL, '2015-12-10 11:01:29', '2015-12-10 03:36:15'),
-(80, 'ILYAS BINTANG PRAYOGI', '5114100157', '$2y$10$G6B2gtrPQzkaNKW/uK3xNOaxWpDfEmoHwOHrqpjanRFJjpFVmj78i', 'C', 3, 'FMq48yjTnktumZJbt8USXkCwfKeRYTyeNNufV6NOaaEyR9lXfa93rVxDkw7u', '2015-12-10 11:01:29', '2015-12-12 00:12:59'),
-(81, 'MUHAMMAD GHAZIAN', '5114100158', '$2y$10$lwfDJe08Kaf4l4YJpnOg2uhGGJs5cKMN0OU1yBCEH3HNCIatmiqxG', 'C', 3, NULL, '2015-12-10 11:01:29', '2015-12-10 03:36:15'),
-(82, 'ADIWINOTO SAPTORENGGO', '5114100164', '$2y$10$rzfZk1NdxNiFwsnH43D2rOCQ2VKPoozcmAV2KSnYJEbIZ8e1MJy9S', 'C', 3, NULL, '2015-12-10 11:01:29', '2015-12-10 03:36:15'),
-(83, 'KUKUH RILO PAMBUDI', '5114100178', '$2y$10$InQk1OttaoiVyHP1l71mr.6T.OuYTkl236B/VLVmkZunFUVP9/sUW', 'C', 3, 'ZRscB07AcaTMUzXcYwBC8PxSfzsnQvzr619WCOFE9elKed4s4JHajE4l6isD', '2015-12-10 11:01:29', '2015-12-12 06:01:42'),
-(84, 'MOCHAMMAD BARUNO S', '5114100184', '$2y$10$4wXnD8KzqPSU8EdmdHmvL.mNzqW96tUCEFa49wMHvzxgidMli/FmC', 'C', 3, NULL, '2015-12-10 11:01:29', '2015-12-10 03:36:16'),
-(85, 'DIYANAH FITRIA SAUSAN', '5114100185', '$2y$10$5pLRqPeI2LyF9vma3sQpxO/pR5bqoWomJ9UlR3kWV1PYl0/Bo2fRu', 'C', 3, NULL, '2015-12-10 11:01:29', '2015-12-10 03:36:16'),
-(86, 'LUQMAN AHMAD', '5114100187', '$2y$10$0LjKNqEzDuV87Wcg5BRCaOxsVFawaPTXPmTmzSBZskApqIw6ecUL2', 'C', 3, 'Jpf1RLYfaOMzEAciOfROVwZ3eCoPU12bLwjdNvb4FHXypSdTsHZEM3AoLTgS', '2015-12-10 11:01:29', '2015-12-11 21:26:59'),
-(87, 'DIKA GHOZIAN MILZAM', '5114100193', '$2y$10$W2v9JkndFKk3WRxYZQfpYuDnv2XGhvp5vbu/tI9bTJpFZLCrXSD8K', 'C', 3, 'fyd8Qv3q4DujP7frVDLiOvubTQpG6P83QxraccJPcXaxolIwduYZmwzv0wqN', '2015-12-10 11:01:29', '2015-12-11 22:36:13'),
-(88, 'AHMAD MUZAKKA ISHAQI', '5114100703', '$2y$10$vgvnpOyQcXcCbwQ7RDKtveJDAXEP5SwV0QFtuDC6G5ivnxdtoRdbC', 'C', 3, NULL, '2015-12-10 11:01:29', '2015-12-10 03:36:16'),
-(89, 'AGUNG ARIO PUTRA', '5113100123', '$2y$10$SsazpEr/Mn5XkiSXXdYDfOKH2GDFJ/ciK39sfX0/JGwSyb0mh/mwe', 'B', 3, 'ddBwKEscxqVmEWnEF7tO6G2IC8p93ivOKU6rbeNfbDW55AykS6gU6syXskyI', '0000-00-00 00:00:00', '2015-12-11 21:54:44'),
-(90, 'M FAHMI PURNOMO', '5113100188', '$2y$10$RvlwrHgZkKCmolMOGPWX.uqaB3MoPlmaBYYkq7uiKPPeO4bhCbNfS', 'B', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(91, 'MUHAMMAD NEZAR MAHARDIKA', '5114100001', '$2y$10$bX7Mc8ut5tfu3Kt5YXD3Au.xWxoLMzUOtmeN4fVCiGgwqCxmz./vu', 'B', 3, 'GFzdCD1KTIl4mKCluXgi4nspVgMB3NqlYgKE49eMKbEmEugL4UtF9o0jScMC', '0000-00-00 00:00:00', '2015-12-12 02:05:42'),
-(92, 'SULTAN BONAR MARTINUS', '5114100006', '$2y$10$Z9xhGEYy3CmPG5XV/qLdB.c33XOBj0MrpDDjrcA5tqdOjMMQiM.hi', 'B', 3, '8AFaVA1gg5K3sTBI0ZugwLPK3BjO5v0qxg5EKpM1px28AqAUUYRTnXQpswyJ', '0000-00-00 00:00:00', '2015-12-11 00:26:51'),
-(93, 'MAGISTA BELLA PUSPITA', '5114100007', '$2y$10$TPqIk2D4W0HEsYwAWIamFeAioveFeEWTMISutan0hmPBFUaYxOdv2', 'B', 3, 'jlbe60jdSvn8xU0FGSdNC9qLVedugww1rIKiQWoaWuMuyXWNmrfGF58jZV6b', '0000-00-00 00:00:00', '2015-12-12 02:02:20'),
-(94, 'MUHAMMAD HANIF', '5114100013', '$2y$10$e4HQtBKgYPsEuTUNwnBB3OHqSchbiGivdENcoqQQ3W1XqIjVMWiGy', 'B', 3, 'x5dDnqZpnndVwA608MosADw3lKUfVLWlu3COwj0GJBLbMI2R4ZFBZ49Y5xbe', '0000-00-00 00:00:00', '2015-12-11 22:05:26'),
-(95, 'ALDI FEBRIANSYAH', '5114100015', '$2y$10$xXcmVVS0GWDKrqYWfsQYtechqMInYXXLQL/ngKEv1frYXzUzDrTWu', 'B', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(96, 'TRASTIAN SATRIA WIBOWO', '5114100016', '$2y$10$2bHLW3U8DUJtksDUIm2mWO9rF5JDtYfHzcLz0wFcADIBx4778TaJ.', 'B', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(97, 'ANDRE EXAUDI JEREMY RUMAPEA', '5114100031', '$2y$10$cQfXZBiB8GMrZ9PMIEg/JOgiB2yJARSvHYPKyurRzW1Yg6GOUd8BO', 'B', 3, '4GE88eot7quOzNMwJ2iLlCu69T8XGTAwz3ohpXHSsIjcXfdMM3ERqON87QHd', '0000-00-00 00:00:00', '2015-12-11 22:16:30'),
-(98, 'MUHAMAD HENDRI FEBRIANSYAH', '5114100036', '$2y$10$rIYJ6jPfZXtvPC9HsZpxAebQoCiiQaqr4yOURD2k76OnnmcHaL9Xe', 'B', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(99, 'RIZKY FENALDO MAULANA', '5114100040', '$2y$10$rUCEck8XLFif6zKFzR3RNuxo1wxLxxKfO0fmGm/4aH3/y6dmO7hV.', 'B', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(100, 'AHMAD AFIIF NAUFAL', '5114100041', '$2y$10$EcElDG3oZ/rXRfdCsWttxu1PgqS3xFLmsK2571YQTUVT6HWlLwauS', 'B', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(101, 'RARAS ANGGITA', '5114100046', '$2y$10$4B6ZqxewvAUI6V3J6w48yOX2N4WWI1/G40LMpWZedjmEJx.KQ/W0.', 'B', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(102, 'BRILIAN WIDYA MUSTOFA', '5114100047', '$2y$10$gja6BWFIl03cA.iVTAOh5Okozm8eu2uLbz9io/r7yWYoa.CM1o0KW', 'B', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(103, 'HAIDAR ARYA PRASETYA', '5114100051', '$2y$10$b9neD.aFOvpvyZXHFJTNZ./gTNPF.KXh6LWnjfVuaY55wh0l4YA1e', 'B', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(104, 'BASRY A. SIHOTANG', '5114100059', '$2y$10$jfNLavqn8pk8eLv45GbQYe84XQXe4jUNrXLOw5mk1fPSQzsDfOTru', 'B', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(105, 'TOSCA YOEL CONNERY', '5114100061', '$2y$10$yhCledXRO.IXGVVhm9xII.WNimB1eJf2CJ680W55314HFB1kiEU9q', 'B', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(106, 'HAMKA AMINULLAH', '5114100063', '$2y$10$vQO7nDbPQDjAaceIJ.aT9uVb35zGzKqyEVN1ZQcINySljN4h8ndge', 'B', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(107, 'REYNALDO JOHANES', '5114100064', '$2y$10$.uev39zJQz6.Yx6m/E0h4u6rQjjLTJ9jqL.JHgApgDm0QXA52p8Cu', 'B', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(108, 'PAUL ALDY SARUMAHA', '5114100072', '$2y$10$vCIvsM47tjx4E2miqMgtkuD66HM2IEaqNyVBr8kkTyLrthyc1xnSa', 'B', 3, 'Wt14mNQqlKaAYvtjBWfF1fvtvDgG3rVGmyFXpexSO8nxDXK2dIxvp5bGda6f', '0000-00-00 00:00:00', '2015-12-10 08:14:23'),
-(109, 'M. LUQMANUL HAKIM PURNAMAWAN', '5114100081', '$2y$10$QkEfbXTN8JA9rF/.LomX2.YLyAiWXOWCbirSqfcInBDbj1P37gwrS', 'B', 3, '3qUOjBnSRnoE8hoRH02qEmAjKQqoejFr0tqhEuYQSCO25LjSULB0fZEqc7vP', '0000-00-00 00:00:00', '2015-12-12 01:51:33'),
-(110, 'SYAUKI AULIA THAMRIN', '5114100083', '$2y$10$c5mtYBtIt8u5z1fLcK/8ruac3Yjt6/v0PcFAgudShFOxbnDIXNzGG', 'B', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(111, 'RR. VANIA MAYA CARISSA', '5114100086', '$2y$10$C1giQQQPrDNPms0fqO761O/OqYE9a.G8Z2MiKsNOccsSbNX.loVr6', 'B', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(112, 'NURUL AZIZAH', '5114100090', '$2y$10$VMmM93INP4z0aLp2arciGO.2Qgi0WstyAx/t0xsTDoD9f952bEBFS', 'B', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(113, 'ANANDI JAYA SANTOSO', '5114100096', '$2y$10$F9D4T6rZYeM.uACgsJvveuq0HFXxkX4xFk3wB/zgAFf2QZja17tmG', 'B', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(114, 'STEVEN KURNIAWAN', '5114100100', '$2y$10$SssSxJBny0xES0x3GhQCwuQ5Sw/4cwuWhaC0ao.489VrSEglJi/qa', 'B', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(115, 'M RASYID KAROMI', '5114100101', '$2y$10$J1RJVZINZ7770XUm3oD.ZOPJjBxDqqSdBZl7dL/Jee1MFVnrGUNVi', 'B', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(116, 'IRZAL AHMAD SABILLA', '5114100123', '$2y$10$PJwSWYb9gVhPEN8ciwI64OGzrJOR1mIB0IVAfUpHKY4DFZ3mPzEQm', 'B', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(117, 'KEVIN ALIF FACHREZA', '5114100128', '$2y$10$VY6nmBZ8LwbnPnfQbHL1ielUePuZxY.spnqZrTBmqZrDngmSNmore', 'B', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(118, 'MICHAEL DAVE', '5114100131', '$2y$10$UGaZZJlRtFX5NaeI0ic5/eZaip.16uu6knAb96NxxC7bYg3MbAaRe', 'B', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(119, 'MOHAMMAD ANWAR HIDAYAT', '5114100137', '$2y$10$8CLms.EB/q8qaIvRNiq6wO1OZmYV6K6gqL15xJ0ga9RtLp0aEAo2.', 'B', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(120, 'MIFTAKHUL AKHYAR', '5114100143', '$2y$10$IqHXfYusBy/ehWK8WIAGVO7AD8EClixIQ0FWr0GLUoKcHAn2hdotW', 'B', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(121, 'WIDA DWITIAYASA', '5114100155', '$2y$10$DBcSHVjxRQExE2Grme3rduGuvSvjt.ARVTPDNHYKYNBllwGJ/tWDy', 'B', 3, 'CY7vFZiBHI2tKxBgIWMbmFXqzDBlub1knGqhzMnBS6zFGLvmnkR78FHQ4Xdu', '0000-00-00 00:00:00', '2015-12-11 23:50:34'),
-(122, 'BASYAR ADNANI', '5114100162', '$2y$10$eJYkfSfiafcoLCYi03mOE.W7LQnENhOEzPCbjwXqo2Mbt2zQVLy2K', 'B', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(123, 'FAIQ FIRDAUSY', '5114100165', '$2y$10$YbrQ5Xy.t9VMNSTFsD.nk.7g7aQPIn1NX32XgBSd/TyH5Q3u/PBJC', 'B', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(124, 'ANINDITA LARASATI', '5114100170', '$2y$10$yE5pN/NAaGbCwMeBwq3HheGsdPWIBzQgrv8iF1ySxgeTqL1p5Lcm.', 'B', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(125, 'GLLEEN ALLAN MARCHELLIM', '5114100171', '$2y$10$anh91HBxlkfPcA5sQEHLg.d/45rBGQ5/0w.ntlU7xNOj.v/Xx9zdO', 'B', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(126, 'AFIF RIDHO KAMAL PUTRA', '5114100173', '$2y$10$hvM6rF/95DSzJ9rF6v9zBO8Jc7tkg012AGjVUyVm4BWYlsZzheYHK', 'B', 3, '5gAMahf9UI3vp6pmNkBfbXsnQXw1MwNOaS7QmmxEtyqbYtKlv3pzOENvqSZN', '0000-00-00 00:00:00', '2015-12-11 23:03:13'),
-(127, 'RIANSYA PAMUSTI', '5114100175', '$2y$10$qcnbuPkCyXRBS7Wte4VHFeDMkfJAUu5IrxNcQtvPiXopqynr85EUK', 'B', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(128, 'ADITYA IKHSAN', '5114100186', '$2y$10$Ph1IYXm/m7GiB7xj5GqTfu86b91GLqjiuEwi3rtasyM6eNQzp.E2e', 'B', 3, 'oR8k45RCKI0QJXwbWzcnM02US0PmfRJ7RHHO5XnfIlaSx0GJ2ASdrnYxNMph', '0000-00-00 00:00:00', '2015-12-12 00:03:26'),
-(129, 'Mohammad Rizki Makarim', '5109100066', '$2y$10$.SIX/nF6PjFlinF.lJRY5usntTsG7hRqW7BZjWWr54Zo5dkwGYF.y', 'E', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(130, 'Septiawan Ananda Rizki', '5109100072', '$2y$10$Er0XRHjUOVspJPgNrzG2musWF7AoTkSgRwsmfsAelhmoaarASaAxa', 'E', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(131, 'Diaz Ardha Rahmawan ', '5110100035', '$2y$10$fTNRx3VivT02/C5LurZpzeKNYIHYVmEvt8GgxIV40.sTOPo97gZny', 'E', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(132, 'Muhammad Saddam', '5113100187', '$2y$10$8Xt8iC9Am266H5FFjdifxuqPMu6FW8USvkwZ4bJ1yX6LwlPTuhiKC', 'E', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(133, 'Adietya Bagus Nusantara', '5114100004', '$2y$10$pnWfLXHRqngiS5cMO059uOUFrh8GUel8E7ZGroInlBEG955TX7q4S', 'E', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(134, 'Nafia Rizky Yogayana', '5114100017', '$2y$10$1sKrlBt1h4l9ndBiUx8gT.ynxzuoMY8oFpqJvgyf.6/yEt0lHAwv2', 'E', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(135, 'Alek Nur Fatman', '5114100018', '$2y$10$4S.kFdh8Zd.9CmTV9L82Oue4lq/52m1407Xr55bVubCbSM5Vs75La', 'E', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(136, 'Rahma Dini Maghfirotul Laily', '5114100027', '$2y$10$NO7lHAlv9l3p5GAtGiGYIO.2bdOMj4uIjR9iP/Nm1bCtE7zZllpkm', 'E', 3, 'Zbgwww9TFdNWCQuUKKOEvPCjlqCn8HmtswHyIYxYwJlKz1aR55nSNxv963SY', '0000-00-00 00:00:00', '2015-12-10 08:22:38'),
-(137, 'Ahmad Ismail Harry Wicaksono', '5114100032', '$2y$10$cN/iPd1hS.TAVpSf9jGH/eChkkPCrE8VKK1THMkMsFOSXtn.ELuUG', 'E', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(138, 'Pramudito Hapriarso', '5114100035', '$2y$10$6.NFAaqSzwlK/XQWvDA0VeVeWeHtvaXgkwierOktZ6rK/YxIoA3Ha', 'E', 3, 'g8GusctVOhbv1VBoMrR2UZbOm4vOGg081TtaIHCTaAqf0QvIHDUEsMEu20Ph', '0000-00-00 00:00:00', '2015-12-10 08:16:26'),
-(139, 'Dwiyan Satria Utama', '5114100045', '$2y$10$5u8pj070GbBCEoGT.bpwOeBVjDSKDdxTdl25zNNNQehAQPPbd9TZO', 'E', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(140, 'I Gede Putu Nobby Aswi Pala', '5114100048', '$2y$10$t1htc4KoMlKStXvLAy/hc.OW51pIkADJnd2/4y2A/Os94K7/0l2yy', 'E', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(141, 'Tionia Rizkika Afilia Haryono', '5114100053', '$2y$10$JfHyf.k9mcvXbG5MRCDEOOhfAuowbA4OpR8YsQN4sviJfjCouJtc.', 'E', 3, 'zELUVCtoSQHgFvslcW1feSHy4QxLkWcBEV3GY7JM7bSsDtBhbpYd221DSpmV', '0000-00-00 00:00:00', '2015-12-12 06:27:29'),
-(142, 'Ananda Ricky', '5114100056', '$2y$10$FapMlOQBOxGT4h9VIMicyOG1ihpW5YXXKAoV9dOPhiomNn.2KoxfC', 'E', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(143, 'Dzaky Zakiyal Fawwaz', '5114100067', '$2y$10$mihCgOEH1lyZf9vnR1orx.mTCQhpdqmOA.42OohdABirkydPU5kM6', 'E', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(144, 'Muhsin Bayu Aji Fadhillah', '5114100071', '$2y$10$cbYevdcDtGKwLCIqji0MAuybRTbC0VOZKmnLENVAsjD5twu2dAy8.', 'E', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(145, 'Muhammad Hanif Amrizal', '5114100077', '$2y$10$RKY/2xiuLA1zxFd8OkQHMOWfFgh71/I.S9vLBFu.LWARhbx9u4h86', 'E', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(146, 'Rian Danis Adi Pratama', '5114100084', '$2y$10$kZFMF7Nx2TYuxzJiYF9/ee1LX58x3pnQkLTuI8X73SYMVKVvfEmqi', 'E', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(147, 'Christyanto Liman', '5114100087', '$2y$10$Hg24kNwec7pinp7j/.ZgJefE9Ly68GKWCSVZmXLlMA3NboKQY3PsG', 'E', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(148, 'Anugra Pratama R', '5114100099', '$2y$10$ikrutqJfJgW7Rz2LVaCgXenolAk1BHtXYMqKuoQXe.AMa3pxq5RrW', 'E', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(149, 'Fatihah ''Ulya Hakiem', '5114100104', '$2y$10$nrEvJOVy4EqrKkjtGcWDIeNqwUzsXwV.KwX9rZixAheNw0GtPeXdy', 'E', 3, 'pyOYqdQDKo8HlRuQab8oi6ktN7xEOSSkWaBZ0s8gxsdBjxijllCnMA1HDIxL', '0000-00-00 00:00:00', '2015-12-12 00:22:38'),
-(150, 'Muhammad Fauzan Ramadhani ', '5114100106', '$2y$10$9b93DxMHmEcgnXeUq2b3fudzoWKS1jXYo0GswaSwFsGsnIqNjqmru', 'E', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(151, 'Nafiar Rahmansyah', '5114100109', '$2y$10$PnbvEVDTpDvBZCobmebxPuUYo2rViE68rwneYjDY8l9vHIh2bLgOC', 'E', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(152, 'Rafiar Rahmansyah', '5114100110', '$2y$10$7D/.sMSg1IJ2ECxVpcoGcePdEArKxPfWjROTQj29bKbC8jGYL80Lq', 'E', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(153, 'Fourir Akbar', '5114100115', '$2y$10$xjiWx3wMZuyO6fkkw7a9ru6a8g0Nk5h87CvefjdFsTDn8CdAuYsXW', 'E', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(154, 'Petrus Damianus S W', '5114100117', '$2y$10$gfEgK45m2exsnzYhBBwx9eHaE33NDgpI.6z38e2pI2a7mYFkd7enq', 'E', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(155, 'Bayu Sektiaji', '5114100122', '$2y$10$sxi6MZ/YDPU2DM5ntFN3suhUP2VzQYkQ6jqOH.iialnUDMeHO.J6S', 'E', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(156, 'Aufar Rizqi', '5114100124', '$2y$10$U8kMeBvO7hkom4EPTBuepel1Fve/xzhjt1ohORs.UHHN8/9Zn3wSe', 'E', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(157, 'Muhammad Fauzan Mahmud', '5114100134', '$2y$10$rDYhl8XByQl3k4WxZmSYMOWOq0DrpDe8sg7.a7xn6Q/2AW4hd7d36', 'E', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(159, 'Naufan  Arifie Syahputra', '5114100136', '$2y$10$cc/ZSKEyAL./CwdVHJyfNuL/APYKKa3rmHy2uvjfMfZIHRUfPJkQW', 'E', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(160, 'Ilham Aulia Majid', '5114100144', '$2y$10$AsVOsF.svpixlun0loa0HuT.2bO1ftwJ.OfhcUByd7FAcclvVsshW', 'E', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(161, 'Dimas Hirda Pratama', '5114100147', '$2y$10$qx/0ZymgX/FIlAi4wYdVGeeDnBjmzeJwr8yPxctG4OUvv.7ucImzm', 'E', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(162, 'Demsy Iman Mustasyar', 'demsyiman', '$2y$10$gWShDrYvsUyzPiJC/BM4oe47jGxuUU1pIxOfqq5uJ2CvHvivWRnVy', 'A', 1, 'M2QK5ZpFDOcD5cJdLYP60sp68fOOG9K4uYcW4cRYWbDXpR6jaIYymWUUFazu', '0000-00-00 00:00:00', '2015-12-18 01:44:30'),
-(163, 'Riyadlatin Nufus', '5114100151', '$2y$10$il/PJl/ZTaPtxnXRQISHxeJ2pzemJ9hPDajA30usukp3R4HZ7WA2W', 'E', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(164, 'Hari Setiawan', '5114100156', '$2y$10$Rh7m.Z3KxeJ4PHoZfiHZw.SMvYjSyGFO13onz3NbTNlPmDb35CIKC', 'E', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(165, 'Aldhia Muafa', '5114100168', '$2y$10$9M4Mk9KwdvzB2Hkk7itqC.bTB2ArUDaJ1/ML14WCzxcp7m0lxV4Rq', 'E', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(166, 'Rayhan Gemaruzman', '5114100174', '$2y$10$cP3J4AzWhkO2.ifHYi/de.31ohLgZFW8h.KrpsUYgdmRz.QUw6vW.', 'E', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(167, 'Hifnie Bilfash', 'billyfash', '$2y$10$tE/H5c0yxHmmRmn5To5LD.aMTB9LKqVDAzZI8kS/8r4b94u9w.5nK', 'A', 1, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(168, 'Ghaly Aditya', '5114100179', '$2y$10$Js5XS15Ubi9xk6w8kz8nO.k8q.CGslIfDOqyVRdyAcVZJB6HIyszO', 'E', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(169, 'Feter A Vedaalana', '5114100183', '$2y$10$PmOMY3KbXF6c9oWQv5anG.nHk.GA2tnGOjENpBI.ZEoFS7Ax/nIIy', 'E', 3, 'IADbUlpumBdDKLUPu83e2RFzaGuGG61ssrDg9TGBlTYTfoqNdsPo6i4418jq', '0000-00-00 00:00:00', '2015-12-12 04:56:59'),
-(170, 'Rahmat Rijal', '5114100706', '$2y$10$x8wE7ZYuwDP5AqL2ErkldeWsHBvPDJd0nL/Ldg97O7QF1.3F1vl5i', 'E', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(171, 'DEWANGGA OKTA WAHYUDIANTO', '5114100005', '$2y$10$es2eJ1OWaawoK33fDJAwTOvYgvGujw5nPHMVi5qxbicxc/.n.Fd..', 'D', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(172, 'KADEK WINDA DWIASTINI', '5114100008', '$2y$10$DleneYKjDBDDb4L0xG7G0uUvlylZ38zwmNJk19EjYjLDrNhxJkTju', 'D', 3, NULL, '0000-00-00 00:00:00', '2015-12-11 10:08:23'),
-(173, 'RIVALDO ALIF RACHMANSYAH', '5114100010', '$2y$10$9OMDGFLcWP/fVX1lFl9jPuV8z93KNKBR.2b4kLOpJxDiifS.malYe', 'D', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(174, 'ANDI ERSALDY RAISHA PAKKI', '5114100009', '$2y$10$uvDXIsDAkZSKagFIyrvVi.c29ciJ5wfaXXL6TviepqViE8owfYshq', 'D', 3, 'EjrUndnZI8RUUYyVBDlYyENkGRNPjsakOMc4Fc7jzeSpn1umbxaQCLAgiF8j', '0000-00-00 00:00:00', '2015-12-11 22:00:48'),
-(175, 'RINA WIJAYA KUSUMA WARDHANI', '5114100021', '$2y$10$fvOzTnpRVgEA0kdwbX86oujCDSovEP5tDokLvqrkiUqtokas1WZmu', 'D', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(176, 'DENI ISMAIL', '5114100022', '$2y$10$sKhArprxyjj8a.wa0JSz9Ov9C95RqhPUhH6LY9.kLxjGe6DQgRedK', 'D', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(177, 'I PUTU EKA WIRA MAHARDIKA', '5114100025', '$2y$10$ZhYpoBFlHV3nZLrf1KKGXuNvV.SZZbVjJvpSC2f0T2pINoeSQjrO.', 'D', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(178, 'I MADE FANDY ADITYA WIRANA ', '5114100026', '$2y$10$Cfz5wEN0SzUFpeazQPWMh.yhjYphYgrzR4C.C5VO79HmYNCmqT8eS', 'D', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(179, 'MUHAMMAD FAHMI ABDURRAHMAN', '5114100028', '$2y$10$a8ELDM4YJgHTnIJ8dmkGjeKo8dAmVe.2q/bfhvi63yOXpfmnsBKlm', 'D', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(180, 'ALFITRAH NURRAMADHAN S.', '5114100037', '$2y$10$31m6/ru6W6NBwr38L7qP8uUrvw9wcd5l2OOX44SAveK4XXrTw5rym', 'D', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(181, 'CAHYA SETYA ADHI', '5114100049', '$2y$10$GK0n6kse.kh01ngX4ivjW.Ogp7kVdpkD2Qzh4IBRthXv2tbtckAWe', 'D', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(182, 'ANDY YOHANES HADIWIJAYA', '5114100050', '$2y$10$Z1axL/lG533Cez9EbLjyhOOWcxUdeHCKM4wxS7bGX6hw5XDMZUoAO', 'D', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(183, 'ROMI YEHEZKIEL PURBA', '5114100054', '$2y$10$q7DZbpP1AwGVqokwyQDUfuYmYjU7ysfOydtL4WAZxNPgW4g8Wcu42', 'D', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(184, 'MUHAMMAD FARHAN MAULANA', '5114100055', '$2y$10$fwuvbNQybE2GRUCCrc37FeCp31.xZddAImGUgjoEeXxClmgo0wsOO', 'D', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(185, 'WIDHI MAHAPUTRA PANDE PUTU', '5114100058', '$2y$10$.ttGYWK8inVvlZLYBPqtVesJ0SUTK8MukDma49o0D9kB7BCyPi4T6', 'D', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(186, 'BUTHORO KUNTO RAHARJO', '5114100068', '$2y$10$YaGHv4I8BbFAvw52SSt.Nu.7SKdJyQRu/fJiB.Co679i3JRPL7iPi', 'D', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(187, 'PRASETYO NUGROHADI', '5114100070', '$2y$10$fw6somtRnqFtNp69NI9DPerngGKzeAPej/W9iqpUb6NJZdCSD92e.', 'D', 3, 'VdcrbnW6Ca0vBuuKpd2Yo3dQ6AhCPKeKiamAIAlOxNk6sGD0Ruw929P470bw', '0000-00-00 00:00:00', '2015-12-12 01:53:07'),
-(188, 'MUHAMMAD FAISHAL ILHAM', '5114100076', '$2y$10$rlytLPoxRorIj4Xc4idBI.JkDhkjCKqSoaI4N4z6dAaX5GwzdgnO6', 'D', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(189, 'ADENUAR PURNOMO', '5114100079', '$2y$10$zJvi9CfUWqXHGYRvSEwoHelhjutpD9mCTXALawe8X/h5U0ulsT83i', 'D', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(190, 'KHARISMA MONIKA DIAN PERTIWI', '5114100092', '$2y$10$/BSurOfN7hUM2A0hF.ZqbuIuvfGcb1cNw7NKa0JctHcJbNW4YsYUm', 'D', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(191, 'MUHAMMAD IQBAL', '5114100095', '$2y$10$4CHkYU57iNMLjTHV8Iw27u3IOfg6wyfORPR8ISphFNyvwis1O2R4q', 'D', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(192, 'FINTANTO CENDIKIA', '5114100098', '$2y$10$4jbcFljL/tVOXIi7kzb.A.VH/z0tVIoyNmw3QDSSdBPtqovY53jb2', 'D', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(193, 'IVALDY PUTRA LIFIARI', '5114100105', '$2y$10$hLt.ntzIp/kq319tX7Hn2egNvRjIXMXeo3Dj7SqTrCUfLTzLH7i7G', 'D', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(194, 'ARYA PUTRA KURNIAWAN', '5114100107', '$2y$10$CkKwQNWnGqWA.Q1WGr0A/.VFALiaBAvLl4ZL/ChI4GaP95GzLx15q', 'D', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(195, 'FARIS SALBARI', '5114100119', '$2y$10$Lus/liQIQdd3Mhe.R4BjF.wtNaCaST8euHEulBGVbEA5D6uxctSZa', 'D', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(196, 'GEDE WAYAN DHARMAWAN', '5114100133', '$2y$10$XTgasiLDyKPxCRZ2ftjG6eK229vpoUzuH0Sgx8wFG.RWDYGlXoSUO', 'D', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(197, 'ROCHMAN SOLEH', '5114100140', '$2y$10$Q0IiOXVWuZyFr2CQ1RCSYOLvFgfwBVAkpiPXuFSOxYRO36I0G5fVW', 'D', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(198, 'MARTONO TRI SULISTYO', '5114100141', '$2y$10$mCzVwHc7jqj2DRRdztib1Ob6PZ2tq2sBrKL7dnZ7reXUeup9YpUa2', 'D', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(199, 'MUCHAMAD BUYUNG ABIYOSO', '5114100150', '$2y$10$Iek/9vPGW0GA6sSoocMmNOswfa69APp0wR8dxHxPQbA/NRybYlshW', 'D', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(200, 'HANENDYO INDIRA HARTONO PUTRA', '5114100160', '$2y$10$RrgQjc/plcaRUxhWlDsAIeUGvwXM0j9LfS12jXT3aYC.86DO310HO', 'D', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(201, 'ADITYA GUNAWAN', '5114100167', '$2y$10$PesoE9bXGfcrt9Jiunt5.eK5J1O7KXE0xf7YH0757tXW1vBVji8Iy', 'D', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(202, 'EVAN BANGUN', '5114100169', '$2y$10$6m9oOJbkgRwuWg1QFP9jNudC0g5nG7lEGteZA217a2mmM3muMQSCy', 'D', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(203, 'IRFAN HANIF', '5114100177', '$2y$10$GMK./dhujOfEOZNO1YswTe5nyx4AxpoL9yTcaMSwm5urKiYR7Y9gC', 'D', 3, 'gMy8k1wKNxGYQph560R8akfnNm2mrMJ0YdLWyXgFBkI3etsQ5Whsuy003Bij', '0000-00-00 00:00:00', '2015-12-12 02:07:21'),
-(204, 'RIZAL SEPTIARAKHMAN', '5114100180', '$2y$10$RXw5uUvRXupCWu/nPWRxcet68Q02cnVXD3wtd0q/atjm/o525eq3K', 'D', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(205, 'ANNE ANNISA AULIA', '5114100181', '$2y$10$HFuUQN5VuQ1WZfO.1wmGaOM/eIz8Rl78yo.3P56LtJiv.iTLpT7iy', 'D', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(206, 'SADDHANA ARTA D', '5114100191', '$2y$10$9a0G2ryXYyIOnWhuRg3PeOht.AZtTCuBNlAvMfcRIGO/OjabVerfi', 'D', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(207, 'ALAM AR RAAD STONE', '5114100701', '$2y$10$z0/E5t/BxVew1RlfyodD2OhLt3QZFBmBHZ3JKUv48boEmNC1xjqyK', 'D', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(208, 'MUHAMMAD ISHAR KADIR', '5114100702', '$2y$10$49TQ9/xFkeLWrTA6H4hcj.8psSxI0oe5WxRxK7i8GyXExtt6Qn1SG', 'D', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(209, 'Ahmad Hanan', '5114100705', '$2y$10$YMTwzWXqzr6tN7dqCMibguap/BbjYJEGajlyH0EzGu9.y6.7dU/f.', 'D', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(210, 'Asisten', 'asistenA', '$2y$10$pCKxWWmR/br32Yiv69Ey0uIXqQ77CB3UVi7OU5cf1pF9ItU5Xl7o.', 'A', 3, 'cPjLRZfQ5BAKM72A8jjhwlCVoI3IiiwgYKm5foiNSExmWuDthmnFD1iND5PL', '0000-00-00 00:00:00', '2015-12-11 19:49:10'),
-(211, 'asisten', 'asisten', '$2y$10$srYHYCR2mLCuhJD4BPf4U./OYKcGvR9cMbovAmNtcH7Gf9lgjIize', 'C', 3, 'dXGXGkKcGtMheM8YFtrsqOHCC4dQlaALx6MYVj414BYlj0pcaPUZ2Q9s37sZ', '0000-00-00 00:00:00', '2015-12-11 23:46:04');
+INSERT INTO `users` (`id`, `nama`, `username`, `password`, `paket_id`, `remember_token`, `created_at`, `updated_at`) VALUES
+(2, 'bilfash', '5113100091', '$2y$10$SVgRSSp34xdNYR4RIs1LEeiYRf4vsH9465g2/4tZshE6OMB/Wvj/m', 1, 'EXUbkfZsJJHA4LXKufurJJwgzRGA75uzQvsynPrLcVJWKttdptEz3qGbfNLD', '2015-08-17 15:13:22', '2016-05-03 04:15:34'),
+(12, 'Asisten SBD kelas A', 'sbdA', '$2y$10$2oIngVMmkjvwVcAR5dbvl.MN70VpXi2Zi28MWzben/8A/8kBiiVm2', 2, 's6ygOXfs0UoIzIOu1RKx5XD7dPg0cUIA7PfKl4nCeZTJz5Js9c5EIPvX7QBO', '0000-00-00 00:00:00', '2016-05-05 00:46:29'),
+(13, 'Asisten SBD kelas B', 'sbdB', '$2y$10$wuusvnuXI2fiS4h3dllR9OmXcT1DyIivay9Kzn8FNtVi4VSeW5DA.', 2, 'DB8rVeFNJcvlIzRzYI2Q7loNU8hJAXgKFBcdnHNxMrtyvEbdnIysCsYS5czu', '0000-00-00 00:00:00', '2015-12-11 23:47:46'),
+(14, 'Asisten SBD kelas C', 'sbdC', '$2y$10$45fTTOfitKIPyGpc48FM5uH5LkKjaXdedz3N/XgZShpkU/icjT..K', 2, 'tLstPjtmKeDQDqH5S40sI5E8vy4en8PWBScHGfVQfgbPTDDcN9LKBNyAzdPD', '0000-00-00 00:00:00', '2015-12-12 00:59:32'),
+(16, 'Asisten SBD kelas E', 'sbdE', '$2y$10$cqafCQkH2fZEZYTv9dedYeiGSXnfBag7BUzm0rDChsI6NEm42KvFa', 2, 'DQEIiSxAZR6fWpqCr5TUndTeuUUhXEA4Hip8BTUjcA6Ponj6iIvVDCYaHYRH', '0000-00-00 00:00:00', '2015-12-10 07:43:49'),
+(18, 'AQSHA JIDAN KUSUMA', '5113100069', '$2y$10$jAxq6dH9dxqwuN/RtpzAauU.1X1DRBOmn9RFhMcdj5AZ9mnlcQBye', 3, 'yXojC8fB4LZHmLz1IQJAWITKCzBOzvhblWPs1ljtLr5hlbW2bzmzNMgpcZmL', '0000-00-00 00:00:00', '2015-12-12 05:55:22'),
+(19, 'WILLIAM SUHUD', '5114100002', '$2y$10$X0QgElT1/QBLanFZupfkZurk3JQov1y1fNX5Xu98u1vm3vH16sfI2', 3, 'fDJ1GJAtalRieXoHo0ilf4yqaQNfPdTyyf63NtOS2pKekhxjNqLxDyC9CH1Z', '0000-00-00 00:00:00', '2015-12-11 19:21:39'),
+(20, 'ZAHRAH CITRA HAFIZHA', '5114100012', '$2y$10$3/kqRT58fPcMe/RD3gP7Ru3yH8w/EfihLqrNzfzAts0aybgnHR0ga', 3, 'pjtexpcJDD9cMvmwexB1Ed0GGY25a9LR1NL38QwKmrr9LIPBNhOfEDkPApTb', '0000-00-00 00:00:00', '2015-12-10 08:31:17'),
+(21, 'SITA NURJAYANTI', '5114100019', '$2y$10$WAeZFSocyAMc5O2eNXgzM.PzJnvmGYlB7MNex.Fv0pQJSiuCzJU1u', 3, 'RBxJLko4OGRvuuYNyKTMgB4vi3kNJ6Jyh15zWaKzjE4aJvp8WFzv0CjHBpGu', '0000-00-00 00:00:00', '2015-12-11 21:07:40'),
+(22, 'FATHONI ADI KURNIAWAN', '5114100020', '$2y$10$73g5j41mqeETFom49szX.OXKkk3GIX9BKGsiw4qu89FaHfnyfYr1u', 3, '1M0oyDCtFvGJZbcieJ04tP0skX8cB9ZAu6zIc7EfJeKhfEn9YYPhtXgROnIC', '0000-00-00 00:00:00', '2015-12-12 04:11:51'),
+(23, 'HERDITO IBNU DEWANGKORO', '5114100023', '$2y$10$TvmCzgEPYNfGbH/tY4RAreBtymdGyHhET1YLL8fc6GYA.l7ZcBK9u', 3, 'UBOeGwj5tt65AC1aH1S2hwK4lYu7FVbfGVfLPY3LEjhmrwwzORM3fywrlv7G', '0000-00-00 00:00:00', '2015-12-13 22:22:05'),
+(24, 'SETYASSIDA NOVIAN PUTRA DAMARA', '5114100024', '$2y$10$.C71cdhpSdxE5NIvkqDP5.9RpCz1tg8l8lfXC7UF2BGMZIJrjWFB6', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(25, 'DESY NURBAITI RAHMI', '5114100030', '$2y$10$rSmEDKY6lCdA/UolSYTXx.Lao/V3xP2Lz3DVVIWj1XYhAF/7AFK2.', 3, 'Uph0mOniHVqQXkPiPPHAvyI5GB1ykMWHnOhX3tZepJkDjZ5HiabwpMI7h4hy', '0000-00-00 00:00:00', '2015-12-12 05:18:04'),
+(26, 'DELIA RISTI NARESWARI', '5114100033', '$2y$10$Xv/uZsd7/UdnmBhLEPddSeKd1X1wYCI3N5gBwv1n8RQGDwuJ.TAru', 3, '9OM8DjhZqO2F7Ofkelrifk3aKQvk4Yb8HJQXjicJRse1a2RVJNo8OG2cTt1l', '0000-00-00 00:00:00', '2015-12-10 08:32:16'),
+(27, 'SABILA MALAHATI ARNINDYA', '5114100034', '$2y$10$t78lmWfo1RNr3yHr2prk1.CaYG44tiX18/EtCDnENeNGkf2cNsfOm', 3, 'DNBG3L20MVUm3eHH3w2ws2BsPz5JKV1cChdzuFGi1cRPs0L2rvktzpcQEFjF', '0000-00-00 00:00:00', '2016-04-03 08:53:15'),
+(28, 'RANI AULIA HIDAYAT', '5114100044', '$2y$10$DwixLrPlACWqhUpwByyF2OIyQje7wZpGs5pEEbLGu1QeEK234g0UC', 3, '7zPh3dqcwF84c6r5w8EP7PXDEI5MiswvfFowLcjsGjypPPfoq99Jxgmx13ff', '0000-00-00 00:00:00', '2015-12-12 04:34:35'),
+(29, 'NURHAMIDAH TYAS PALUPI', '5114100057', '$2y$10$uYImf6Ij4TLjbJUQqDVMX.k5KI/GcKKADc8ZHUAySjAeGw/VxTyPK', 3, 'D5gwUz7G9llao2re1txpJtNG1plgxoXWZltcfGItxlUvrQaLcAw5EcdkakWT', '0000-00-00 00:00:00', '2015-12-12 06:14:39'),
+(30, 'LUCHA KAMALA PUTRI', '5114100062', '$2y$10$eMxMhlU8LhFYDrIFOlfOmueHZfGAGBKpXlTcn8G5odelA5SNKJfJy', 3, 'sahzq3ZJJHKECgpud6FXIR3q0QmOHbygZSgafZMK8Wq3jtracMKTZp0Ctjt6', '0000-00-00 00:00:00', '2015-12-12 06:07:18'),
+(31, 'ANGGIT YUDHISTIRA', '5114100065', '$2y$10$xaTaQpKoO9mRJmwFxaVtcOPc0N7IeKeEBFWmTNHKjMmwdR/vd0aMa', 3, 'zYFiJTcrHmC6vWehthfFPTvJUCrJ409VaSjqcYQtlZQkSNScmOleZweQY6k8', '0000-00-00 00:00:00', '2015-12-12 05:08:16'),
+(32, 'VINSENSIA SIPRIANA ZEGA', '5114100066', '$2y$10$9PrOt2ieE16o5UFmaqTAxOuuX2p94u9WhbzbrOMEictbsymR2I1jK', 3, 'qdCQ4CP5EFaYobAmh6UxtWyxMcqhCWHySEtL05c8dgqHS0HjFDG0707urtGw', '0000-00-00 00:00:00', '2015-12-10 08:14:06'),
+(33, 'MUHAMMAD HILMAN', '5114100069', '$2y$10$t5chKO0hVjTzqHh/Bc4zc.ES4r9RJcbvzfkGZuzZz4vtmLSsM3Ili', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(34, 'PANJI RIMAWAN', '5114100075', '$2y$10$H9ahkNETYWoVaa4wJCSq4uZQ0IzhXdCqke.9Sj39yO2QLR3vNdy2K', 3, 'H6g5RdDmU9bWomyHTLvc9htdcSbw210eKwajK0fXsteUqcR0F6RVcX0JSyUd', '0000-00-00 00:00:00', '2015-12-12 02:04:29'),
+(35, 'FARHAN RAMADHANA', '5114100078', '$2y$10$Pe1hACxEJB.fgCyJmvYyB.kN5acA6zaDeQlqkq43fXKab7bUmibje', 3, 'kY8aqSNVl2k9TkGPMMFu5okMC9gAwv74rYpeo3Cyx5Scz3ok1gJeWWEEr72c', '0000-00-00 00:00:00', '2015-12-13 00:19:35'),
+(36, 'AVIANANDA DWIRAHMA JULIARTI', '5114100085', '$2y$10$wvEpgYFDZajvOEGi85XcFuWeKGLwEx8/e6dqmU2aFFQxZObiUWjiy', 3, 'xQ1BxJ8XKd3verzxs5GEkjojZrGqFELS1bVKcMED6IKRoiukE5aZ9kdB7OvH', '0000-00-00 00:00:00', '2015-12-12 05:53:52'),
+(37, 'ADAM WIDI BAGASKARTA', '5114100089', '$2y$10$A2BK4CvinYvKqTNQrVp3KeFcuNifQQRqH0eaWIWVJfY.ge.bzbJAy', 3, 'iYAJEYqpgQy49FfMykRHyo1otYsQznapoGjg6nukblYcKXtdkUhfrX9pXCyn', '0000-00-00 00:00:00', '2015-12-12 23:57:39'),
+(38, 'SYUKRON RIFA`IL M.', '5114100093', '$2y$10$2E6nvi2.s4Jh69lXqVMwX.8tO0xlUT.lpJR87svAtOL9L8bN3Z3h6', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(39, 'ABDUL MAJID HASANI', '5114100097', '$2y$10$6EYVp/I4jZhGclk5DDl56u3icbtkhoeGrp5N4CCpgwzPAHCbR/5NG', 3, 'zZJcGSGHaixrNN1exZ4Wz4D2qwrdLp2v4r6nnE8MWgixLhttD9CAmWw1GgEe', '0000-00-00 00:00:00', '2015-12-12 01:52:14'),
+(40, 'BAYU AJI PAMUNGKAS', '5114100108', '$2y$10$D0zTZG8KacCOtn05ajLiAOJqQIu4fStWsZkgcdhSXKN6hHGLcSSPK', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(41, 'SHAFLY NAUFAL ADIANT', '5114100114', '$2y$10$RSa7b6kcsCwRpHMqSUvp3OzL7iazhjVxOZuA9ZRtgQFGCtLa5QHpC', 3, '9o66ZcIjhHk7pbi1rRMAI1aTUCMYXQpkkrTikqgn0qyp46TiDwl7CjHv31OW', '0000-00-00 00:00:00', '2015-12-10 08:33:08'),
+(42, 'HUMAIRA TRI ACANTYA', '5114100116', '$2y$10$GxTXAB913safb/4lCIIkKO1FuygOqwNTHCocfW2VXEO6l5QP/3Qrm', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(43, 'MUHAMMAD RIF`ATULLAH', '5114100118', '$2y$10$fkFJb3BoBvTZRrA0Mintee2dfgvTWPYX7NPPaAAlHLmAEKX1xpAP2', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(44, 'MUSTIKA KURNIA MAYANGSARI', '5114100126', '$2y$10$IA9kqCEqQCkscG4W8i5JB.1Un5zlmDd7Lf852wvZXUIdpX2pe0mN2', 3, 'swmjwPPLJt5mN09hwDFVNvPtWsksbNhBMi0r5xl9g1s8EJdwV59BRRpmbtlp', '0000-00-00 00:00:00', '2015-12-12 05:58:22'),
+(45, 'R.AY. NOORMALA NADYA', '5114100127', '$2y$10$Hmi5XVrkEme1CTeNxPdLC.2HRqLVNApwOYAdefNX4jGmHvCKqY5Wa', 3, 'Wmr8qbpfHRDZNMtsCcBCYkSAEOd3gq6hGug7x0840HzWktPv7X9vSpM3PfiP', '0000-00-00 00:00:00', '2015-12-12 04:56:39'),
+(46, 'RAHMATIN NADIA', '5114100130', '$2y$10$QX8LVxlglo9q5NOjTvDa1.fdCx6j7btZrTB./NYPH7lAen2trJ9mm', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(47, 'DWIKA SETYA MUHAMMAD', '5114100142', '$2y$10$vowDkW04.zwQIP8tBBI8tePE.1guS8WTIKBv3m3BeZShs8/XbJ91u', 3, 'UnSUEvpxcu5Gwu1nt8Xdqq77fLQF4sTbiQdyVY3jH2RLJzTEejYYHx9I8cxn', '0000-00-00 00:00:00', '2015-12-11 21:01:54'),
+(48, 'ANDREAS GALANG ANUGERAH', '5114100153', '$2y$10$kYHEooDcNy6hTxSHNyXuDOc6EHNrMxB.Ohf.xOAJlj/S41xzS6DLa', 3, '9WlyJ2x5yUHSN1h1LMUWutuO2Em774z2LQ9gegXvCc4mUQs53Sj2Kn1x8z9C', '0000-00-00 00:00:00', '2015-12-12 01:07:40'),
+(49, 'AFIFAH ASMAR SARI', '5114100154', '$2y$10$UI9FW1KcBgDD1pXFkSTWS.Zbdku0NQ1XIRdEgW8KN5UhjE8FzFB.m', 3, 'Ojg9kxazbr0xGgOGMo8Sk8fb45zfm8z2Sny6MwWr3iYXWQXHahINWrqi6Dmy', '0000-00-00 00:00:00', '2015-12-12 05:24:25'),
+(50, 'YUSUF DIMAS HERMAWAN', '5114100159', '$2y$10$wyBiPAHK0xLDVZaikTPDXuE35KxOC1BAYA6U1CtKbWxIXs9jBLTgO', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(51, 'MUHAMMAD HABIBUR RAHMAN', '5114100163', '$2y$10$md5odGd/eiFX/4x/XPJL4Od/9Gn2DSYULjIgnHye7grbppIS6H9ZO', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(52, 'HARIYOSO ARIO BIMO', '5114100166', '$2y$10$hZAQbQutNqE.d3bS4g4lWu1z9R/g2Fnv.otlAxZjfxkc8n3aiT/5q', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(53, 'KANIA AMALIA', '5114100172', '$2y$10$EW0ky0S1EcI4FLn/PJwZBOuNQIBGBIBt.T3n.xp05JS4DyPcef5Xe', 3, 'Wn6qjBgPLHJvTo26gPdvljNaaB6BYHrvaj011ufZReb3zSlKMTm4fVQV5y4u', '0000-00-00 00:00:00', '2015-12-12 05:28:39'),
+(54, 'TIARA ANGGITA', '5114100176', '$2y$10$NWKXzizM.PGV/4LUbZdWXOJlmq/9ff7Mqzdjr/unojwHzbM03rR.a', 3, 'JWkFCJ8YgcKb1MZsqA3roZDfJNuhdK45yFxrMBumOERZSTxdtyMP2eOf7sYQ', '0000-00-00 00:00:00', '2015-12-12 05:45:36'),
+(55, 'HILMA KAMILAH', '5114100188', '$2y$10$0GnpGVuNyxAXhW.mTfliwu74Celn9RB07X3u9XKz1g68WxfdEMwDu', 3, 'LHCFzz4hEt31GzEs0pxE8F9r5Y8DWUwCea3zjefJNPaoqSjcV9EPsLjNV4Qc', '0000-00-00 00:00:00', '2015-12-12 05:51:07'),
+(56, 'FIKRY KHAIRYTAMIM', '5114100192', '$2y$10$grUWPwVzLCJWgyAck91dreNuMWnNKSsuf/yAeKYAsiSbvHboq8lrG', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(57, 'NUR MAULIDIAH E', '5114100704', '$2y$10$eZpnKTiH1LJLAWJuA3nVe.ywypTmCNsihmSkJwFHGZppsyHjI9hpO', 3, '4SBz3byGajqYnZR01f5DyJ0wTgBl4UNXWIsiqYorZSCdw0VizY3DAPO75zij', '0000-00-00 00:00:00', '2015-12-12 06:01:07'),
+(58, 'Dwi', 'dwi', '$2y$10$S7aRXRFma3W9WyRr7Tekx.ho8VwVMVrNruUtpj2WcO32FbkK1cQpS', 3, 'ww5cjex5zS3UwUA1GZ7wd70zVsH50exdrk6mcHkhvoQvQRjEqQBc1B4vhX0K', '0000-00-00 00:00:00', '2015-12-12 00:17:24'),
+(59, 'Asisten Kelas SBD D', 'sbdD', '$2y$10$olhxSdESNohU1/I7/cnPpuW7Sh.Kp43l3cfgMj2PblCoZ4PXFMsQq', 2, 'PfiFocVuvKkVdhckx4sd9x15EhtEzewnQxH0v1pZvGB7f6zjxyVhm03WHrhY', '0000-00-00 00:00:00', '2015-12-12 00:26:31'),
+(60, 'blfsh', 'blfsh', '$2y$10$2WTSUY68bGy.nJ1pN8.XsOTptCIbuOVK5MB.ZaxBZyNo4DFG0aW3S', 3, 'RUZRVSvUMKijIeSgPEg1gG1C2M34BOSGBlON2W0C6lVTxgKAZ1shNGATBASt', '0000-00-00 00:00:00', '2015-12-11 20:52:49'),
+(62, 'ARDHIAN SASMITO', '5109100182', '$2y$10$iXD4cKagHUZ8I8gHENm/ueXd.jDk9P0HbiFKQULctN2LeT2Ezbif2', 3, NULL, '2015-12-10 11:01:29', '2015-12-10 03:36:12'),
+(63, 'JORDY ADHITYO P', '5111100101', '$2y$10$kkerBhdbfgtPcUo6DU.xsuM9Ksqe/1/SuOnBHeELz.pTyNT.LZ1Zy', 3, NULL, '2015-12-10 11:01:29', '2015-12-11 07:09:46'),
+(64, 'MOSES KHARIS SATRIO MUKONO', '5113100137', '$2y$10$TyHHsNV/mQQef7WWbz8uL.pfr2VZ7.nU5yJOec/U8On3YTH.PhaaG', 3, NULL, '2015-12-10 11:01:29', '2015-12-10 03:36:12'),
+(65, 'THEO PRATAMA', '5114100029', '$2y$10$bwZt.InNt5PfLD8SEF8//e5BS7sMlIJbKrYnn0r6/sdz6licUwzA6', 3, NULL, '2015-12-10 11:01:29', '2015-12-10 03:36:13'),
+(66, 'MUHAMMAD AL FATIH ABIL FIDA`', '5114100039', '$2y$10$TsUJPHDOZkaQZmrX9qxNnu1rly8zfwIWoTGrrRb2kil4SSYNYBX2W', 3, 'DvPJGqy31ZnFuCQGWpwDxizlsWhbna2wEXdFQIvDNOgiCf6nth0RlkFoxbUS', '2015-12-10 11:01:29', '2015-12-12 02:08:38'),
+(67, 'JEFFRY NASRI FARUKI', '5114100043', '$2y$10$o2mj.FXf3ef209Iqu/WbzuH1KzFP0eaEX6G6F26R0LhTL/kI1077O', 3, 'oG2iGf0Oosf4ipXsvzYhTfp5elrXIzjo0tkDt01hWEE469zUNNxNE87FGqKy', '2015-12-10 11:01:29', '2015-12-11 23:45:07'),
+(68, 'NURUL WACHIDAH', '5114100052', '$2y$10$HRQDTIde3P9MzqMCmIT/Q.PaA3eqwpjjn9zUPg9p4myg8Iu8K98Ii', 3, NULL, '2015-12-10 11:01:29', '2015-12-10 03:36:13'),
+(69, 'MONICA INDAH HABSARI', '5114100060', '$2y$10$5RzymvdxLJJ4u/UwY005WeJ7gE6qDorKLhf.Q2ksGgnbJChL8/k.y', 3, 'mT6L9pIIHmR7nTYM5lhxMWuW8OBrKr4CpWsjGRP3op6Zs0LTVCLwbTNLidoe', '2015-12-10 11:01:29', '2015-12-12 01:41:24'),
+(70, 'HENDRA DARMAWAN', '5114100073', '$2y$10$udGS2JlLBnhKkFLZv.dGGedR1obZjpdJVsA2KeUb86S8SaKxudPF2', 3, NULL, '2015-12-10 11:01:29', '2015-12-10 03:36:13'),
+(71, 'AGUNG REZKY RAMADHAN', '5114100074', '$2y$10$ThO7IgHGRLzHortydbGJBeZR5YXhen.Hg5YsKEeLDuvRMUeZUDVg2', 3, NULL, '2015-12-10 11:01:29', '2015-12-10 03:36:14'),
+(72, 'WILDAN LUTFI SYARIATI FIRDAUS SYAWAL', '5114100080', '$2y$10$.E.KBuI74PV.o.4LWd1z1ORpZxkJGTLqqRBwSjsdXOioJCzPHUwEq', 3, NULL, '2015-12-10 11:01:29', '2015-12-10 03:36:14'),
+(73, 'MUHAMMAD DHANIAR RIEFQY ZAIN', '5114100094', '$2y$10$KuFUGXa/RWNiSvd7zfvQPOSo3QnrkLysT6vlK8uIb2X/CpcnogJVq', 3, NULL, '2015-12-10 11:01:29', '2015-12-10 03:36:14'),
+(74, 'AHMAD BILAL', '5114100121', '$2y$10$8frXiXn39YClxkWcdHZf6OhypT5UgqrJzBy9dfKxat6RfbhtU6Q8a', 3, NULL, '2015-12-10 11:01:29', '2015-12-10 03:36:14'),
+(75, 'ANTONIUS KEVIN W', '5114100132', '$2y$10$.CbAe9W.JB7noJHJgXynDuTe.SCjRmwMum/CxfcxLjio4gtKb/xnW', 3, NULL, '2015-12-10 11:01:29', '2015-12-10 03:36:15'),
+(76, 'FAIZ AINUN KARIMA', '5114100138', '$2y$10$WzYJ3UYvEOL6IAyl8MsgnuhK0WO1Q7L2cQiWIyxLBn63w0KvzFoMe', 3, NULL, '2015-12-10 11:01:29', '2015-12-10 03:36:15'),
+(77, 'VINCENT DANIEL WIN', '5114100139', '$2y$10$qgAtKhjBh3hzp54bvU/aq.nrjkQaUV4tRFyHEDKu7pAWaTBUDGuIq', 3, NULL, '2015-12-10 11:01:29', '2015-12-10 03:36:15'),
+(78, 'VALENT CHRISTOPHER JUNIOR', '5114100145', '$2y$10$Q4RFHXJRrDqJ3WlpOTfHUuOEY43thl/XJidJD5Uw/AX8R8pSY5qki', 3, NULL, '2015-12-10 11:01:29', '2015-12-10 03:36:15'),
+(79, 'DESTIANA NURLIASARI', '5114100148', '$2y$10$YMQetapF9L1ZOVOX4eL7YO2cS8XonqTYP7SusSMkd6UqsMawCtzAm', 3, NULL, '2015-12-10 11:01:29', '2015-12-10 03:36:15'),
+(80, 'ILYAS BINTANG PRAYOGI', '5114100157', '$2y$10$G6B2gtrPQzkaNKW/uK3xNOaxWpDfEmoHwOHrqpjanRFJjpFVmj78i', 3, 'FMq48yjTnktumZJbt8USXkCwfKeRYTyeNNufV6NOaaEyR9lXfa93rVxDkw7u', '2015-12-10 11:01:29', '2015-12-12 00:12:59'),
+(81, 'MUHAMMAD GHAZIAN', '5114100158', '$2y$10$lwfDJe08Kaf4l4YJpnOg2uhGGJs5cKMN0OU1yBCEH3HNCIatmiqxG', 3, NULL, '2015-12-10 11:01:29', '2015-12-10 03:36:15'),
+(82, 'ADIWINOTO SAPTORENGGO', '5114100164', '$2y$10$rzfZk1NdxNiFwsnH43D2rOCQ2VKPoozcmAV2KSnYJEbIZ8e1MJy9S', 3, NULL, '2015-12-10 11:01:29', '2015-12-10 03:36:15'),
+(83, 'KUKUH RILO PAMBUDI', '5114100178', '$2y$10$InQk1OttaoiVyHP1l71mr.6T.OuYTkl236B/VLVmkZunFUVP9/sUW', 3, 'ZRscB07AcaTMUzXcYwBC8PxSfzsnQvzr619WCOFE9elKed4s4JHajE4l6isD', '2015-12-10 11:01:29', '2015-12-12 06:01:42'),
+(84, 'MOCHAMMAD BARUNO S', '5114100184', '$2y$10$4wXnD8KzqPSU8EdmdHmvL.mNzqW96tUCEFa49wMHvzxgidMli/FmC', 3, NULL, '2015-12-10 11:01:29', '2015-12-10 03:36:16'),
+(85, 'DIYANAH FITRIA SAUSAN', '5114100185', '$2y$10$5pLRqPeI2LyF9vma3sQpxO/pR5bqoWomJ9UlR3kWV1PYl0/Bo2fRu', 3, NULL, '2015-12-10 11:01:29', '2015-12-10 03:36:16'),
+(86, 'LUQMAN AHMAD', '5114100187', '$2y$10$0LjKNqEzDuV87Wcg5BRCaOxsVFawaPTXPmTmzSBZskApqIw6ecUL2', 3, 'Jpf1RLYfaOMzEAciOfROVwZ3eCoPU12bLwjdNvb4FHXypSdTsHZEM3AoLTgS', '2015-12-10 11:01:29', '2015-12-11 21:26:59'),
+(87, 'DIKA GHOZIAN MILZAM', '5114100193', '$2y$10$W2v9JkndFKk3WRxYZQfpYuDnv2XGhvp5vbu/tI9bTJpFZLCrXSD8K', 3, 'fyd8Qv3q4DujP7frVDLiOvubTQpG6P83QxraccJPcXaxolIwduYZmwzv0wqN', '2015-12-10 11:01:29', '2015-12-11 22:36:13'),
+(88, 'AHMAD MUZAKKA ISHAQI', '5114100703', '$2y$10$vgvnpOyQcXcCbwQ7RDKtveJDAXEP5SwV0QFtuDC6G5ivnxdtoRdbC', 3, NULL, '2015-12-10 11:01:29', '2015-12-10 03:36:16'),
+(89, 'AGUNG ARIO PUTRA', '5113100123', '$2y$10$SsazpEr/Mn5XkiSXXdYDfOKH2GDFJ/ciK39sfX0/JGwSyb0mh/mwe', 3, 'ddBwKEscxqVmEWnEF7tO6G2IC8p93ivOKU6rbeNfbDW55AykS6gU6syXskyI', '0000-00-00 00:00:00', '2015-12-11 21:54:44'),
+(90, 'M FAHMI PURNOMO', '5113100188', '$2y$10$RvlwrHgZkKCmolMOGPWX.uqaB3MoPlmaBYYkq7uiKPPeO4bhCbNfS', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(91, 'MUHAMMAD NEZAR MAHARDIKA', '5114100001', '$2y$10$bX7Mc8ut5tfu3Kt5YXD3Au.xWxoLMzUOtmeN4fVCiGgwqCxmz./vu', 3, 'GFzdCD1KTIl4mKCluXgi4nspVgMB3NqlYgKE49eMKbEmEugL4UtF9o0jScMC', '0000-00-00 00:00:00', '2015-12-12 02:05:42'),
+(92, 'SULTAN BONAR MARTINUS', '5114100006', '$2y$10$Z9xhGEYy3CmPG5XV/qLdB.c33XOBj0MrpDDjrcA5tqdOjMMQiM.hi', 3, '8AFaVA1gg5K3sTBI0ZugwLPK3BjO5v0qxg5EKpM1px28AqAUUYRTnXQpswyJ', '0000-00-00 00:00:00', '2015-12-11 00:26:51'),
+(93, 'MAGISTA BELLA PUSPITA', '5114100007', '$2y$10$TPqIk2D4W0HEsYwAWIamFeAioveFeEWTMISutan0hmPBFUaYxOdv2', 3, 'jlbe60jdSvn8xU0FGSdNC9qLVedugww1rIKiQWoaWuMuyXWNmrfGF58jZV6b', '0000-00-00 00:00:00', '2015-12-12 02:02:20'),
+(94, 'MUHAMMAD HANIF', '5114100013', '$2y$10$e4HQtBKgYPsEuTUNwnBB3OHqSchbiGivdENcoqQQ3W1XqIjVMWiGy', 3, 'x5dDnqZpnndVwA608MosADw3lKUfVLWlu3COwj0GJBLbMI2R4ZFBZ49Y5xbe', '0000-00-00 00:00:00', '2015-12-11 22:05:26'),
+(95, 'ALDI FEBRIANSYAH', '5114100015', '$2y$10$xXcmVVS0GWDKrqYWfsQYtechqMInYXXLQL/ngKEv1frYXzUzDrTWu', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(96, 'TRASTIAN SATRIA WIBOWO', '5114100016', '$2y$10$2bHLW3U8DUJtksDUIm2mWO9rF5JDtYfHzcLz0wFcADIBx4778TaJ.', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(97, 'ANDRE EXAUDI JEREMY RUMAPEA', '5114100031', '$2y$10$cQfXZBiB8GMrZ9PMIEg/JOgiB2yJARSvHYPKyurRzW1Yg6GOUd8BO', 3, '4GE88eot7quOzNMwJ2iLlCu69T8XGTAwz3ohpXHSsIjcXfdMM3ERqON87QHd', '0000-00-00 00:00:00', '2015-12-11 22:16:30'),
+(98, 'MUHAMAD HENDRI FEBRIANSYAH', '5114100036', '$2y$10$rIYJ6jPfZXtvPC9HsZpxAebQoCiiQaqr4yOURD2k76OnnmcHaL9Xe', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(99, 'RIZKY FENALDO MAULANA', '5114100040', '$2y$10$rUCEck8XLFif6zKFzR3RNuxo1wxLxxKfO0fmGm/4aH3/y6dmO7hV.', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(100, 'AHMAD AFIIF NAUFAL', '5114100041', '$2y$10$EcElDG3oZ/rXRfdCsWttxu1PgqS3xFLmsK2571YQTUVT6HWlLwauS', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(101, 'RARAS ANGGITA', '5114100046', '$2y$10$4B6ZqxewvAUI6V3J6w48yOX2N4WWI1/G40LMpWZedjmEJx.KQ/W0.', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(102, 'BRILIAN WIDYA MUSTOFA', '5114100047', '$2y$10$gja6BWFIl03cA.iVTAOh5Okozm8eu2uLbz9io/r7yWYoa.CM1o0KW', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(103, 'HAIDAR ARYA PRASETYA', '5114100051', '$2y$10$b9neD.aFOvpvyZXHFJTNZ./gTNPF.KXh6LWnjfVuaY55wh0l4YA1e', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(104, 'BASRY A. SIHOTANG', '5114100059', '$2y$10$jfNLavqn8pk8eLv45GbQYe84XQXe4jUNrXLOw5mk1fPSQzsDfOTru', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(105, 'TOSCA YOEL CONNERY', '5114100061', '$2y$10$yhCledXRO.IXGVVhm9xII.WNimB1eJf2CJ680W55314HFB1kiEU9q', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(106, 'HAMKA AMINULLAH', '5114100063', '$2y$10$vQO7nDbPQDjAaceIJ.aT9uVb35zGzKqyEVN1ZQcINySljN4h8ndge', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(107, 'REYNALDO JOHANES', '5114100064', '$2y$10$.uev39zJQz6.Yx6m/E0h4u6rQjjLTJ9jqL.JHgApgDm0QXA52p8Cu', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(108, 'PAUL ALDY SARUMAHA', '5114100072', '$2y$10$vCIvsM47tjx4E2miqMgtkuD66HM2IEaqNyVBr8kkTyLrthyc1xnSa', 3, 'Wt14mNQqlKaAYvtjBWfF1fvtvDgG3rVGmyFXpexSO8nxDXK2dIxvp5bGda6f', '0000-00-00 00:00:00', '2015-12-10 08:14:23'),
+(109, 'M. LUQMANUL HAKIM PURNAMAWAN', '5114100081', '$2y$10$QkEfbXTN8JA9rF/.LomX2.YLyAiWXOWCbirSqfcInBDbj1P37gwrS', 3, '3qUOjBnSRnoE8hoRH02qEmAjKQqoejFr0tqhEuYQSCO25LjSULB0fZEqc7vP', '0000-00-00 00:00:00', '2015-12-12 01:51:33'),
+(110, 'SYAUKI AULIA THAMRIN', '5114100083', '$2y$10$c5mtYBtIt8u5z1fLcK/8ruac3Yjt6/v0PcFAgudShFOxbnDIXNzGG', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(111, 'RR. VANIA MAYA CARISSA', '5114100086', '$2y$10$C1giQQQPrDNPms0fqO761O/OqYE9a.G8Z2MiKsNOccsSbNX.loVr6', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(112, 'NURUL AZIZAH', '5114100090', '$2y$10$VMmM93INP4z0aLp2arciGO.2Qgi0WstyAx/t0xsTDoD9f952bEBFS', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(113, 'ANANDI JAYA SANTOSO', '5114100096', '$2y$10$F9D4T6rZYeM.uACgsJvveuq0HFXxkX4xFk3wB/zgAFf2QZja17tmG', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(114, 'STEVEN KURNIAWAN', '5114100100', '$2y$10$SssSxJBny0xES0x3GhQCwuQ5Sw/4cwuWhaC0ao.489VrSEglJi/qa', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(115, 'M RASYID KAROMI', '5114100101', '$2y$10$J1RJVZINZ7770XUm3oD.ZOPJjBxDqqSdBZl7dL/Jee1MFVnrGUNVi', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(116, 'IRZAL AHMAD SABILLA', '5114100123', '$2y$10$PJwSWYb9gVhPEN8ciwI64OGzrJOR1mIB0IVAfUpHKY4DFZ3mPzEQm', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(117, 'KEVIN ALIF FACHREZA', '5114100128', '$2y$10$VY6nmBZ8LwbnPnfQbHL1ielUePuZxY.spnqZrTBmqZrDngmSNmore', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(118, 'MICHAEL DAVE', '5114100131', '$2y$10$UGaZZJlRtFX5NaeI0ic5/eZaip.16uu6knAb96NxxC7bYg3MbAaRe', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(119, 'MOHAMMAD ANWAR HIDAYAT', '5114100137', '$2y$10$8CLms.EB/q8qaIvRNiq6wO1OZmYV6K6gqL15xJ0ga9RtLp0aEAo2.', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(120, 'MIFTAKHUL AKHYAR', '5114100143', '$2y$10$IqHXfYusBy/ehWK8WIAGVO7AD8EClixIQ0FWr0GLUoKcHAn2hdotW', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(121, 'WIDA DWITIAYASA', '5114100155', '$2y$10$DBcSHVjxRQExE2Grme3rduGuvSvjt.ARVTPDNHYKYNBllwGJ/tWDy', 3, 'CY7vFZiBHI2tKxBgIWMbmFXqzDBlub1knGqhzMnBS6zFGLvmnkR78FHQ4Xdu', '0000-00-00 00:00:00', '2015-12-11 23:50:34'),
+(122, 'BASYAR ADNANI', '5114100162', '$2y$10$eJYkfSfiafcoLCYi03mOE.W7LQnENhOEzPCbjwXqo2Mbt2zQVLy2K', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(123, 'FAIQ FIRDAUSY', '5114100165', '$2y$10$YbrQ5Xy.t9VMNSTFsD.nk.7g7aQPIn1NX32XgBSd/TyH5Q3u/PBJC', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(124, 'ANINDITA LARASATI', '5114100170', '$2y$10$yE5pN/NAaGbCwMeBwq3HheGsdPWIBzQgrv8iF1ySxgeTqL1p5Lcm.', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(125, 'GLLEEN ALLAN MARCHELLIM', '5114100171', '$2y$10$anh91HBxlkfPcA5sQEHLg.d/45rBGQ5/0w.ntlU7xNOj.v/Xx9zdO', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(126, 'AFIF RIDHO KAMAL PUTRA', '5114100173', '$2y$10$hvM6rF/95DSzJ9rF6v9zBO8Jc7tkg012AGjVUyVm4BWYlsZzheYHK', 3, '5gAMahf9UI3vp6pmNkBfbXsnQXw1MwNOaS7QmmxEtyqbYtKlv3pzOENvqSZN', '0000-00-00 00:00:00', '2015-12-11 23:03:13'),
+(127, 'RIANSYA PAMUSTI', '5114100175', '$2y$10$qcnbuPkCyXRBS7Wte4VHFeDMkfJAUu5IrxNcQtvPiXopqynr85EUK', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(128, 'ADITYA IKHSAN', '5114100186', '$2y$10$Ph1IYXm/m7GiB7xj5GqTfu86b91GLqjiuEwi3rtasyM6eNQzp.E2e', 3, 'oR8k45RCKI0QJXwbWzcnM02US0PmfRJ7RHHO5XnfIlaSx0GJ2ASdrnYxNMph', '0000-00-00 00:00:00', '2015-12-12 00:03:26'),
+(129, 'Mohammad Rizki Makarim', '5109100066', '$2y$10$.SIX/nF6PjFlinF.lJRY5usntTsG7hRqW7BZjWWr54Zo5dkwGYF.y', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(130, 'Septiawan Ananda Rizki', '5109100072', '$2y$10$Er0XRHjUOVspJPgNrzG2musWF7AoTkSgRwsmfsAelhmoaarASaAxa', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(131, 'Diaz Ardha Rahmawan ', '5110100035', '$2y$10$fTNRx3VivT02/C5LurZpzeKNYIHYVmEvt8GgxIV40.sTOPo97gZny', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(132, 'Muhammad Saddam', '5113100187', '$2y$10$8Xt8iC9Am266H5FFjdifxuqPMu6FW8USvkwZ4bJ1yX6LwlPTuhiKC', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(133, 'Adietya Bagus Nusantara', '5114100004', '$2y$10$pnWfLXHRqngiS5cMO059uOUFrh8GUel8E7ZGroInlBEG955TX7q4S', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(134, 'Nafia Rizky Yogayana', '5114100017', '$2y$10$1sKrlBt1h4l9ndBiUx8gT.ynxzuoMY8oFpqJvgyf.6/yEt0lHAwv2', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(135, 'Alek Nur Fatman', '5114100018', '$2y$10$4S.kFdh8Zd.9CmTV9L82Oue4lq/52m1407Xr55bVubCbSM5Vs75La', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(136, 'Rahma Dini Maghfirotul Laily', '5114100027', '$2y$10$NO7lHAlv9l3p5GAtGiGYIO.2bdOMj4uIjR9iP/Nm1bCtE7zZllpkm', 3, 'Zbgwww9TFdNWCQuUKKOEvPCjlqCn8HmtswHyIYxYwJlKz1aR55nSNxv963SY', '0000-00-00 00:00:00', '2015-12-10 08:22:38'),
+(137, 'Ahmad Ismail Harry Wicaksono', '5114100032', '$2y$10$cN/iPd1hS.TAVpSf9jGH/eChkkPCrE8VKK1THMkMsFOSXtn.ELuUG', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(138, 'Pramudito Hapriarso', '5114100035', '$2y$10$6.NFAaqSzwlK/XQWvDA0VeVeWeHtvaXgkwierOktZ6rK/YxIoA3Ha', 3, 'g8GusctVOhbv1VBoMrR2UZbOm4vOGg081TtaIHCTaAqf0QvIHDUEsMEu20Ph', '0000-00-00 00:00:00', '2015-12-10 08:16:26'),
+(139, 'Dwiyan Satria Utama', '5114100045', '$2y$10$5u8pj070GbBCEoGT.bpwOeBVjDSKDdxTdl25zNNNQehAQPPbd9TZO', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(140, 'I Gede Putu Nobby Aswi Pala', '5114100048', '$2y$10$t1htc4KoMlKStXvLAy/hc.OW51pIkADJnd2/4y2A/Os94K7/0l2yy', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(141, 'Tionia Rizkika Afilia Haryono', '5114100053', '$2y$10$JfHyf.k9mcvXbG5MRCDEOOhfAuowbA4OpR8YsQN4sviJfjCouJtc.', 3, 'zELUVCtoSQHgFvslcW1feSHy4QxLkWcBEV3GY7JM7bSsDtBhbpYd221DSpmV', '0000-00-00 00:00:00', '2015-12-12 06:27:29'),
+(142, 'Ananda Ricky', '5114100056', '$2y$10$FapMlOQBOxGT4h9VIMicyOG1ihpW5YXXKAoV9dOPhiomNn.2KoxfC', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(143, 'Dzaky Zakiyal Fawwaz', '5114100067', '$2y$10$mihCgOEH1lyZf9vnR1orx.mTCQhpdqmOA.42OohdABirkydPU5kM6', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(144, 'Muhsin Bayu Aji Fadhillah', '5114100071', '$2y$10$cbYevdcDtGKwLCIqji0MAuybRTbC0VOZKmnLENVAsjD5twu2dAy8.', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(145, 'Muhammad Hanif Amrizal', '5114100077', '$2y$10$RKY/2xiuLA1zxFd8OkQHMOWfFgh71/I.S9vLBFu.LWARhbx9u4h86', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(146, 'Rian Danis Adi Pratama', '5114100084', '$2y$10$kZFMF7Nx2TYuxzJiYF9/ee1LX58x3pnQkLTuI8X73SYMVKVvfEmqi', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(147, 'Christyanto Liman', '5114100087', '$2y$10$Hg24kNwec7pinp7j/.ZgJefE9Ly68GKWCSVZmXLlMA3NboKQY3PsG', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(148, 'Anugra Pratama R', '5114100099', '$2y$10$ikrutqJfJgW7Rz2LVaCgXenolAk1BHtXYMqKuoQXe.AMa3pxq5RrW', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(149, 'Fatihah ''Ulya Hakiem', '5114100104', '$2y$10$nrEvJOVy4EqrKkjtGcWDIeNqwUzsXwV.KwX9rZixAheNw0GtPeXdy', 3, 'pyOYqdQDKo8HlRuQab8oi6ktN7xEOSSkWaBZ0s8gxsdBjxijllCnMA1HDIxL', '0000-00-00 00:00:00', '2015-12-12 00:22:38'),
+(150, 'Muhammad Fauzan Ramadhani ', '5114100106', '$2y$10$9b93DxMHmEcgnXeUq2b3fudzoWKS1jXYo0GswaSwFsGsnIqNjqmru', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(151, 'Nafiar Rahmansyah', '5114100109', '$2y$10$PnbvEVDTpDvBZCobmebxPuUYo2rViE68rwneYjDY8l9vHIh2bLgOC', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(152, 'Rafiar Rahmansyah', '5114100110', '$2y$10$7D/.sMSg1IJ2ECxVpcoGcePdEArKxPfWjROTQj29bKbC8jGYL80Lq', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(153, 'Fourir Akbar', '5114100115', '$2y$10$xjiWx3wMZuyO6fkkw7a9ru6a8g0Nk5h87CvefjdFsTDn8CdAuYsXW', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(154, 'Petrus Damianus S W', '5114100117', '$2y$10$gfEgK45m2exsnzYhBBwx9eHaE33NDgpI.6z38e2pI2a7mYFkd7enq', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(155, 'Bayu Sektiaji', '5114100122', '$2y$10$sxi6MZ/YDPU2DM5ntFN3suhUP2VzQYkQ6jqOH.iialnUDMeHO.J6S', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(156, 'Aufar Rizqi', '5114100124', '$2y$10$U8kMeBvO7hkom4EPTBuepel1Fve/xzhjt1ohORs.UHHN8/9Zn3wSe', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(157, 'Muhammad Fauzan Mahmud', '5114100134', '$2y$10$rDYhl8XByQl3k4WxZmSYMOWOq0DrpDe8sg7.a7xn6Q/2AW4hd7d36', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(159, 'Naufan  Arifie Syahputra', '5114100136', '$2y$10$cc/ZSKEyAL./CwdVHJyfNuL/APYKKa3rmHy2uvjfMfZIHRUfPJkQW', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(160, 'Ilham Aulia Majid', '5114100144', '$2y$10$AsVOsF.svpixlun0loa0HuT.2bO1ftwJ.OfhcUByd7FAcclvVsshW', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(161, 'Dimas Hirda Pratama', '5114100147', '$2y$10$qx/0ZymgX/FIlAi4wYdVGeeDnBjmzeJwr8yPxctG4OUvv.7ucImzm', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(162, 'Demsy Iman Mustasyar', 'demsyiman', '$2y$10$gWShDrYvsUyzPiJC/BM4oe47jGxuUU1pIxOfqq5uJ2CvHvivWRnVy', 1, 'M2QK5ZpFDOcD5cJdLYP60sp68fOOG9K4uYcW4cRYWbDXpR6jaIYymWUUFazu', '0000-00-00 00:00:00', '2015-12-18 01:44:30'),
+(163, 'Riyadlatin Nufus', '5114100151', '$2y$10$il/PJl/ZTaPtxnXRQISHxeJ2pzemJ9hPDajA30usukp3R4HZ7WA2W', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(164, 'Hari Setiawan', '5114100156', '$2y$10$Rh7m.Z3KxeJ4PHoZfiHZw.SMvYjSyGFO13onz3NbTNlPmDb35CIKC', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(165, 'Aldhia Muafa', '5114100168', '$2y$10$9M4Mk9KwdvzB2Hkk7itqC.bTB2ArUDaJ1/ML14WCzxcp7m0lxV4Rq', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(166, 'Rayhan Gemaruzman', '5114100174', '$2y$10$cP3J4AzWhkO2.ifHYi/de.31ohLgZFW8h.KrpsUYgdmRz.QUw6vW.', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(167, 'Hifnie Bilfash', 'billyfash', '$2y$10$tE/H5c0yxHmmRmn5To5LD.aMTB9LKqVDAzZI8kS/8r4b94u9w.5nK', 1, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(168, 'Ghaly Aditya', '5114100179', '$2y$10$Js5XS15Ubi9xk6w8kz8nO.k8q.CGslIfDOqyVRdyAcVZJB6HIyszO', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(169, 'Feter A Vedaalana', '5114100183', '$2y$10$PmOMY3KbXF6c9oWQv5anG.nHk.GA2tnGOjENpBI.ZEoFS7Ax/nIIy', 3, 'IADbUlpumBdDKLUPu83e2RFzaGuGG61ssrDg9TGBlTYTfoqNdsPo6i4418jq', '0000-00-00 00:00:00', '2015-12-12 04:56:59'),
+(170, 'Rahmat Rijal', '5114100706', '$2y$10$x8wE7ZYuwDP5AqL2ErkldeWsHBvPDJd0nL/Ldg97O7QF1.3F1vl5i', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(171, 'DEWANGGA OKTA WAHYUDIANTO', '5114100005', '$2y$10$es2eJ1OWaawoK33fDJAwTOvYgvGujw5nPHMVi5qxbicxc/.n.Fd..', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(172, 'KADEK WINDA DWIASTINI', '5114100008', '$2y$10$DleneYKjDBDDb4L0xG7G0uUvlylZ38zwmNJk19EjYjLDrNhxJkTju', 3, NULL, '0000-00-00 00:00:00', '2015-12-11 10:08:23'),
+(173, 'RIVALDO ALIF RACHMANSYAH', '5114100010', '$2y$10$9OMDGFLcWP/fVX1lFl9jPuV8z93KNKBR.2b4kLOpJxDiifS.malYe', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(174, 'ANDI ERSALDY RAISHA PAKKI', '5114100009', '$2y$10$uvDXIsDAkZSKagFIyrvVi.c29ciJ5wfaXXL6TviepqViE8owfYshq', 3, 'EjrUndnZI8RUUYyVBDlYyENkGRNPjsakOMc4Fc7jzeSpn1umbxaQCLAgiF8j', '0000-00-00 00:00:00', '2015-12-11 22:00:48'),
+(175, 'RINA WIJAYA KUSUMA WARDHANI', '5114100021', '$2y$10$fvOzTnpRVgEA0kdwbX86oujCDSovEP5tDokLvqrkiUqtokas1WZmu', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(176, 'DENI ISMAIL', '5114100022', '$2y$10$sKhArprxyjj8a.wa0JSz9Ov9C95RqhPUhH6LY9.kLxjGe6DQgRedK', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(177, 'I PUTU EKA WIRA MAHARDIKA', '5114100025', '$2y$10$ZhYpoBFlHV3nZLrf1KKGXuNvV.SZZbVjJvpSC2f0T2pINoeSQjrO.', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(178, 'I MADE FANDY ADITYA WIRANA ', '5114100026', '$2y$10$Cfz5wEN0SzUFpeazQPWMh.yhjYphYgrzR4C.C5VO79HmYNCmqT8eS', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(179, 'MUHAMMAD FAHMI ABDURRAHMAN', '5114100028', '$2y$10$a8ELDM4YJgHTnIJ8dmkGjeKo8dAmVe.2q/bfhvi63yOXpfmnsBKlm', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(180, 'ALFITRAH NURRAMADHAN S.', '5114100037', '$2y$10$31m6/ru6W6NBwr38L7qP8uUrvw9wcd5l2OOX44SAveK4XXrTw5rym', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(181, 'CAHYA SETYA ADHI', '5114100049', '$2y$10$GK0n6kse.kh01ngX4ivjW.Ogp7kVdpkD2Qzh4IBRthXv2tbtckAWe', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(182, 'ANDY YOHANES HADIWIJAYA', '5114100050', '$2y$10$Z1axL/lG533Cez9EbLjyhOOWcxUdeHCKM4wxS7bGX6hw5XDMZUoAO', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(183, 'ROMI YEHEZKIEL PURBA', '5114100054', '$2y$10$q7DZbpP1AwGVqokwyQDUfuYmYjU7ysfOydtL4WAZxNPgW4g8Wcu42', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(184, 'MUHAMMAD FARHAN MAULANA', '5114100055', '$2y$10$fwuvbNQybE2GRUCCrc37FeCp31.xZddAImGUgjoEeXxClmgo0wsOO', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(185, 'WIDHI MAHAPUTRA PANDE PUTU', '5114100058', '$2y$10$.ttGYWK8inVvlZLYBPqtVesJ0SUTK8MukDma49o0D9kB7BCyPi4T6', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(186, 'BUTHORO KUNTO RAHARJO', '5114100068', '$2y$10$YaGHv4I8BbFAvw52SSt.Nu.7SKdJyQRu/fJiB.Co679i3JRPL7iPi', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(187, 'PRASETYO NUGROHADI', '5114100070', '$2y$10$fw6somtRnqFtNp69NI9DPerngGKzeAPej/W9iqpUb6NJZdCSD92e.', 3, 'VdcrbnW6Ca0vBuuKpd2Yo3dQ6AhCPKeKiamAIAlOxNk6sGD0Ruw929P470bw', '0000-00-00 00:00:00', '2015-12-12 01:53:07'),
+(188, 'MUHAMMAD FAISHAL ILHAM', '5114100076', '$2y$10$rlytLPoxRorIj4Xc4idBI.JkDhkjCKqSoaI4N4z6dAaX5GwzdgnO6', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(189, 'ADENUAR PURNOMO', '5114100079', '$2y$10$zJvi9CfUWqXHGYRvSEwoHelhjutpD9mCTXALawe8X/h5U0ulsT83i', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(190, 'KHARISMA MONIKA DIAN PERTIWI', '5114100092', '$2y$10$/BSurOfN7hUM2A0hF.ZqbuIuvfGcb1cNw7NKa0JctHcJbNW4YsYUm', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(191, 'MUHAMMAD IQBAL', '5114100095', '$2y$10$4CHkYU57iNMLjTHV8Iw27u3IOfg6wyfORPR8ISphFNyvwis1O2R4q', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(192, 'FINTANTO CENDIKIA', '5114100098', '$2y$10$4jbcFljL/tVOXIi7kzb.A.VH/z0tVIoyNmw3QDSSdBPtqovY53jb2', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(193, 'IVALDY PUTRA LIFIARI', '5114100105', '$2y$10$hLt.ntzIp/kq319tX7Hn2egNvRjIXMXeo3Dj7SqTrCUfLTzLH7i7G', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(194, 'ARYA PUTRA KURNIAWAN', '5114100107', '$2y$10$CkKwQNWnGqWA.Q1WGr0A/.VFALiaBAvLl4ZL/ChI4GaP95GzLx15q', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(195, 'FARIS SALBARI', '5114100119', '$2y$10$Lus/liQIQdd3Mhe.R4BjF.wtNaCaST8euHEulBGVbEA5D6uxctSZa', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(196, 'GEDE WAYAN DHARMAWAN', '5114100133', '$2y$10$XTgasiLDyKPxCRZ2ftjG6eK229vpoUzuH0Sgx8wFG.RWDYGlXoSUO', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(197, 'ROCHMAN SOLEH', '5114100140', '$2y$10$Q0IiOXVWuZyFr2CQ1RCSYOLvFgfwBVAkpiPXuFSOxYRO36I0G5fVW', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(198, 'MARTONO TRI SULISTYO', '5114100141', '$2y$10$mCzVwHc7jqj2DRRdztib1Ob6PZ2tq2sBrKL7dnZ7reXUeup9YpUa2', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(199, 'MUCHAMAD BUYUNG ABIYOSO', '5114100150', '$2y$10$Iek/9vPGW0GA6sSoocMmNOswfa69APp0wR8dxHxPQbA/NRybYlshW', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(200, 'HANENDYO INDIRA HARTONO PUTRA', '5114100160', '$2y$10$RrgQjc/plcaRUxhWlDsAIeUGvwXM0j9LfS12jXT3aYC.86DO310HO', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(201, 'ADITYA GUNAWAN', '5114100167', '$2y$10$PesoE9bXGfcrt9Jiunt5.eK5J1O7KXE0xf7YH0757tXW1vBVji8Iy', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(202, 'EVAN BANGUN', '5114100169', '$2y$10$6m9oOJbkgRwuWg1QFP9jNudC0g5nG7lEGteZA217a2mmM3muMQSCy', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(203, 'IRFAN HANIF', '5114100177', '$2y$10$GMK./dhujOfEOZNO1YswTe5nyx4AxpoL9yTcaMSwm5urKiYR7Y9gC', 3, 'gMy8k1wKNxGYQph560R8akfnNm2mrMJ0YdLWyXgFBkI3etsQ5Whsuy003Bij', '0000-00-00 00:00:00', '2015-12-12 02:07:21'),
+(204, 'RIZAL SEPTIARAKHMAN', '5114100180', '$2y$10$RXw5uUvRXupCWu/nPWRxcet68Q02cnVXD3wtd0q/atjm/o525eq3K', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(205, 'ANNE ANNISA AULIA', '5114100181', '$2y$10$HFuUQN5VuQ1WZfO.1wmGaOM/eIz8Rl78yo.3P56LtJiv.iTLpT7iy', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(206, 'SADDHANA ARTA D', '5114100191', '$2y$10$9a0G2ryXYyIOnWhuRg3PeOht.AZtTCuBNlAvMfcRIGO/OjabVerfi', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(207, 'ALAM AR RAAD STONE', '5114100701', '$2y$10$z0/E5t/BxVew1RlfyodD2OhLt3QZFBmBHZ3JKUv48boEmNC1xjqyK', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(208, 'MUHAMMAD ISHAR KADIR', '5114100702', '$2y$10$49TQ9/xFkeLWrTA6H4hcj.8psSxI0oe5WxRxK7i8GyXExtt6Qn1SG', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(209, 'Ahmad Hanan', '5114100705', '$2y$10$YMTwzWXqzr6tN7dqCMibguap/BbjYJEGajlyH0EzGu9.y6.7dU/f.', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(210, 'Asisten', 'asistenA', '$2y$10$pCKxWWmR/br32Yiv69Ey0uIXqQ77CB3UVi7OU5cf1pF9ItU5Xl7o.', 3, 'cPjLRZfQ5BAKM72A8jjhwlCVoI3IiiwgYKm5foiNSExmWuDthmnFD1iND5PL', '0000-00-00 00:00:00', '2015-12-11 19:49:10'),
+(211, 'asisten', 'asisten', '$2y$10$srYHYCR2mLCuhJD4BPf4U./OYKcGvR9cMbovAmNtcH7Gf9lgjIize', 3, 'dXGXGkKcGtMheM8YFtrsqOHCC4dQlaALx6MYVj414BYlj0pcaPUZ2Q9s37sZ', '0000-00-00 00:00:00', '2015-12-11 23:46:04'),
+(212, 'demsyimanm', 'demsyimanm', '$2y$10$Aknh3032FGVghmyMlGeXCecdmBPmTqtDUnL8BanhcuO3KraihNCr2', 2, 'nqEjNJbN1it6MKWx9bD6J8IA66dvtsKFL2MTNxZnJZm9CHctOkGkvo6dy1Vx', '0000-00-00 00:00:00', '2016-05-03 07:56:01'),
+(213, 'demy', 'demy', '$2y$10$zHQNCd89jrpB2X0ir.9cw.GzlQ61ZKDQoiGNWnnmDoa1hbSc5MLcy', 3, 'd4E5DayzqrTBvSFiQYSAHhXiWVhIweU0TejXvy0mGAe0gpOHLARrrBFSZdvg', '0000-00-00 00:00:00', '2016-05-03 07:28:04'),
+(214, 'luffi as', 'luffi', 'password', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(216, 'luffi as', 'luffiaa', 'password', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(218, 'luffi aassss', '5113100127', 'asdfadfa', 3, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_event`
+--
+
+CREATE TABLE `user_event` (
+  `id` int(11) NOT NULL,
+  `users_id` int(11) NOT NULL,
+  `event_id` int(11) NOT NULL,
+  `status` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `user_event`
+--
+
+INSERT INTO `user_event` (`id`, `users_id`, `event_id`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 12, 89, 1, '2016-05-03 18:49:14', '2016-05-03 18:49:14', NULL),
+(3, 212, 89, 2, '2016-05-03 19:43:43', '2016-05-03 19:43:43', NULL),
+(5, 2, 89, 2, '2016-05-03 19:44:21', '2016-05-03 19:44:21', NULL),
+(7, 167, 89, 2, '2016-05-03 19:45:05', '2016-05-03 19:45:05', NULL),
+(8, 13, 89, 2, '2016-05-03 19:46:08', '2016-05-03 19:46:08', NULL),
+(9, 27, 89, 2, '2016-05-03 19:53:22', '2016-05-03 19:53:22', NULL),
+(10, 12, 91, 1, '2016-05-05 13:00:30', '2016-05-05 13:00:30', NULL),
+(11, 12, 92, 1, '2016-05-05 13:01:26', '2016-05-05 13:01:26', NULL),
+(18, 12, 104, 1, '2016-05-05 13:45:04', '2016-05-05 13:45:04', NULL),
+(19, 12, 105, 1, '2016-05-05 20:38:20', '2016-05-05 20:38:20', NULL),
+(20, 12, 106, 1, '2016-05-05 20:42:10', '2016-05-05 20:42:10', NULL),
+(21, 12, 107, 1, '2016-05-05 20:46:36', '2016-05-05 20:46:36', NULL),
+(22, 12, 108, 1, '2016-05-05 20:52:56', '2016-05-05 20:52:56', NULL),
+(23, 12, 109, 1, '2016-05-05 20:54:37', '2016-05-05 20:54:37', NULL),
+(24, 12, 110, 1, '2016-05-05 20:57:59', '2016-05-05 20:57:59', NULL),
+(25, 12, 111, 1, '2016-05-05 21:01:42', '2016-05-05 21:01:42', NULL),
+(26, 12, 112, 1, '2016-05-05 21:02:04', '2016-05-05 21:02:04', NULL),
+(27, 12, 113, 1, '2016-05-05 21:21:10', '2016-05-05 21:21:10', NULL),
+(28, 12, 114, 1, '2016-05-05 21:22:18', '2016-05-05 21:22:18', NULL),
+(29, 12, 115, 1, '2016-05-05 21:25:26', '2016-05-05 21:25:26', NULL),
+(30, 12, 116, 1, '2016-05-05 21:26:07', '2016-05-05 21:26:07', NULL),
+(31, 12, 117, 1, '2016-05-05 21:59:45', '2016-05-05 21:59:45', NULL);
 
 --
 -- Indexes for dumped tables
@@ -1551,11 +1672,29 @@ ALTER TABLE `event`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `history_upload`
+--
+ALTER TABLE `history_upload`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `paket`
+--
+ALTER TABLE `paket`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `password_resets`
 --
 ALTER TABLE `password_resets`
   ADD KEY `password_resets_username_index` (`username`),
   ADD KEY `password_resets_token_index` (`token`);
+
+--
+-- Indexes for table `payment`
+--
+ALTER TABLE `payment`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `question`
@@ -1583,6 +1722,12 @@ ALTER TABLE `users`
   ADD UNIQUE KEY `users_username_unique` (`username`);
 
 --
+-- Indexes for table `user_event`
+--
+ALTER TABLE `user_event`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -1590,7 +1735,22 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `event`
 --
 ALTER TABLE `event`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=118;
+--
+-- AUTO_INCREMENT for table `history_upload`
+--
+ALTER TABLE `history_upload`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `paket`
+--
+ALTER TABLE `paket`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT for table `payment`
+--
+ALTER TABLE `payment`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `question`
 --
@@ -1610,7 +1770,12 @@ ALTER TABLE `submission`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=212;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=219;
+--
+-- AUTO_INCREMENT for table `user_event`
+--
+ALTER TABLE `user_event`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
