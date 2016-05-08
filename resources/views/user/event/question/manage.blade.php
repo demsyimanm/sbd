@@ -46,7 +46,8 @@
 				          		<div class="col-md-10 col-md-offset-1">
 				          			<h1>{{$quest->judul}}</h1><br>
 				          			<p style="font-size:20px;"><?php echo nl2br($quest->konten)?></p>
-				          			<form id="form1" action="{{ URL::to('user/question/'. $eve->data[0]->id.'/submit/'.$quest->id) }}"  method="POST">
+
+				          			<form id="form1" action="http://localhost:5000/submitEvent/{{$eve->id}}/{{$quest->id}}/{{Auth::user()->id}}"  method="POST">
 							        	<input type="hidden" name="_token" value="{{ csrf_token() }}">
 							        	<br><br>
 						          		<h5>Salin query Anda ke textarea di bawah :</h5>

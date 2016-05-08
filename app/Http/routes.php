@@ -24,10 +24,13 @@ Route::controllers([
 /*User*/
 
 Route::get('regular', 'UserController@index');/*sudah*/
+
 Route::get('user/event', 'EventController@index');/*sudah*/
 Route::get('user/list/event', 'EventController@ListEventPremium');/*sudah*/
 Route::get('user/question/{id}', 'QuestionController@index');/*sudah*/
-Route::post('user/question/{id1}/submit/{id2}', array('before' => 'csrf', 'uses' => 'QuestionController@submit'));
+/*Route::get('user/event', 'EventController@index');
+Route::get('user/question/{id}', 'QuestionController@index');*/
+Route::post('user/question/{id1}/submit/{id2}', array('before' => 'csrf', 'uses' => 'QuestionController@submit'));//sudah , belum diperiksa
 
 /*Assistant*/
 Route::get('premium', 'AdminController@index');/*sudah*/
@@ -67,7 +70,7 @@ Route::post('admin/question/{id1}/delete/{id2}', array('before' => 'csrf', 'uses
 
 /*View Submission*/
 Route::get('admin/event/viewSubmission', 'EventController@viewSubmissions');/*sudah*/
-Route::post('admin/event/viewSubmission', 'EventController@viewSubmissions');/*sudah*/
+Route::post('admin/event/viewSubmission', 'EventController@viewSubmissions');/*now*/
 Route::get('admin/event/viewSubmissionSubmit/{id}', 'EventController@viewSubmissionsSubmit');/*sudah*/
 
 
@@ -83,7 +86,7 @@ Route::get('user/scoreboard/{id}', 'UserController@scoreboard');/*sudah*/
 
 
 Route::get('register', 'AccountController@register');/*sudah*/
-Route::post('register', 'AccountController@register');
+Route::post('register', 'AccountController@register');#sudah
 
 /*DB*/
 Route::get('create/db', 'EventController@db');/*sudah*/
