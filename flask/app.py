@@ -191,7 +191,7 @@ def createEvent(user_id):
     cur2 = db2.cursor()
     cur2.execute(queryGetMaxEvent)
     row = cur2.fetchone()
-    return redirect("http://localhost/sbd/public/admin/event/create/parser/"+str(row[0])+"/"+request.form['db_name'], code = 302)
+    return redirect("http://localhost/CloudSBD/public/admin/event/create/parser/"+str(row[0])+"/"+request.form['db_name'], code = 302)
     
     # return redirect("http://localhost/sbd/public/admin/event/create/parser/"+str(row[0])+"/"+request.form['db_name'],code=302)
 
