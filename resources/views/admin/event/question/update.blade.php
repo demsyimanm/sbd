@@ -18,7 +18,7 @@
 			</ul>
 		</div>
 	@endif
-	<form action="" method="POST" class="form-horizontal">
+	<form action="http://localhost:5000/updateQuestion/{{$eve->id}}/{{$quest->id}}/{{Auth:user->paket->id}}" method="POST" class="form-horizontal">
 		<input type="hidden" name="_token" value="{{ csrf_token() }}">
 		<div class="box-body">
 			<div class="form-group">
