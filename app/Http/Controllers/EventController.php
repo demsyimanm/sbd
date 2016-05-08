@@ -129,16 +129,16 @@ class EventController extends Controller {
 		$max_id = $maxid;
 		$db_name = $dbname;
 		$temp_file = "parser_".$max_id.".py";
-		$file = fopen("../parser/parser_".$max_id.".py", "wb") or die("Unable to open file!");
+		$file = fopen("10.151.63.115:2345/CloudParser/parser_".$max_id.".py", "wb") or die("Unable to open file!");
 		$content = "#!/usr/bin/python
 import MySQLdb
 import time
 import sys
 try:
-  db_kunci= MySQLdb.connect('localhost', 'root','', ".'"'.$dbname.'"'.")
+  db_kunci= MySQLdb.connect('10.151.63.117', 'root','', ".'"'.$dbname.'"'.")
   cursor_kunci = db_kunci.cursor()
   while True:
-    db= MySQLdb.connect('localhost', 'root', '', 'sbd')
+    db= MySQLdb.connect('10.151.63.117', 'root', '', 'sbd')
     cursor = db.cursor()
     
     try:
