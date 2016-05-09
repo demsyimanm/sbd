@@ -10,6 +10,7 @@ use App\Event;
 use App\Question;
 use App\Submission;
 use App\Http\Controllers\EventController;
+
 class QuestionController extends Controller {
 
 	/**
@@ -31,11 +32,31 @@ class QuestionController extends Controller {
 		$url3 = "http://10.151.63.181:5000/getQuestionByEventID/".$id;
 		$this->data['question'] = json_decode(file_get_contents($url3));
 
+		/*if(Auth::user()->paket->id == 1 || Auth::user()->paket->id == 2){
+			return view('admin.event.question.manage',$this->data);
+		}*/
+		/*else if(Auth::user()->paket->id == 3){*/
+			return view('user.event.question.manage',$this->data);
+		/*}*/
+
+	}
+
+	public function indexAdmin($id)
+	{
+		$this->data = array();
+		$url = "http://10.151.63.181:5000/getEventById/".$id;
+		$this->data['eve'] = json_decode(file_get_contents($url));
+
+		$url2 = "http://10.151.63.181:5000/getJudulQuestionByEventID/".$id;
+		$this->data['judul'] = json_decode(file_get_contents($url2));
+
+		/*$this->data['question'] = Question::where('event_id','=',$id)->get();*/
+
+		$url3 = "http://10.151.63.181:5000/getQuestionByEventID/".$id;
+		$this->data['question'] = json_decode(file_get_contents($url3));
+
 		if(Auth::user()->paket->id == 1 || Auth::user()->paket->id == 2){
 			return view('admin.event.question.manage',$this->data);
-		}
-		else if(Auth::user()->paket->id == 3){
-			return view('user.event.question.manage',$this->data);
 		}
 
 	}

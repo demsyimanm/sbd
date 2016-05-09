@@ -56,29 +56,6 @@ $(document).ready(function() {
   setInterval(setTime, 1000);
 }); 
 </script>
-       <?php
-        date_default_timezone_set('Asia/Jakarta'); // CDT
-        $year = date('Y');
-        $mon = date('m');
-        $url = "http://10.151.63.181:5000/cekPayment/".Auth::user()->id."/".$mon."/".$year;
-        $bayar = json_decode(file_get_contents($url));
-      ?>
-       <div id="modaldiv" class="modal modal-primary fade">
-          <div class="modal-dialog">
-              <div class="modal-content">
-                  <div class="modal-header">
-                      <h4 class="modal-title">Peringatan</h4>
-                  </div>
-                  <div class="modal-body">
-                      <p>Anda belum melakukan pembayaran untuk bulan {{$mon}} tahun {{$year}}</p>
-                      <p>Lakukan pembayaran agar bisa melanjutkan menggunakan fitur SBDOJ</p>
-                  </div>
-                  <div class="modal-footer">
-                      <a href="{{ URL::to('account/setting')}}" class="btn btn-warning btn-flat">Bayar</a>
-                  </div>
-              </div><!-- /.modal-content -->
-          </div><!-- /.modal-dialog -->
-      </div>
       <header class="main-header">
         <!-- Logo -->
         <a href="{{URL::to('/')}}" class="logo">
@@ -212,22 +189,6 @@ $(document).ready(function() {
             </li>
             @endif
           </ul>
-         <?php
-            if (empty($bayar->data[0]->users_id) )
-            {
-/*              echo "masuk";*/
-              ?>
-              <script type="text/javascript">
-                 $("#modaldiv")
-                 .modal({
-                  backdrop : 'static',
-                  keyboard: false
-                })
-                 .modal('show');
-              </script>
-            <?php 
-            }
-          ?>
         </section>
        
         <!-- /.sidebar -->

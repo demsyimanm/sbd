@@ -18,6 +18,25 @@
 			    	$("#data_table").DataTable();
 			    });
 		    </script>
+		    <?php
+		    	if (isset($_GET['status']))
+		    	{
+		    		if ($_GET['status'] == 'gagal')
+		    		{
+		    			?>
+		    				<div class="col-md-12">
+						    	<div class="col-md-2"></div>
+						    	<div class="col-md-8">
+								    <div class="callout callout-danger text-center">
+									  <h3>Peringatan!</h3>
+									  <h5>Database Anda melebihi kapasitas paket Anda</h5>
+									</div>
+								</div>
+							</div>
+		    			<?php
+		    		} 
+		    	}
+		    ?>
 		    <div class="col-md-12">
 		    	<div class="col-md-3"></div>
 		    	<div class="col-md-6">
@@ -36,7 +55,7 @@
 					      <div class="progress-bar" style="width: {{$used}}%"></div>
 					    </div>
 					    <span class="progress-description">
-					      {{$used}}% dari {{$kuota}} MB
+					      {{$used}}% from {{$kuota}} MB
 					    </span>
 					  </div><!-- /.info-box-content -->
 					</div>

@@ -68,8 +68,12 @@ class EventController extends Controller {
 		$url = "http://10.151.63.181:5000/getEventByParticipant/".Auth::user()->id;
 		$events = json_decode(file_get_contents($url));
 
-		
-		return view('user.event.manage',compact('events'));
+		date_default_timezone_set('Asia/Jakarta'); // CDT
+		$current_date = date('Y-m-d');
+
+		$url2 = "http://10.151.63.181:5000/getTodayQueries/".Auth::user()->id."/".$current_date;
+		$sum = json_decode(file_get_contents($url2));
+		return view('user.event.manage',compact('events','sum'));
 	}
 
 	/**
@@ -257,7 +261,7 @@ except:
 		//http_get("http://10.151.63.181:3000/start?id=".$id);
 		$url = "http://10.151.63.181:5000/startParser/".$id;
     	$quest_id = json_decode(file_get_contents($url));
-		return redirect("http://10.151.63.181:3000/start?id=".$id);
+		return redirect("http://10.151.63.115:3000/start?id=".$id);
 	}
 
 	/**
@@ -274,7 +278,7 @@ except:
 		));*/
 		$url = "http://10.151.63.181:5000/stopParser/".$id;
     	$quest_id = json_decode(file_get_contents($url));
-		return redirect("http://10.151.63.181:3000/stop?id=".$id);
+		return redirect("http://10.151.63.115:3000/stop?id=".$id);
 	}
 
 	/**
@@ -429,11 +433,20 @@ except:
 				$file = Input::file('fileToUpload');
 				$file_name = $file->getClientOriginalName();
 				$file_size = round($file->getSize() / 1024);
+
+				$url2 = "http://10.151.63.181:5000/kapasitasDB/".Auth::user()->id;
+				$cap = json_decode(file_get_contents($url2));
+				$sum = $cap->data[0]->ukuran + $file_size;
+				if($sum/1000  > Auth::user()->paket->ukuran_db )
+				{
+					return redirect('db?status=gagal');
+				}
 				$file_ex = $file->getClientOriginalExtension();
 				$file_mime = $file->getMimeType();
 				$newname = 'sql'.$max_id.'.sql';
 				$file->move('C:\xampp\htdocs\CloudSBD\sqlFile', $newname);
 				$loc = 'C:\xampp\htdocs\CloudSBD\sqlFile\\'.$newname;
+
 
 
 				/*History_Upload::insertGetId(array(

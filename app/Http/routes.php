@@ -59,7 +59,7 @@ Route::get('admin/event/create/parser/{maxid}/{dbname}', 'EventController@create
 Route::post('admin/event/create/parser/{maxid}/{dbname}', 'EventController@createParser');/*sudah*/
 
 /*Question*/
-Route::get('admin/question/{id}', 'QuestionController@index');/*sudah*/
+Route::get('admin/question/{id}', 'QuestionController@indexAdmin');/*sudah*/
 Route::post('admin/question/{id}', array('before' => 'csrf', 'uses' => 'QuestionController@index'));
 Route::get('admin/question/{id}/create', 'QuestionController@create');/*sudah*/
 Route::post('admin/question/{id}/create', array('before' => 'csrf', 'uses' => 'QuestionController@create'));

@@ -202,21 +202,21 @@ def addParticipant(id):
     	query = "INSERT INTO user_event (users_id, event_id, status) VALUES '"+request.form['user']+"',"+id+","+request.form['role']
     	cur.execute(query)
     	db.commit()
-    	return redirect("http://localhost/sbd/public/event/list/peserta/"+id, code=302)
+    	return redirect("http://10.151.63.181/CloudSBD/public/event/list/peserta/"+id, code=302)
     else :
-    	return redirect ("http://localhost/sbd/public/home",code=302)
+    	return redirect ("http://10.151.63.181/CloudSBD/public/home",code=302)
 
 @app.route("/submitEvent/<id1>/<id2>/<id_user>", methods=['POST'])
 def submit(id1,id2,id_user):
     query = "INSERT INTO submission (question_id, users_id, nilai, jawaban, status) VALUES ("+id2+","+id_user+",0,'"+request.form['jawaban']+"',0)"
     cur.execute(query)
     db.commit()
-    return redirect("http://localhost/sbd/public/user/question/"+id1,code=302)
+    return redirect("http://10.151.63.181/CloudSBD/public/user/question/"+id1,code=302)
 
 @app.route("/updateEvent/<paket_id>", methods=['POST'])
 def updateEvent(paket_id):
 	if (paket_id == 3) or (paket_id == 4):
-		return redirect("http://localhost/sbd/public")
+		return redirect("http://10.151.63.181/CloudSBD/public")
 
 	waktu_mulai = request.form['tgl_mulai']+" "+request.form['wkt_mulai']
 	waktu_akhir = request.form['tgl_akhir']+" "+request.form['wkt_akhir']
@@ -224,7 +224,7 @@ def updateEvent(paket_id):
 	print query
 	cur.execute(query)
 	db.commit()
-	return redirect("http://localhost/sbd/public/admin/event",code=302)
+	return redirect("http://10.151.63.181/CloudSBD/public/admin/event",code=302)
 
 
 #QUESTION
@@ -234,23 +234,27 @@ def updateQuestion(id1, id2, paket_id):
 		query = "UPDATE question SET judul = '"+request.form['judul']+"', konten= '"+request.form['konten']+"', jawaban='"+request.form['jawaban']+"'"
 		cur.execute(query)
 		db.commit()
-		return redirect("http://localhost/sbd/public/admin/question/"+id1,code=302)
+		return redirect("http://10.151.63.181/CloudSBD/public/admin/question/"+id1,code=302)
 	else:
-		return redirect("http://localhost/sbd/public/"+id1,code=302)
+		return redirect("http://10.151.63.181/CloudSBD/public/"+id1,code=302)
 
 @app.route("/createQuestion/<id>/<paket_id>", methods=['POST'])
 def createQuestion(id,paket_id):
-	if (paket_id==1) or (paket_id==2):
+	# print paket_id
+	if (paket_id=='1' or paket_id=='2'):
+		print "masuk"
 		query = "INSERT INTO question (event_id, judul, konten, jawaban) VALUES("+id+",'"+request.form['judul']+"','"+request.form['konten']+"','"+request.form['jawaban']+"')"
-		return redirect("http://localhost/sbd/public/admin/question/"+id,code=302)
+		cur.execute(query)
+		db.commit()
+		return redirect("http://10.151.63.181/CloudSBD/public/admin/question/"+id,code=302)
 	else :
-		return redirect("http://localhost/sbd/public/")
+		return redirect("http://10.151.63.181/CloudSBD/public/")
 
 # submission
 
 @app.route("/viewSubmission", methods=['POST'])
 def viewSubmission():
-	return redirect("http://localhost/sbd/public/admin/event/viewSubmissionSubmit/"+request.form['event'])
+	return redirect("http://10.151.63.181/CloudSBD/public/admin/event/viewSubmissionSubmit/"+request.form['event'])
 
 
     
@@ -280,6 +284,20 @@ def createDB(user_id, max_id, db_name, size):
 @app.route("/kapasitasDB/<user_id>", methods=['GET'])
 def kapasitasDB(user_id):	
 	query = "SELECT SUM(size) as ukuran from history_upload where users_id="+user_id
+	cur.execute(query)
+	return jsonify(data=cur.fetchall())	
+
+@app.route("/getTodayQueries/<user_id>/<timestamp>", methods=['GET'])
+def getTodayQueries(user_id,timestamp):	
+	query = "SELECT COUNT(created_at) as sum FROM submission WHERE DATE(created_at) ="+"'"+timestamp+"'"+" and users_id="+user_id
+	# print query
+	cur.execute(query)
+	return jsonify(data=cur.fetchall())	
+
+@app.route("/cekPayment/<user_id>/<bulan>/<tahun>", methods=['GET'])
+def cekPayment(user_id,bulan,tahun):	
+	query = "select * from payment where bulan = "+bulan+" and tahun = "+tahun+" and users_id="+user_id+" and paket_id = (select paket_id from users where id="+user_id+")"
+	# print query
 	cur.execute(query)
 	return jsonify(data=cur.fetchall())	
 

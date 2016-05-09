@@ -1,4 +1,4 @@
-@extends('admin.AppAdmin')
+@extends('admin.AppBayar')
 @section('content')
     <section class="content-header">
         <h1>
@@ -23,7 +23,7 @@
 			<li class="active">
 				<a href="#bayar" data-toggle="tab" aria-expanded="true">Bayar</a>
 			</li>
-			<li class=>
+			<li class>
 				<a href="#ganti" data-toggle="tab" aria-expanded="true">Ganti Paket</a>
 			</li>
 		</ul>
@@ -230,7 +230,6 @@
 			      <br>
 			</div>
 		</div>
-	</div>
 	<!-- <form action="" method="POST" class="form-horizontal" >
 		<input type="hidden" name="_token" value="{{ csrf_token() }}">
 		<div class="box-body">
